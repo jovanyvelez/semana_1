@@ -1,0 +1,163 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id            Int             @id @default(autoincrement())
+  roleId        Int
+  name          String
+  phone         String
+  email         String          @unique
+  docType       String
+  numDoc        String          @unique
+  Departament   String
+  city          String
+  address       String
+  bussinessUnit String?
+  zone          String?
+  orders        OrdenDePedido[]
+  role          Roles           @relation(fields: [roleId], references: [id])
+}
+
+model Roles {
+  id   Int       @id @default(autoincrement())
+  name String    @unique
+  User Usuario[]
+}
+
+model OrdenDePedido {
+  id               Int                     @id @default(autoincrement())
+  fecha            DateTime                @default(now())
+  userId           Int
+  direccionEntrega String
+  ciudadEnt        String
+  departamentoEnt  String
+  metodoPago       String
+  estado           String
+  fechaDespacho    DateTime
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+  cliente          Usuario                 @relation(fields: [userId], references: [id])
+  productos        OrdenDePedidoProducto[]
+}
+
+model OrdenDePedidoProducto {
+  ordenDePedidoId Int
+  productoId      String
+  cantidad        Int
+  precio          Float
+  ccosto          String
+  ordenDePedido   OrdenDePedido @relation(fields: [ordenDePedidoId], references: [id])
+  producto        Product       @relation(fields: [productoId], references: [id])
+
+  @@id([ordenDePedidoId, productoId])
+}
+
+model Category {
+  id        String                 @id @default(uuid())
+  name      String                 @unique
+  padreId   String?
+  createdAt DateTime               @default(now())
+  updatedAt DateTime               @updatedAt
+  padre     Category?              @relation("PadreHijos", fields: [padreId], references: [id])
+  hijos     Category[]             @relation("PadreHijos")
+  product   Product[]
+  ccosto    CcostoZoneCategories[]
+  zones     Zones[]                @relation("CategoriasZonas")
+}
+
+model Product {
+  id              String                  @id @default(uuid())
+  name            String
+  description     String
+  brand           String
+  code            String                  @unique
+  eancode         String                  @unique
+  quantity        Float
+  promo           Boolean
+  active          Boolean
+  categoryId      String
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+  image           Image[]
+  ordenesDePedido OrdenDePedidoProducto[]
+  price           Price[]
+  category        Category                @relation(fields: [categoryId], references: [id])
+}
+
+model Image {
+  id        String   @id @default(uuid())
+  publicId  String
+  secureUrl String
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+model Price {
+  id        String   @id @default(uuid())
+  price1    Float
+  price2    Float?
+  price3    Float?
+  price4    Float?
+  price5    Float?
+  price6    Float?
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+model CcostoZoneCategories {
+  id         Int      @id @default(autoincrement())
+  zone       String
+  ccosto     String   @unique
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model Zones {
+  id         Int        @id @default(autoincrement())
+  name       String
+  code       Int
+  categorias Category[] @relation("CategoriasZonas")
+}
+
+model AuthUser {
+  id           String        @id @unique
+  email        String        @unique
+  auth_key     AuthKey[]
+  auth_session AuthSession[]
+
+  @@map("auth_user")
+}
+
+model AuthSession {
+  id             String   @id @unique
+  user_id        String
+  active_expires BigInt
+  idle_expires   BigInt
+  auth_user      AuthUser @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@map("auth_session")
+}
+
+model AuthKey {
+  id              String   @id @unique
+  hashed_password String?
+  user_id         String
+  primary_key     Boolean
+  expires         BigInt?
+  auth_user       AuthUser @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@map("auth_key")
+}
