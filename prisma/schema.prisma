@@ -18,8 +18,9 @@ model Usuario {
   Departament   String
   city          String
   address       String
+  descount      Decimal   @default(0) @db.Decimal(2, 2)
   bussinessUnit String?
-  zone          String?
+  zone          String
   orders        OrdenDePedido[]
   role          Roles           @relation(fields: [roleId], references: [id])
 }
@@ -37,10 +38,9 @@ model OrdenDePedido {
   direccionEntrega String
   ciudadEnt        String
   departamentoEnt  String
-  metodoPago       String
-  estado           String
-  fechaDespacho    DateTime
-  createdAt        DateTime                @default(now())
+  metodoPago       String?
+  estado           String?
+  fechaDespacho    DateTime?
   updatedAt        DateTime                @updatedAt
   cliente          Usuario                 @relation(fields: [userId], references: [id])
   productos        OrdenDePedidoProducto[]
@@ -52,6 +52,8 @@ model OrdenDePedidoProducto {
   cantidad        Int
   precio          Float
   ccosto          String
+  category        String
+  rootCategory    String
   ordenDePedido   OrdenDePedido @relation(fields: [ordenDePedidoId], references: [id])
   producto        Product       @relation(fields: [productoId], references: [id])
 

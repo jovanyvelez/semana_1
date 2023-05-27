@@ -6,6 +6,7 @@
 	import type { ProductStore} from "$lib/interfaces/Product"
 
 	export let data;
+	export let form;
 
 	let address1 = '';
 	let address2 = '';

@@ -1,5 +1,5 @@
 import { prisma } from '$lib/server/prisma';
-
+// SvelteKit + PocketBase Integration: User Login and Registration 
 export const load = async () => {
 	const cliente = await prisma.usuario.findUnique({
 		where: {
