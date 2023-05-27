@@ -32,7 +32,11 @@
 		order.departamento = departamento;
 		order.municipio = municipio;
 		order.products = $cart.map((e) => {
-			return { id: e.id, cantidad: e.qtyBuy, price: e.price[0].price1, category: e.categoryId };
+			return { 	id: e.id, 
+						quantity:e.quantity, 
+						cantidad: e.qtyBuy, 
+						price: e.price[0].price1, 
+						category: e.categoryId };
 		});
 
 		formData.append('products', JSON.stringify(order,null,2))
@@ -69,8 +73,7 @@
 
 
 <form method="post" use:enhance={saveOrder}>
-	<pre>{JSON.stringify(order, null, 2)}</pre>
-
+	
 	<h1 class="text-center">Direccion de Envío</h1>
 
 	<div class="flex justify flex-col ml-5">

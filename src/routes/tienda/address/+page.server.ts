@@ -3,19 +3,18 @@ import { prisma } from '$lib/server/prisma';
 import type { Actions } from './$types';
 
 export const actions = {
-    default: async ({request}) => {
-        // TODO log the user in
-        const datos = await request.formData();
+	default: async ({ request }) => {
+		// TODO log the user in
+		const datos = await request.formData();
 
-        const productos = JSON.parse(datos.get('products') as string)
-        const { userId, departamento, municipio, notes, address, products, zone  } = productos
-        let newProducts
-        if( departamento.length>1 && municipio.length>1 && address.length>1 && notes.length>1){
-            
-            newProducts = await Promise.all(
-                products.map(async (element) => {
-                  try {
-                    const result = await prisma.$queryRaw`
+		const productos = JSON.parse(datos.get('products') as string);
+		const { userId, departamento, municipio, notes, address, products, zone } = productos;
+		let newProducts;
+		if (departamento.length > 1 && municipio.length > 1 && address.length > 1 && notes.length > 1) {
+			newProducts = await Promise.all(
+				products.map(async (element) => {
+					try {
+						const result = await prisma.$queryRaw`
                       WITH RECURSIVE CategoryHierarchy AS (
                         SELECT "id", "name", "padreId"
                         FROM "Category"
@@ -31,56 +30,71 @@ export const actions = {
                       FROM CategoryHierarchy
                       WHERE "padreId" IS NULL;
                     `;
-                    return {productoId: element.id,
-                            rootCategory:result[0].id,
-                            cantidad:element.cantidad,
-                            precio: element.price,
-                            category: element.category 
-                        };
-                  } catch (error) {
-                    //console.log("hubo un error con la consulta ccosto")
-                    return fail(422, {success:false });
-                  }
-                })
-              );
-              
-            //console.log(newProducts);
-            newProducts = await Promise.all(
-                newProducts.map(async (element)=>{
-                    const ccosto = await prisma.ccostoZoneCategories.findMany({
-                        where: {zone, categoryId:element.rootCategory},
-                        select:{ccosto:true}
-                      });
-                      return {...element, ccosto}
-                    }
-                )
-            );
-            newProducts = newProducts.map((obj) => {
-                return {...obj, ccosto:obj.ccosto[0].ccosto}
-            });
+						return {
+							productoId: element.id,
+							rootCategory: result[0].id,
+							cantidad: element.cantidad,
+							precio: element.price,
+							category: element.category
+						};
+					} catch (error) {
+						//console.log("hubo un error con la consulta ccosto")
+						return fail(422, { success: false });
+					}
+				})
+			);
 
-            //console.log(JSON.stringify(newProducts,null,2));
+			//console.log(newProducts);
+			newProducts = await Promise.all(
+				newProducts.map(async (element) => {
+					const ccosto = await prisma.ccostoZoneCategories.findMany({
+						where: { zone, categoryId: element.rootCategory },
+						select: { ccosto: true }
+					});
+					return { ...element, ccosto };
+				})
+			);
+			newProducts = newProducts.map((obj) => {
+				return { ...obj, ccosto: obj.ccosto[0].ccosto };
+			});
 
-            const finalOrder = await prisma.OrdenDePedido.create({
-                data: {
-                    userId,
-                    direccionEntrega: address,
-                    ciudadEnt: municipio,
-                    departamentoEnt: departamento,
-                }
-            })
+			//console.log(JSON.stringify(newProducts,null,2));
 
-            newProducts = newProducts.map(element =>{
-                return {...element, ordenDePedidoId:finalOrder.id}
-            });
+			const finalOrder = await prisma.OrdenDePedido.create({
+				data: {
+					userId,
+					direccionEntrega: address,
+					ciudadEnt: municipio,
+					departamentoEnt: departamento,
+					notes
+				}
+			});
 
-            const detalle = await prisma.OrdenDePedidoProducto.createMany({
-                data: newProducts
-            })
+			newProducts = newProducts.map((element) => {
+				return { ...element, ordenDePedidoId: finalOrder.id };
+			});
 
-            return { success: true };
-        }
-        console.log("Sorry")
-        return fail(422, {success:false });
-    }
+			const detalle = await prisma.OrdenDePedidoProducto.createMany({
+				data: newProducts
+			});
+
+			await Promise.all(
+				products.map(async (element) => {
+					await prisma.Product.update({
+						where: {
+							id: element.id
+						},
+						data: {
+							quantity: element.quantity - element.cantidad
+						}
+					});
+				})
+			);
+            prisma.$disconnect();
+			return { success: true };
+		}
+        prisma.$disconnect()
+		console.log('Sorry');
+		return fail(422, { success: false });
+	}
 } satisfies Actions;

@@ -18,9 +18,9 @@ model Usuario {
   Departament   String
   city          String
   address       String
-  descount      Decimal   @default(0) @db.Decimal(2, 2)
   bussinessUnit String?
   zone          String
+  descount      Decimal         @default(0) @db.Decimal(2, 2)
   orders        OrdenDePedido[]
   role          Roles           @relation(fields: [roleId], references: [id])
 }
@@ -42,6 +42,7 @@ model OrdenDePedido {
   estado           String?
   fechaDespacho    DateTime?
   updatedAt        DateTime                @updatedAt
+  notes            String?
   cliente          Usuario                 @relation(fields: [userId], references: [id])
   productos        OrdenDePedidoProducto[]
 }
@@ -68,8 +69,8 @@ model Category {
   updatedAt DateTime               @updatedAt
   padre     Category?              @relation("PadreHijos", fields: [padreId], references: [id])
   hijos     Category[]             @relation("PadreHijos")
-  product   Product[]
   ccosto    CcostoZoneCategories[]
+  product   Product[]
   zones     Zones[]                @relation("CategoriasZonas")
 }
 
@@ -120,8 +121,8 @@ model Price {
 model CcostoZoneCategories {
   id         Int      @id @default(autoincrement())
   zone       String
-  ccosto     String   @unique
   categoryId String
+  ccosto     String   @unique
   category   Category @relation(fields: [categoryId], references: [id])
 }
 
