@@ -47,9 +47,10 @@
 		return async({result})=>{
 			console.log(result.type)
 			if(result.type==='success'){
+				console.log(result)
 				const temp: ProductStore[] = []
 				$cart = temp
-				goto('/')
+				goto(`/tienda/conf_envio/${result.data.savedorder}`)
 			}
 		}
 	}

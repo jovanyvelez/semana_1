@@ -91,7 +91,7 @@ export const actions = {
 				})
 			);
             prisma.$disconnect();
-			return { success: true };
+			return { success: true, savedorder: finalOrder.id };
 		}
         prisma.$disconnect()
 		console.log('Sorry');
