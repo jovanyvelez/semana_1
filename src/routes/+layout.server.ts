@@ -1,3 +1,4 @@
+//Agrego comentario
 import { prisma } from '$lib/server/prisma';
 // SvelteKit + PocketBase Integration: User Login and Registration 
 export const load = async () => {
