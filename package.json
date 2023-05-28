@@ -34,6 +34,7 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^4.14.1",
-		"daisyui": "^2.51.6"
+		"daisyui": "^2.51.6",
+		"nodemailer": "^6.9.2"
 	}
 }
