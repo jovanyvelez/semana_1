@@ -1,6 +1,7 @@
 import { redirect, type Actions, fail } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-import { auth } from '$lib/server/lucia';
+import { transporter } from '$lib/server/nodemailer';
+
 
 
 export const load = async ({ locals }) => {
@@ -86,9 +87,30 @@ export const load = async ({ locals }) => {
 export const actions: Actions = {
 	// signout
 	default: async ({ locals }) => {
+		/*
 		const session = await locals.auth.validate();
 		if (!session) return fail(401);
 		await auth.invalidateSession(session.sessionId);
 		locals.auth.setSession(null);
-	}
+	}*/
+	try {
+
+		let info = await transporter.sendMail({
+			from: '"Fred Foo 👻" jovany.velez@zohomail.com>', // sender address
+			to: "jovany.velez@gmail.com", // list of receivers
+			subject: "Hello ✔", // Subject line
+			text: "Hello world?", // plain text body
+			html: "<b>Hello world?</b>", // html body
+		});
+		console.log("Message sent: %s", info.messageId);
+        /*await transporter.sendMail({
+            from: '"Equisol" SOPORTE.TI@EQUISOL.COM.CO', // sender address
+            to: "jovany.velez@gmail.com", // list of receivers
+            subject: `Hemos recibido tu Orden`, // Subject line
+            text: "Hola Mundo", // plain text body
+            //html: "<b>Hello world?</b>", // html body
+          });*/
+    } catch (error) {
+        console.log(error)
+    }}
 };

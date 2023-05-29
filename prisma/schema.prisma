@@ -20,7 +20,7 @@ model Usuario {
   address       String
   bussinessUnit String?
   zone          String
-  descount      Decimal         @default(0) @db.Decimal(2, 2)
+  descount      Float         @default(0) 
   orders        OrdenDePedido[]
   role          Roles           @relation(fields: [roleId], references: [id])
 }
