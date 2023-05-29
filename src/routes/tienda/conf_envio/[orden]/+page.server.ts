@@ -21,7 +21,7 @@ export async function load({ params }) {
             from: '"Equisol" SOPORTE.TI@EQUISOL.COM.CO', // sender address
             to: "jovany.velez@gmail.com, spvergara@gmail.com", // list of receivers
             subject: "Hello ✔", // Subject line
-            text: "Hello world?", // plain text body
+            text: orden, // plain text body
             html: "<b>Hello world?</b>", // html body
           });
     } catch (error) {

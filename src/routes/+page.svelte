@@ -11,7 +11,7 @@
             <h1 class="my-10 text-center text-yellow-400">{category.name}</h1>
             {#each category.products as product (product.id) }
                 <div class="card glass w-64 bg-base-100 shadow-xl mx-2 mt-2">
-                <figure><img src={ product.image[0].secureUrl } alt="article" class="" /></figure>
+                <figure><img src={ product.image[1].secureUrl } alt="article" class="" /></figure>
                 <div class="card-body">
                     <h2 class="card-title">{product.name.trim()}</h2>
                 </div>
