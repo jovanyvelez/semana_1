@@ -1,6 +1,12 @@
 import { prisma } from '$lib/server/prisma';
+import { redirect } from '@sveltejs/kit';
 
-export async function load({ params }) {
+
+export async function load({ params, locals }) {
+
+	const { user } = await locals.auth.validateUser();
+	if (!user) throw redirect(303, '/login');
+
 	type mQuery = {
 		param: string;
 		page: number;
@@ -16,8 +22,8 @@ export async function load({ params }) {
 	}
 
 
-	const cliente = await prisma.usuario.findMany({
-		where: { email: 'jovany.velez@gmail.com' },
+	const cliente = await prisma.usuario.findUnique({
+		where: { email: user.email },
 		select: {
 			name: true,
 			phone: true,

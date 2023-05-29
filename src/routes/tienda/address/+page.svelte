@@ -20,9 +20,9 @@
 	let municipios = [];
 	let order = {};
 
-	order.userId = data.user.id;
-	order.zone = data.user.zone;
-	order.address = data.user.address;
+	order.userId = data.usuario.id;
+	order.zone = data.usuario.zone;
+	order.address = data.usuario.address;
 	$: completeAddress = `${address1} ${address2} # ${address3}-${address4}`;
 
 	const saveOrder = ({cancel, formData})=>{
@@ -69,10 +69,12 @@
 
 </script>
 
-
-
-
-
+<pre>
+	{JSON.stringify(data.usuario.id,null,2)}
+</pre>
+<pre>
+	{JSON.stringify(order,null,2)}
+</pre>
 <form method="post" use:enhance={saveOrder}>
 	
 	<h1 class="text-center">Direccion de Envío</h1>
@@ -156,7 +158,11 @@
 					bind:value={notes}
 				/>
 			</div>
-		{/if}
-	</div>
-	<button type="submit" class="btn btn-warning btn-sm mr-5">Finalizar compra </button>
+			{/if}
+		</div>
+		<div class="flex justify-center mt-3">
+
+			<button type="submit" class="btn btn-warning btn-sm mr-5 w-2/12">Finalizar compra </button>
+		</div>
+	
 </form>

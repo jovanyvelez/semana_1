@@ -1,6 +1,6 @@
 <script>
 	import '../app.css';
-    import Menu from '$lib/components/Menu.svelte';
+	import Menu from '$lib/components/Menu.svelte';
 	export let data;
 </script>
 
@@ -8,12 +8,12 @@
 	<title>Mi Tienda Virtuale</title>
 </svelte:head>
 
-{#if data.user}
-		<Menu />
+{#if data?.email}
+	<Menu />
 {/if}
 
 <main class="overflow-auto">
-<slot />
+	<slot />
 </main>
 
 <style lang="postcss">
@@ -24,4 +24,3 @@
 		@apply text-2xl font-semibold w-full mb-2;
 	}
 </style>
-	

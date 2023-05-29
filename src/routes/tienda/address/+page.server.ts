@@ -2,11 +2,35 @@ import { fail, redirect } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
 import type { Actions } from './$types';
 
+export async function load({ locals }) {
+
+	const { user } = await locals.auth.validateUser();
+	if (!user) throw redirect(303, '/login');
+
+	const usuario = await prisma.usuario.findUnique({
+		where: { email: user.email },
+		select: {
+			id: true,
+			name: true,
+			phone: true,
+			email: true,
+			docType: true,
+			numDoc: true,
+			Departament: true,
+			city: true,
+			address: true,
+			role: { select: { name: true } }
+		}
+	});
+
+	return { usuario }
+}
+
 export const actions = {
 	default: async ({ request }) => {
 		// TODO log the user in
 		const datos = await request.formData();
-
+		
 		const productos = JSON.parse(datos.get('products') as string);
 		const { userId, departamento, municipio, notes, address, products, zone } = productos;
 		let newProducts;
@@ -38,45 +62,50 @@ export const actions = {
 							category: element.category
 						};
 					} catch (error) {
-						//console.log("hubo un error con la consulta ccosto")
+
 						return fail(422, { success: false });
 					}
 				})
-			);
-
-			//console.log(newProducts);
-			newProducts = await Promise.all(
-				newProducts.map(async (element) => {
-					const ccosto = await prisma.ccostoZoneCategories.findMany({
-						where: { zone, categoryId: element.rootCategory },
-						select: { ccosto: true }
+				);
+				
+				
+				newProducts = await Promise.all(
+					newProducts.map(async (element) => {
+						const ccosto = await prisma.ccostoZoneCategories.findMany({
+							where: { zone, categoryId: element.rootCategory },
+							select: { ccosto: true }
+						});
+						return { ...element, ccosto };
+					})
+					);
+					
+					newProducts = newProducts.map((obj) => {
+						return { ...obj, ccosto: obj.ccosto[0].ccosto };
 					});
-					return { ...element, ccosto };
-				})
-			);
-			newProducts = newProducts.map((obj) => {
-				return { ...obj, ccosto: obj.ccosto[0].ccosto };
-			});
-
-			//console.log(JSON.stringify(newProducts,null,2));
-
-			const finalOrder = await prisma.OrdenDePedido.create({
-				data: {
-					userId,
-					direccionEntrega: address,
-					ciudadEnt: municipio,
-					departamentoEnt: departamento,
-					notes
-				}
-			});
-
-			newProducts = newProducts.map((element) => {
+					
+					
+					
+					const finalOrder = await prisma.OrdenDePedido.create({
+						data: {
+							userId,
+							direccionEntrega: address,
+							ciudadEnt: municipio,
+							departamentoEnt: departamento,
+							notes
+						}
+					});
+					newProducts = newProducts.map((element) => {
 				return { ...element, ordenDePedidoId: finalOrder.id };
 			});
+			
+			try {
+				const detalle = await prisma.OrdenDePedidoProducto.createMany({
+					data: newProducts
+				});
+			} catch (error) {
+				console.error(error)
+			}
 
-			const detalle = await prisma.OrdenDePedidoProducto.createMany({
-				data: newProducts
-			});
 
 			await Promise.all(
 				products.map(async (element) => {

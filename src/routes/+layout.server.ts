@@ -1,8 +1,13 @@
-//Agrego comentario
+import { redirect, type Actions, fail } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-// SvelteKit + PocketBase Integration: User Login and Registration 
-export const load = async () => {
-	const cliente = await prisma.usuario.findUnique({
+
+
+
+export const load = async ({locals}) => {
+	
+	const { user } = await locals.auth.validateUser();
+	
+	/*const cliente = await prisma.usuario.findUnique({
 		where: {
 			email: 'jovany.velez@gmail.com'
 		},
@@ -23,8 +28,10 @@ export const load = async () => {
 				}
 			}
 		}
-	});
+	});*/
 	prisma.$disconnect();
-    // console.log(JSON.stringify(cliente,null,2))
-	return { user: cliente };
+	if(user){
+		return { email:user.email };
+	}
+	return {}
 };

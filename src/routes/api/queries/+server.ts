@@ -1,3 +1,5 @@
+import {prisma} from '$lib/server/prisma'
+
 export const GET = async ({ url }: { url: any }): Promise<Response> => {
 	let searchTerm = String(url.searchParams.get('searchTerm')).trim();
 
@@ -22,5 +24,7 @@ export const GET = async ({ url }: { url: any }): Promise<Response> => {
 			}
 		}
 	});
+	prisma.$disconnect()
+	console.log(products);
 	return new Response(JSON.stringify(products), { status: 201 });
 };

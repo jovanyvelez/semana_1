@@ -60,10 +60,11 @@
 	</div>
 </div>
 
+
 {#if datos.length > 0}
 	<div class="flex flex-wrap justify-center">
 		{#each datos as product (product.id)}
-			<Item {product} nombre={data.cliente[0].name} />
+			<Item {product} nombre={data.cliente.name} />
 		{/each}
 	</div>
 {:else}
@@ -84,6 +85,8 @@
 		{/each}
 	</div>
 {/if}
+
+
 
 <style>
 	.pagination a {
