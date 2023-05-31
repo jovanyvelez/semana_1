@@ -69,12 +69,7 @@
 
 </script>
 
-<pre>
-	{JSON.stringify(data.usuario.id,null,2)}
-</pre>
-<pre>
-	{JSON.stringify(order,null,2)}
-</pre>
+
 <form method="post" use:enhance={saveOrder}>
 	
 	<h1 class="text-center">Direccion de Envío</h1>

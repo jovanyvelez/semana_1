@@ -1,12 +1,9 @@
 import { redirect, type Actions, fail } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-import { transporter } from '$lib/server/nodemailer';
-
-
+import { auth } from '$lib/server/lucia';
+import { LuciaError } from 'lucia-auth';
 
 export const load = async ({ locals }) => {
-
-
 	const { user } = await locals.auth.validateUser();
 	if (!user) throw redirect(303, '/login');
 
@@ -83,34 +80,31 @@ export const load = async ({ locals }) => {
 	return { elResultado, user };
 };
 
-
 export const actions: Actions = {
 	// signout
 	default: async ({ locals }) => {
-		/*
-		const session = await locals.auth.validate();
-		if (!session) return fail(401);
-		await auth.invalidateSession(session.sessionId);
-		locals.auth.setSession(null);
-	}*/
-	try {
+		try {
+			const session1 = await locals.auth.validate();
+			if (!session1) return fail(401);
+			await auth.invalidateSession(session1.sessionId);
+			locals.auth.setSession(null);
 
-		let info = await transporter.sendMail({
-			from: '"Fred Foo 👻" jovany.velez@zohomail.com>', // sender address
-			to: "jovany.velez@gmail.com", // list of receivers
-			subject: "Hello ✔", // Subject line
-			text: "Hello world?", // plain text body
-			html: "<b>Hello world?</b>", // html body
-		});
-		console.log("Message sent: %s", info.messageId);
-        /*await transporter.sendMail({
-            from: '"Equisol" SOPORTE.TI@EQUISOL.COM.CO', // sender address
-            to: "jovany.velez@gmail.com", // list of receivers
-            subject: `Hemos recibido tu Orden`, // Subject line
-            text: "Hola Mundo", // plain text body
-            //html: "<b>Hello world?</b>", // html body
-          });*/
-    } catch (error) {
-        console.log(error)
-    }}
+			//Crear usuario
+			/*const user = await auth.createUser({
+				primaryKey: {
+					providerId: 'username',
+					providerUserId: 'wilfer.castano@equisol.com',
+					password: 'wilfer123'
+				},
+				attributes: {
+					email: 'wilfer.castano@equisol.com'
+				}
+			});
+			const session = await auth.createSession(user.userId);
+			locals.auth.setSession(session);
+			console.log('usuario creado');*/
+		} catch (error) {
+			console.log('ERROR');
+		}
+	}
 };
