@@ -41,9 +41,9 @@
 
 		formData.append('products', JSON.stringify(order,null,2))
 
-		console.log("entro")
+
 		//cancel();
-		console.log("salgo")
+
 		return async({result})=>{
 			console.log(result.type)
 			if(result.type==='success'){
