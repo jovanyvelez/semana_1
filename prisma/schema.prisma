@@ -20,7 +20,7 @@ model Usuario {
   address       String
   bussinessUnit String?
   zone          String
-  descount      Float         @default(0) 
+  descount      Decimal         @default(0) @db.Decimal(2, 2)
   orders        OrdenDePedido[]
   role          Roles           @relation(fields: [roleId], references: [id])
 }
@@ -63,7 +63,7 @@ model OrdenDePedidoProducto {
 
 model Category {
   id        String                 @id @default(uuid())
-  name      String                 
+  name      String
   padreId   String?
   createdAt DateTime               @default(now())
   updatedAt DateTime               @updatedAt
@@ -129,7 +129,7 @@ model CcostoZoneCategories {
 model Zones {
   id         Int        @id @default(autoincrement())
   name       String
-  code       Int
+  zone       String
   categorias Category[] @relation("CategoriasZonas")
 }
 
