@@ -23,6 +23,7 @@ model Usuario {
   descount      Decimal         @default(0) @db.Decimal(2, 2)
   orders        OrdenDePedido[]
   role          Roles           @relation(fields: [roleId], references: [id])
+  asesor        String?
 }
 
 model Roles {

@@ -66,6 +66,8 @@ export async function load({ params, locals }) {
 		categorias = resultado.map((obj) => obj.id);
 	}
 
+	categorias = [...categorias,query.param];
+
 	const products = await prisma.product.findMany({
 		where: {
 			categoryId: {
