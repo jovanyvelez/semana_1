@@ -1,6 +1,7 @@
 <script>
 	import '../app.css';
 	import Menu from '$lib/components/Menu.svelte';
+	import MenuAdmon from '$lib/components/MenuAdmon.svelte';
 	export let data;
 </script>
 
@@ -8,8 +9,12 @@
 	<title>Mi Tienda Virtuale</title>
 </svelte:head>
 
-{#if data?.email}
+{#if data?.email && data?.role==='cliente'}
 	<Menu />
+{/if}
+
+{#if data?.email && data?.role==='admin'}
+	<MenuAdmon />
 {/if}
 
 <main class="overflow-auto">

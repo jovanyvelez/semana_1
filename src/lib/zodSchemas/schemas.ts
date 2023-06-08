@@ -8,9 +8,6 @@ export const userSchema = z
 		phone: z.string().regex(/^((3\d{9})|(60\d{8}))$/, 'Número telefónico no es de Colombia'),
 		docType: z.enum(['CC', 'CA', 'PA', 'NIT']),
 		numDoc: z.string().regex(/^[0-9]{4,}$/i, 'Requeriod solo numeros y mínimo 4 caracteres').trim(),
-		documentConfirm: z
-			.string()
-			.regex(/^[0-9]{4,}$/i, 'Requeriod solo numeros y mínimo 4 caracteres').trim(),
 		address: z.string({required_error:"No escribió direccion"})
 			.min(10,{message:"Debe temer mas de 10 caracteres"}).trim(),
 		Department: z.string({required_error:"Se requiere nombre de Departamento"})
@@ -22,7 +19,8 @@ export const userSchema = z
 		zone: z.string({required_error:"Se requiere zona"})
 			.max(2,{message:"No puede ser mas de 2 caracteres"}).trim(),
 		discount: z.number().lte(100).nonnegative(),
-		
+		asesor: z.string().email().min(5),
+		roleId: z.number().lte(3).nonnegative().default(1),
 	});
 
 	export const createUserSchema = z

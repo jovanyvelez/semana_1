@@ -1,11 +1,13 @@
 <script>
   import { enhance } from '$app/forms';
   export let data;
-  const {elResultado} = data;
+  const {elResultado, role} = data;
 </script>
 
-{#if elResultado.length > 0}
+{#if role === 'cliente'}
+    
 
+{#if elResultado.length > 0}
     <div class="flex flex-wrap justify-center">
         {#each elResultado as category (category.rootid) }
             <h1 class="my-10 text-center text-yellow-400">{category.name}</h1>
@@ -20,7 +22,7 @@
         {/each}
     </div>
 {/if}
-
+{/if}
 <form use:enhance method="post">
 	<input type="submit" class="btn btn-warning" value="Sign out" />
 </form>

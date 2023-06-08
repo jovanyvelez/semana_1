@@ -1,9 +1,6 @@
-import { auth } from '$lib/server/lucia';
 import { fail, redirect, type Actions, type Action } from '@sveltejs/kit';
-import { LuciaError } from 'lucia-auth';
-import { Prisma } from '@prisma/client';
 import { prisma } from '$lib/server/prisma.js';
-import { superValidate } from 'sveltekit-superforms/server';
+import { superValidate, message } from 'sveltekit-superforms/server';
 import { userSchema } from '$lib/zodSchemas/schemas.js';
 
 
@@ -16,44 +13,49 @@ export const load = async () => {
 	//if (session) throw redirect(302, '/');
 
 	//const user = auth.deleteUser('Q7RD8tt47Qy3RKV');
+
+	const tipos = await prisma.roles.findMany();
+
 	const form = await superValidate(userSchema);
 
 	return {
-		form
+		form, tipos
 	};
 };
 
-const register: Action = async ({ request, locals }) => {
-	const form = await superValidate(request, userSchema);
-	
-	console.log('En el servidor');
-	if (!form.valid) {
-		return fail(400, {
-			form
-		});
-	}
-/*
+const register: Action = async ({ request }) => {
+
+	const datos = await request.formData();
+	const form = await superValidate(datos, userSchema);
+	if (!form.valid) return fail(400, {form});
+	//const newUser = JSON.parse(JSON.stringify(form.data));
 	try {
-		const usuario = await prisma.user.findUnique({
-			where: { email: form.data.email }
-		});
-
-		await prisma.user.create({
+		const user = await prisma.usuario.create({
 			data: {
-				email: form.data.email,
-				nombre: form.data.name,
-				telefono: form.data.telefono,
-				role: { connect: { name: 'cliente' } }
+				name:form.data.name as string,
+				email: form.data.email as string,
+				phone: form.data.phone as string,
+				docType: form.data.docType as string,
+				numDoc: form.data.numDoc as string,
+				address: form.data.address as string,
+				Departament: form.data.Department as string,
+				city: form.data.city as string,
+				bussinessUnit: form.data.bussinessUnit as string,
+				zone: form.data.zone as string,
+				discount: form.data.discount as number,
+				asesor: form.data.asesor as string,
+				roleId: form.data.roleId as number
 			}
-		});
-
+		})
 	} catch (error) {
-		
-	}finally{
-		prisma.$disconnect;
+		console.log("No se pudo grabar el registro")
+		return fail(400, {form});
 	}
-*/
 
+	
+	return message(form, 'Usuario creado!');
+
+/*
 	try {
 		const user = await auth.createUser({
 			primaryKey: {
@@ -87,33 +89,8 @@ const register: Action = async ({ request, locals }) => {
 		return fail(500, {
 			message: 'Unknown error occurred'
 		});
-	}
-	return { form };
-	/*
-	
+	}*/
 
-	if (usuario) {
-		form.valid = false;
-		form.errors.email = ['email ya existe'];
-		await prisma.Sdisconnect();
-		return fail(400, {
-			form
-		});
-	}
-	await prisma.user.create({
-		data: {
-			email: form.data.email,
-			username: form.data.email,
-			passwordHash: await bcrypt.hash(form.data.password, 10),
-			userAuthToken: crypto.randomUUID(),
-			role: { connect: { name: Roles.USER } }
-		}
-	});
-	await prisma.$disconnect();
-	console.log('Weldone');
-	redirect(303, '/login');
-	//return {form}
-	*/
 };
 
 export const actions: Actions = { register };
