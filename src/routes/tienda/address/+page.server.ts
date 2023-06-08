@@ -71,7 +71,7 @@ export const actions = {
 				
 				newProducts = await Promise.all(
 					newProducts.map(async (element) => {
-						const ccosto = await prisma.ccostoZoneCategories.findMany({
+						const ccosto = await prisma.ccostoZoneCategories.findFirst({
 							where: { zone, categoryId: element.rootCategory },
 							select: { ccosto: true }
 						});
@@ -80,7 +80,7 @@ export const actions = {
 					);
 					
 					newProducts = newProducts.map((obj) => {
-						return { ...obj, ccosto: obj.ccosto[0].ccosto };
+						return { ...obj, ccosto: obj.ccosto.ccosto };
 					});
 					
 					
