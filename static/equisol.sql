@@ -257,8 +257,8 @@ CREATE TABLE public."Usuario" (
     address text NOT NULL,
     "bussinessUnit" text,
     zone text NOT NULL,
-    descount numeric(2,2) DEFAULT 0 NOT NULL,
-    asesor text
+    asesor text,
+    discount double precision DEFAULT 0
 );
 
 
@@ -563,6 +563,9 @@ COPY public."OrdenDePedido" (id, fecha, "userId", "direccionEntrega", "ciudadEnt
 57	2023-05-30 12:22:49.85	1	Diagonal 23 # 33-33	Andes	Antioquia	\N	\N	\N	2023-05-30 12:22:49.85	asdsd
 59	2023-06-01 13:40:17.247	1	Manzana 23 # 22-3	Betéitiva	Boyacá	\N	\N	\N	2023-06-01 13:40:17.247	Compra de prueba
 60	2023-06-01 13:41:54.502	1	Calle 45 # 32-23	Alejandría	Antioquia	\N	\N	\N	2023-06-01 13:41:54.502	lkjlj
+61	2023-06-07 20:58:20.07	2	Carrera 1 # 2-14	Abriaquí	Antioquia	\N	\N	\N	2023-06-07 20:58:20.07	Casa 23, segundo piso
+62	2023-06-07 21:09:35.713	1	Calle 32 # 1-21	San Andrés	Archipiélago de San Andrés, Providencia y Santa Catalina	\N	\N	\N	2023-06-07 21:09:35.713	Avenida new oswald 
+63	2023-06-07 23:11:27.83	1	Avenida 2 # 3-23	Betulia	Antioquia	\N	\N	\N	2023-06-07 23:11:27.83	Barrio Alto
 \.
 
 
@@ -590,6 +593,9 @@ COPY public."OrdenDePedidoProducto" ("ordenDePedidoId", "productoId", cantidad, 
 57	1e8e34ea-7752-40d2-aabe-2d30178a2e85	1	7100	0113	ab076f01-185c-4c85-9201-c1354ecf839c	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
 60	76cedd39-2479-4402-acfa-a0a2e95a4fc3	2	4100	0308	8e500d7a-b094-4211-aabd-9b23dbb97368	d40e26db-01df-45f5-89b3-3836422052cf
 60	9b38700d-f347-4ec3-96b4-89afdc9fb97b	2	3975	0308	9f104869-ed56-4586-abc6-897d1ce279a2	d40e26db-01df-45f5-89b3-3836422052cf
+61	89334caa-1afb-460a-92c2-9abffbcd82fa	1	232	12121	7606f174-60d1-4da8-957a-f0957a9825d2	f294f4ef-bc85-4281-8722-969de08cde43
+63	1e8e34ea-7752-40d2-aabe-2d30178a2e85	1	7100	0113	ab076f01-185c-4c85-9201-c1354ecf839c	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
+63	097858ca-8b2b-4c5e-b32d-d8c267573232	1	22000	0113	ac6d39f5-e44a-47a6-9242-b776194d8270	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
 45	60921eb2-3fcb-43f3-831c-063322554f66	2	1100	0113	68b77e5d-b252-47b4-8e52-453935137f04	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
 45	ae0acb35-6589-4b2e-8d43-0708485a4419	2	28000	0113	a8f457bc-202e-4407-945a-fc90428dc7c9	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
 48	60921eb2-3fcb-43f3-831c-063322554f66	2	1100	0113	68b77e5d-b252-47b4-8e52-453935137f04	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
@@ -609,6 +615,8 @@ COPY public."OrdenDePedidoProducto" ("ordenDePedidoId", "productoId", cantidad, 
 59	1e8e34ea-7752-40d2-aabe-2d30178a2e85	2	7100	0113	ab076f01-185c-4c85-9201-c1354ecf839c	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
 59	e9f0cf99-216e-4a70-826f-64bd0c334f5c	2	11280	0113	ab076f01-185c-4c85-9201-c1354ecf839c	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
 59	60921eb2-3fcb-43f3-831c-063322554f66	2	1100	0113	68b77e5d-b252-47b4-8e52-453935137f04	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
+62	89334caa-1afb-460a-92c2-9abffbcd82fa	2	232	12121	7606f174-60d1-4da8-957a-f0957a9825d2	f294f4ef-bc85-4281-8722-969de08cde43
+62	1e8e34ea-7752-40d2-aabe-2d30178a2e85	2	7100	0113	ab076f01-185c-4c85-9201-c1354ecf839c	08daa8fa-f3e7-4cb4-a9ef-fb7b3cbae34f
 \.
 
 
@@ -645,7 +653,6 @@ ed7d37ad-4207-4dfc-b4fd-c14da1a8a287	232	0	0	\N	\N	\N	89334caa-1afb-460a-92c2-9a
 --
 
 COPY public."Product" (id, name, description, brand, code, eancode, quantity, promo, active, "categoryId", "createdAt", "updatedAt") FROM stdin;
-1e8e34ea-7752-40d2-aabe-2d30178a2e85	Equipo2	500 grs	Red Cut	STEAK002	775465851253	86	f	t	ab076f01-185c-4c85-9201-c1354ecf839c	2023-05-21 16:18:01.498	2023-06-01 13:40:17.432
 60921eb2-3fcb-43f3-831c-063322554f66	Equipo5	Gel	Gillete	BODY001	775465851265	100	f	t	68b77e5d-b252-47b4-8e52-453935137f04	2023-05-21 17:47:56.151	2023-06-01 13:40:17.432
 e9f0cf99-216e-4a70-826f-64bd0c334f5c	Equipo18	500 grs	Red Cut	STEAK001	775465851258	119	f	t	ab076f01-185c-4c85-9201-c1354ecf839c	2023-05-21 16:16:27.411	2023-06-01 13:40:17.432
 55c1a3cb-01f5-4a12-b637-423c0b87af93	Equipo3	333 ml	Bavaria	LIQ0013	775465851269	193	f	t	e03a027c-9192-4b7d-afa4-baf035f8f792	2023-05-21 17:44:02.36	2023-05-30 00:08:37.143
@@ -653,13 +660,14 @@ ae0acb35-6589-4b2e-8d43-0708485a4419	Equipo12	333 ml	Bahia	LIQ002	775465851262	4
 5a792989-6fb1-481a-8b3d-43a4f456e0e9	Equipo4	Doce años	Chirrinchi	wd54654	772114898752	197	f	t	a8f457bc-202e-4407-945a-fc90428dc7c9	2023-05-21 16:23:20.894	2023-05-29 12:54:20.785
 76cedd39-2479-4402-acfa-a0a2e95a4fc3	Equipo6	Cuatro puestos	Pullman	COM6751	7705456466455	777	f	t	8e500d7a-b094-4211-aabd-9b23dbb97368	2023-05-21 17:52:01.155	2023-06-01 13:41:54.545
 9b38700d-f347-4ec3-96b4-89afdc9fb97b	Equipo10	Para el dolor de cabeza	Dolex	Drog1254	7702114569888	3	f	t	9f104869-ed56-4586-abc6-897d1ce279a2	2023-05-21 17:53:28.595	2023-06-01 13:41:54.545
-89334caa-1afb-460a-92c2-9abffbcd82fa	Acetaminofen	Para el dolor de cabeza	Dolex	Drog125445	1277021145987	23	f	t	7606f174-60d1-4da8-957a-f0957a9825d2	2023-06-06 23:58:36.787	2023-06-06 23:58:36.787
 d34c8663-60db-4541-9d0d-1f6faba4d9ac	Equipo16	750 ml	Black Barrel	LIQ001	775645851261	196	f	t	a8f457bc-202e-4407-945a-fc90428dc7c9	2023-05-21 16:37:03.046	2023-05-29 23:10:23.113
 79ed59ab-7598-4997-bb18-b8d1699fb836	Equipo7	450 grs	Horneaditos	BREAD001	775465851254	13	f	t	31950fa6-7fb0-489b-919f-42743fc40082	2023-05-21 18:00:14.879	2023-05-29 23:11:23.133
 9820a1b0-c947-490a-b7e8-cf7a92f06488	Equipo9	250 grs	Horneaditos	SBREAD001	775465851257	8	f	t	e2eee2e4-5fbe-4749-9c72-30b2f47108d5	2023-05-21 16:33:30.489	2023-05-29 23:11:23.133
-097858ca-8b2b-4c5e-b32d-d8c267573232	Equipo1	600 grs	GSF	STEAK0034	775465851260	139	f	t	ac6d39f5-e44a-47a6-9242-b776194d8270	2023-05-21 16:20:10.6	2023-05-30 12:20:58.152
+89334caa-1afb-460a-92c2-9abffbcd82fa	Acetaminofen	Para el dolor de cabeza	Dolex	Drog125445	1277021145987	20	f	t	7606f174-60d1-4da8-957a-f0957a9825d2	2023-06-06 23:58:36.787	2023-06-07 21:09:35.828
 ddec76b9-67b6-40a8-8011-839d7769104e	Equipo17	Tocador, 2 unidades 220 grs	Colombiana de Jabones	SOAP001	775465851263	156	f	t	565de8a2-395e-4677-991d-01fd3eed607c	2023-05-21 17:45:54.649	2023-05-29 10:54:38.621
 94160dfe-9017-476e-b618-e07bc8641531	Equipo8	1.8 litros	JGB	lim23442	5454654544545	42	f	t	9de62a43-d249-45d0-8fef-27cc6714258c	2023-05-21 16:21:37.067	2023-05-29 23:11:23.133
+1e8e34ea-7752-40d2-aabe-2d30178a2e85	Equipo2	500 grs	Red Cut	STEAK002	775465851253	85	f	t	ab076f01-185c-4c85-9201-c1354ecf839c	2023-05-21 16:18:01.498	2023-06-07 23:11:27.882
+097858ca-8b2b-4c5e-b32d-d8c267573232	Equipo1	600 grs	GSF	STEAK0034	775465851260	138	f	t	ac6d39f5-e44a-47a6-9242-b776194d8270	2023-05-21 16:20:10.6	2023-06-07 23:11:27.882
 ac6999ce-57af-46e9-a129-ea92331f8fbd	Equipo11	450 grs	Horneaditos	BREAD002	775465851255	18	f	t	31950fa6-7fb0-489b-919f-42743fc40082	2023-05-21 17:58:15.513	2023-05-30 12:20:58.153
 bc3bb3ba-9d3b-4761-b94a-9ebfc9d5e43c	Equipo14	Tajado	Horneaditos	BREAD003	775465851256	18	f	t	31950fa6-7fb0-489b-919f-42743fc40082	2023-05-21 16:25:59.268	2023-05-30 12:45:15.561
 bf87c9e2-5f50-43eb-8f53-430baeafc68a	Equiopo15	500 grs	Red Cut	STEAK003	775465851259	14	f	t	ac6d39f5-e44a-47a6-9242-b776194d8270	2023-05-21 16:19:06.757	2023-05-29 20:14:50.175
@@ -683,10 +691,12 @@ COPY public."Roles" (id, name) FROM stdin;
 -- Data for Name: Usuario; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public."Usuario" (id, "roleId", name, phone, email, "docType", "numDoc", "Departament", city, address, "bussinessUnit", zone, descount, asesor) FROM stdin;
-1	1	Jovany Velez Arango	3002005393	jovany.velez@gmail.com	cc	15263832	Antioquia	Bello	calle 52d # 57a-40	6	3	0.00	\N
-2	1	Oscar Alberto Padilla	3333333333	oscar.padilla@equisol.com	cc	44444444	Antioquia	Sta Elena	Calle 2 # 3-4	6	2	0.00	\N
-3	1	Wilfer Castaño	4444444444	wilfer.castano@equisol.com.co	cc	33333333	Cordoba	Montería	Carrera 12 # 4-13	6	5	0.00	\N
+COPY public."Usuario" (id, "roleId", name, phone, email, "docType", "numDoc", "Departament", city, address, "bussinessUnit", zone, asesor, discount) FROM stdin;
+2	1	Oscar Alberto Padilla	3333333333	oscar.padilla@equisol.com	cc	44444444	Antioquia	Sta Elena	Calle 2 # 3-4	6	2	\N	1.5
+3	1	Wilfer Castaño	4444444444	wilfer.castano@equisol.com.co	cc	33333333	Cordoba	Montería	Carrera 12 # 4-13	6	5	\N	20.14
+5	1	Mariana Velez Vergara	3006005124	super@example.com	CC	43740489	Cundinamarca	Villeta	Calle 52D # 57A-40	6	02	jovany.velez@gmail.com	0
+1	3	Jovany Velez Arango	3002005393	jovany.velez@gmail.com	cc	15263832	Antioquia	Bello	calle 52d # 57a-40	6	3	\N	8.13
+7	1	Sandra Paola Vergara	3006005323	spvergara@gmail.com	CC	43740482	Antioquia	Arboletes	Calle 23a # 32-41	6	03	jairo.rivera@gmail.com	0
 \.
 
 
@@ -729,6 +739,7 @@ COPY public.auth_key (id, hashed_password, user_id, primary_key, expires) FROM s
 username:jovany.velez@gmail.com	s2:6fDeFibRe2PHKsAt:459b92fde8c01946ddb61b285f3778d0f4790949897a80c0df841a7aa7f620b31403ba2d9b8621630014f637ef1b590d1ab63e3172294e9c0675934a7649f70d	wpDMrek4jqymxhK	t	\N
 username:oscar.padilla@equisol.com	s2:S2rUwIZewbEXTW8Z:15836fdca2fdbbee74b9344698335ccc70ab23d870646538d0db08a0e0b976cd73d35ce8c35c3c59db920a1d596f3e178cd87242b78d28e560a1a51f75af148b	YoCXI7QQcLdkJV2	t	\N
 username:wilfer.castano@equisol.com	s2:hhdDCAfoB6r9EJQ4:8c170fd16db52de56ae98a756397636b1e2349d610669da7d05a09f8bdd0e323cc2b95cfb7928c0e6bfc586800de8da0a8e275acb1f0928858662ca4b0c99406	JE9hxCrDicyKeYX	t	\N
+username:super@example.com	s2:OmL4bO19NsozxZrf:6e65cc69945d1a2d6da07894d01aedfa9ffa831c19ce4f486a85d0a4f4ab6c9601294afb0d8b65ba7836c8788d6ee69d258dc41cf186fcf768bc010c389f2453	1dy2HUxydxn7zkm	t	\N
 \.
 
 
@@ -737,9 +748,7 @@ username:wilfer.castano@equisol.com	s2:hhdDCAfoB6r9EJQ4:8c170fd16db52de56ae98a75
 --
 
 COPY public.auth_session (id, user_id, active_expires, idle_expires) FROM stdin;
-z6wkhYrHqphZsd7hiT50bloK8eqzt4yng8cPWGW4	wpDMrek4jqymxhK	1684979846291	1686189446291
-m10Bdd3oJraHOPYsDtyWczda1vbS8DLLbuuvUKA1	wpDMrek4jqymxhK	1684984250920	1686193850920
-MVq1tkVEFWbJCQU3eopJzKOaun7d1TgMguGTNdIA	wpDMrek4jqymxhK	1685033590737	1686243190737
+tnuWLer4nuyu8GgcF4spfP6JyNwaeJHKb2YTHpyb	YoCXI7QQcLdkJV2	1686368512481	1687578112481
 LTbX1HEvYVHXFMwLX0T9xvVhpoMa9erzek2xtySg	wpDMrek4jqymxhK	1685158638668	1686368238668
 ooYs3GfwOSTnKObOq2K2td1vaMn9ySZzXLJBnOAQ	wpDMrek4jqymxhK	1685158691044	1686368291044
 WXRMPGrSnM6TH4QmHAdX7GLFsfafy9weaicf8aOH	wpDMrek4jqymxhK	1685206922284	1686416522284
@@ -752,6 +761,9 @@ ZcFoyEEZaTieksCnp4csKFvbpbyCYd4ru3toPhwg	YoCXI7QQcLdkJV2	1685930321625	168713992
 1j5XYWFpBvyGdgu4qzcatOIKH0KO9deSvKC8dyIr	wpDMrek4jqymxhK	1686087217768	1687296817768
 acq42AgaXFDvTon5znNNtmFyjMZZvRxgtJqoY9u5	wpDMrek4jqymxhK	1686173717969	1687383317969
 XW2gIP72R0bkBeSfWFyEJaVsA9sWYSC2BD4ek8jc	wpDMrek4jqymxhK	1686225818314	1687435418314
+uZWSloJzEud9uRn2Y2YIGI3AEE3jgMk0A9BIZkSg	wpDMrek4jqymxhK	1686264411402	1687474011402
+C7nkHvDA049NjXbncRQk6YXW9YlfldRNvVqBH85J	wpDMrek4jqymxhK	1686313771649	1687523371649
+iT2Q2PdBoYlsbNgX3twDccggR41W6qkM6k844o5M	wpDMrek4jqymxhK	1686314346891	1687523946891
 \.
 
 
@@ -763,6 +775,7 @@ COPY public.auth_user (id, email) FROM stdin;
 wpDMrek4jqymxhK	jovany.velez@gmail.com
 YoCXI7QQcLdkJV2	oscar.padilla@equisol.com
 JE9hxCrDicyKeYX	wilfer.castano@equisol.com
+1dy2HUxydxn7zkm	super@example.com
 \.
 
 
@@ -777,7 +790,7 @@ SELECT pg_catalog.setval('public."CcostoZoneCategories_id_seq"', 34, true);
 -- Name: OrdenDePedido_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public."OrdenDePedido_id_seq"', 60, true);
+SELECT pg_catalog.setval('public."OrdenDePedido_id_seq"', 63, true);
 
 
 --
@@ -791,7 +804,7 @@ SELECT pg_catalog.setval('public."Roles_id_seq"', 3, true);
 -- Name: Usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public."Usuario_id_seq"', 3, true);
+SELECT pg_catalog.setval('public."Usuario_id_seq"', 9, true);
 
 
 --
