@@ -48,7 +48,6 @@
 		const response = await fetch('/api/department');
 		const data = await response.json();
 		departamentos = data;
-		const input = document.getElementById('descuento');
 	});
 </script>
 
@@ -76,7 +75,7 @@
 			<select
 				id="tipoUser"
 				bind:value={$form.roleId}
-				class="select select-bordered select-xs w-4/12"
+				class="select select-bordered select-xs w-4/12 mt-2"
 				data-invalid={$errors.roleId}
 				{...$constraints.roleId}
 				name="Departament"
@@ -110,7 +109,7 @@
 		</div>
 
 		{#if $errors.email}
-			<small>{$errors.email}</small>
+			<small class="text-error">{$errors.email}</small>
 		{/if}
 
 		<div>
@@ -130,7 +129,7 @@
 		</div>
 
 		{#if $errors.phone}
-			<small>{$errors.phone}</small>
+			<small class="text-error">{$errors.phone}</small>
 		{/if}
 
 		<label for="tipo" class="label">Tipo y Numero de documento</label>
@@ -159,10 +158,10 @@
 			/>
 		</div>
 		{#if $errors.numDoc}
-			<small>{$errors.numDoc}</small>
+			<small class="text-error">{$errors.numDoc}</small>
 		{/if}
 		{#if $errors.docType}
-			<small>{$errors.docType}</small>
+			<small class="text-error">{$errors.docType}</small>
 		{/if}
 
 		<div>
@@ -180,7 +179,9 @@
 					: 'input-bordered'} input-sm rounded-md w-full max-w-xs"
 			/>
 		</div>
-
+		{#if $errors.address}
+			<small class="text-error">{$errors.address}</small>
+		{/if}
 		<div class="flex justify flex-col">
 			<label class="label" for="departamento">Seleccione el Departamento</label>
 
@@ -201,7 +202,7 @@
 			</select>
 
 			{#if $errors.Department}
-				<small>{$errors.Department}</small>
+				<small class="text-error">{$errors.Department}</small>
 			{/if}
 
 			{#if municipios.length > 0}
@@ -220,7 +221,7 @@
 					{/each}
 				</select>
 				{#if $errors.city}
-					<small>{$errors.city}</small>
+					<small class="text-error">{$errors.city}</small>
 				{/if}
 			{/if}
 		</div>
@@ -238,7 +239,7 @@
 			/>
 		</div>
 		{#if $errors.bussinessUnit}
-			<small>{$errors.bussinessUnit}</small>
+			<small class="text-error">{$errors.bussinessUnit}</small>
 		{/if}
 		<div>
 			<label for="zona" class="label">Nro Zona</label>
@@ -273,7 +274,7 @@
 			/>
 		</div>
 		{#if $errors.discount}
-			<small>{$errors.discount}</small>
+			<small class="text-error">{$errors.discount}</small>
 		{/if}
 
 		<div>
@@ -293,7 +294,7 @@
 		</div>
 
 		{#if $errors.asesor}
-			<small>{$errors.asesor}</small>
+			<small class="text-error">{$errors.asesor}</small>
 		{/if}
 
 		<div class="w-full flex justify-center mt-5">

@@ -2,6 +2,9 @@
 	import { enhance } from '$app/forms';
 
     export let data;
+	export let form;
+	console.log(form)
+
 
 	const categorias = data.categoriasHijasRaiz;
 	
@@ -17,6 +20,7 @@
         let padreId;
 
         if(typeof name !=='string'|| name.length < 1){
+				alert("Categoria debe tener nombre")
                 cancel()
             }
 

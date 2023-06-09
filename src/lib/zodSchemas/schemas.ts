@@ -37,3 +37,10 @@ export const userSchema = z
 		password: z.string().min(4).trim().regex(/^(?=.*[a-zA-Z])(?=.*\d).*$/, 'debe terner al menos un numero y una letra'),
 		passwordConfirm: z.string().min(4).trim()
 	})	
+
+	export const authSchema = z
+	.object({
+		email: z.string().email().min(5),
+		password: z.string().min(4).trim().regex(/^(?=.*[a-zA-Z])(?=.*\d).*$/, 'debe terner al menos un numero y una letra'),
+	})
+	

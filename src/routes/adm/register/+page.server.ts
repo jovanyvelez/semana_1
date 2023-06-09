@@ -1,4 +1,4 @@
-import { fail, redirect, type Actions, type Action } from '@sveltejs/kit';
+import { fail, type Actions, type Action } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma.js';
 import { superValidate, message } from 'sveltekit-superforms/server';
 import { userSchema } from '$lib/zodSchemas/schemas.js';
