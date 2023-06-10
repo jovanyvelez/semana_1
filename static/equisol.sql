@@ -17,16 +17,16 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: admin
+-- Name: public; Type: SCHEMA; Schema: -; Owner: ecommerce
 --
 
 -- *not* creating schema, since initdb creates it
 
 
-ALTER SCHEMA public OWNER TO admin;
+ALTER SCHEMA public OWNER TO ecommerce;
 
 --
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: admin
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: ecommerce
 --
 
 COMMENT ON SCHEMA public IS '';
@@ -37,7 +37,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: Category; Type: TABLE; Schema: public; Owner: admin
+-- Name: Category; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."Category" (
@@ -49,10 +49,10 @@ CREATE TABLE public."Category" (
 );
 
 
-ALTER TABLE public."Category" OWNER TO admin;
+ALTER TABLE public."Category" OWNER TO ecommerce;
 
 --
--- Name: CcostoZoneCategories; Type: TABLE; Schema: public; Owner: admin
+-- Name: CcostoZoneCategories; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."CcostoZoneCategories" (
@@ -63,10 +63,10 @@ CREATE TABLE public."CcostoZoneCategories" (
 );
 
 
-ALTER TABLE public."CcostoZoneCategories" OWNER TO admin;
+ALTER TABLE public."CcostoZoneCategories" OWNER TO ecommerce;
 
 --
--- Name: CcostoZoneCategories_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: CcostoZoneCategories_id_seq; Type: SEQUENCE; Schema: public; Owner: ecommerce
 --
 
 CREATE SEQUENCE public."CcostoZoneCategories_id_seq"
@@ -78,17 +78,17 @@ CREATE SEQUENCE public."CcostoZoneCategories_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."CcostoZoneCategories_id_seq" OWNER TO admin;
+ALTER TABLE public."CcostoZoneCategories_id_seq" OWNER TO ecommerce;
 
 --
--- Name: CcostoZoneCategories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: CcostoZoneCategories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ecommerce
 --
 
 ALTER SEQUENCE public."CcostoZoneCategories_id_seq" OWNED BY public."CcostoZoneCategories".id;
 
 
 --
--- Name: Image; Type: TABLE; Schema: public; Owner: admin
+-- Name: Image; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."Image" (
@@ -102,10 +102,10 @@ CREATE TABLE public."Image" (
 );
 
 
-ALTER TABLE public."Image" OWNER TO admin;
+ALTER TABLE public."Image" OWNER TO ecommerce;
 
 --
--- Name: OrdenDePedido; Type: TABLE; Schema: public; Owner: admin
+-- Name: OrdenDePedido; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."OrdenDePedido" (
@@ -123,10 +123,10 @@ CREATE TABLE public."OrdenDePedido" (
 );
 
 
-ALTER TABLE public."OrdenDePedido" OWNER TO admin;
+ALTER TABLE public."OrdenDePedido" OWNER TO ecommerce;
 
 --
--- Name: OrdenDePedidoProducto; Type: TABLE; Schema: public; Owner: admin
+-- Name: OrdenDePedidoProducto; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."OrdenDePedidoProducto" (
@@ -140,10 +140,10 @@ CREATE TABLE public."OrdenDePedidoProducto" (
 );
 
 
-ALTER TABLE public."OrdenDePedidoProducto" OWNER TO admin;
+ALTER TABLE public."OrdenDePedidoProducto" OWNER TO ecommerce;
 
 --
--- Name: OrdenDePedido_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: OrdenDePedido_id_seq; Type: SEQUENCE; Schema: public; Owner: ecommerce
 --
 
 CREATE SEQUENCE public."OrdenDePedido_id_seq"
@@ -155,17 +155,17 @@ CREATE SEQUENCE public."OrdenDePedido_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."OrdenDePedido_id_seq" OWNER TO admin;
+ALTER TABLE public."OrdenDePedido_id_seq" OWNER TO ecommerce;
 
 --
--- Name: OrdenDePedido_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: OrdenDePedido_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ecommerce
 --
 
 ALTER SEQUENCE public."OrdenDePedido_id_seq" OWNED BY public."OrdenDePedido".id;
 
 
 --
--- Name: Price; Type: TABLE; Schema: public; Owner: admin
+-- Name: Price; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."Price" (
@@ -182,10 +182,10 @@ CREATE TABLE public."Price" (
 );
 
 
-ALTER TABLE public."Price" OWNER TO admin;
+ALTER TABLE public."Price" OWNER TO ecommerce;
 
 --
--- Name: Product; Type: TABLE; Schema: public; Owner: admin
+-- Name: Product; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."Product" (
@@ -204,10 +204,10 @@ CREATE TABLE public."Product" (
 );
 
 
-ALTER TABLE public."Product" OWNER TO admin;
+ALTER TABLE public."Product" OWNER TO ecommerce;
 
 --
--- Name: Roles; Type: TABLE; Schema: public; Owner: admin
+-- Name: Roles; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."Roles" (
@@ -216,10 +216,10 @@ CREATE TABLE public."Roles" (
 );
 
 
-ALTER TABLE public."Roles" OWNER TO admin;
+ALTER TABLE public."Roles" OWNER TO ecommerce;
 
 --
--- Name: Roles_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: Roles_id_seq; Type: SEQUENCE; Schema: public; Owner: ecommerce
 --
 
 CREATE SEQUENCE public."Roles_id_seq"
@@ -231,17 +231,17 @@ CREATE SEQUENCE public."Roles_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Roles_id_seq" OWNER TO admin;
+ALTER TABLE public."Roles_id_seq" OWNER TO ecommerce;
 
 --
--- Name: Roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: Roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ecommerce
 --
 
 ALTER SEQUENCE public."Roles_id_seq" OWNED BY public."Roles".id;
 
 
 --
--- Name: Usuario; Type: TABLE; Schema: public; Owner: admin
+-- Name: Usuario; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."Usuario" (
@@ -262,10 +262,10 @@ CREATE TABLE public."Usuario" (
 );
 
 
-ALTER TABLE public."Usuario" OWNER TO admin;
+ALTER TABLE public."Usuario" OWNER TO ecommerce;
 
 --
--- Name: Usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: Usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: ecommerce
 --
 
 CREATE SEQUENCE public."Usuario_id_seq"
@@ -277,17 +277,17 @@ CREATE SEQUENCE public."Usuario_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Usuario_id_seq" OWNER TO admin;
+ALTER TABLE public."Usuario_id_seq" OWNER TO ecommerce;
 
 --
--- Name: Usuario_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: Usuario_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ecommerce
 --
 
 ALTER SEQUENCE public."Usuario_id_seq" OWNED BY public."Usuario".id;
 
 
 --
--- Name: Zones; Type: TABLE; Schema: public; Owner: admin
+-- Name: Zones; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."Zones" (
@@ -297,10 +297,10 @@ CREATE TABLE public."Zones" (
 );
 
 
-ALTER TABLE public."Zones" OWNER TO admin;
+ALTER TABLE public."Zones" OWNER TO ecommerce;
 
 --
--- Name: Zones_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: Zones_id_seq; Type: SEQUENCE; Schema: public; Owner: ecommerce
 --
 
 CREATE SEQUENCE public."Zones_id_seq"
@@ -312,17 +312,17 @@ CREATE SEQUENCE public."Zones_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Zones_id_seq" OWNER TO admin;
+ALTER TABLE public."Zones_id_seq" OWNER TO ecommerce;
 
 --
--- Name: Zones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: Zones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ecommerce
 --
 
 ALTER SEQUENCE public."Zones_id_seq" OWNED BY public."Zones".id;
 
 
 --
--- Name: _CategoriasZonas; Type: TABLE; Schema: public; Owner: admin
+-- Name: _CategoriasZonas; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public."_CategoriasZonas" (
@@ -331,10 +331,10 @@ CREATE TABLE public."_CategoriasZonas" (
 );
 
 
-ALTER TABLE public."_CategoriasZonas" OWNER TO admin;
+ALTER TABLE public."_CategoriasZonas" OWNER TO ecommerce;
 
 --
--- Name: _prisma_migrations; Type: TABLE; Schema: public; Owner: admin
+-- Name: _prisma_migrations; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public._prisma_migrations (
@@ -349,10 +349,10 @@ CREATE TABLE public._prisma_migrations (
 );
 
 
-ALTER TABLE public._prisma_migrations OWNER TO admin;
+ALTER TABLE public._prisma_migrations OWNER TO ecommerce;
 
 --
--- Name: auth_key; Type: TABLE; Schema: public; Owner: admin
+-- Name: auth_key; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public.auth_key (
@@ -364,10 +364,10 @@ CREATE TABLE public.auth_key (
 );
 
 
-ALTER TABLE public.auth_key OWNER TO admin;
+ALTER TABLE public.auth_key OWNER TO ecommerce;
 
 --
--- Name: auth_session; Type: TABLE; Schema: public; Owner: admin
+-- Name: auth_session; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public.auth_session (
@@ -378,10 +378,10 @@ CREATE TABLE public.auth_session (
 );
 
 
-ALTER TABLE public.auth_session OWNER TO admin;
+ALTER TABLE public.auth_session OWNER TO ecommerce;
 
 --
--- Name: auth_user; Type: TABLE; Schema: public; Owner: admin
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
 CREATE TABLE public.auth_user (
@@ -390,45 +390,45 @@ CREATE TABLE public.auth_user (
 );
 
 
-ALTER TABLE public.auth_user OWNER TO admin;
+ALTER TABLE public.auth_user OWNER TO ecommerce;
 
 --
--- Name: CcostoZoneCategories id; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: CcostoZoneCategories id; Type: DEFAULT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."CcostoZoneCategories" ALTER COLUMN id SET DEFAULT nextval('public."CcostoZoneCategories_id_seq"'::regclass);
 
 
 --
--- Name: OrdenDePedido id; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: OrdenDePedido id; Type: DEFAULT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."OrdenDePedido" ALTER COLUMN id SET DEFAULT nextval('public."OrdenDePedido_id_seq"'::regclass);
 
 
 --
--- Name: Roles id; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: Roles id; Type: DEFAULT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Roles" ALTER COLUMN id SET DEFAULT nextval('public."Roles_id_seq"'::regclass);
 
 
 --
--- Name: Usuario id; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: Usuario id; Type: DEFAULT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Usuario" ALTER COLUMN id SET DEFAULT nextval('public."Usuario_id_seq"'::regclass);
 
 
 --
--- Name: Zones id; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: Zones id; Type: DEFAULT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Zones" ALTER COLUMN id SET DEFAULT nextval('public."Zones_id_seq"'::regclass);
 
 
 --
--- Data for Name: Category; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: Category; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."Category" (id, name, "padreId", "createdAt", "updatedAt") FROM stdin;
@@ -461,11 +461,16 @@ f294f4ef-bc85-4281-8722-969de08cde43	Pruebas	\N	2023-06-05 16:18:01.34	2023-06-0
 990e1935-504d-4329-b384-e6c597a7f107	Acerados	7606f174-60d1-4da8-957a-f0957a9825d2	2023-06-06 01:14:11.897	2023-06-06 01:14:11.897
 5d87d293-9dc4-4fca-bd04-6c71ddf66ac5	Andamios	f294f4ef-bc85-4281-8722-969de08cde43	2023-06-06 01:16:41.881	2023-06-06 01:16:41.881
 84b5d997-a2c5-4dc0-a0be-9d0770679289	Estructurales	5d87d293-9dc4-4fca-bd04-6c71ddf66ac5	2023-06-06 01:17:18.442	2023-06-06 01:17:18.442
+3f53d9fd-bd92-4ecd-bcb7-db818fb304d8	MARCA DE PRUEBA	\N	2023-06-09 15:03:02.772	2023-06-09 15:03:02.772
+9010f7d0-c467-4f36-b188-d0c335c9d554	LANZAMIENTOS	3f53d9fd-bd92-4ecd-bcb7-db818fb304d8	2023-06-09 15:06:55.859	2023-06-09 15:06:55.859
+b21e2e29-470c-40ab-8e90-cf3a51edb376	Linea 1	9010f7d0-c467-4f36-b188-d0c335c9d554	2023-06-09 15:08:11.588	2023-06-09 15:08:11.588
+ff7ba603-50fe-4011-816c-def811c35f24	CATEGORIA DE EJEMPLO	\N	2023-06-09 16:13:13.871	2023-06-09 16:13:13.871
+75eebb7e-5ee5-4cab-a7dd-bde8a85f61a6	TUBOS	ff7ba603-50fe-4011-816c-def811c35f24	2023-06-09 16:16:19.787	2023-06-09 16:16:19.787
 \.
 
 
 --
--- Data for Name: CcostoZoneCategories; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: CcostoZoneCategories; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."CcostoZoneCategories" (id, zone, "categoryId", ccosto) FROM stdin;
@@ -494,11 +499,12 @@ COPY public."CcostoZoneCategories" (id, zone, "categoryId", ccosto) FROM stdin;
 23	5	da4ace43-beb2-45c7-9cdd-7ad125179e1b	0124
 24	6	da4ace43-beb2-45c7-9cdd-7ad125179e1b	0125
 34	1	f294f4ef-bc85-4281-8722-969de08cde43	12121
+36	1	ff7ba603-50fe-4011-816c-def811c35f24	6666
 \.
 
 
 --
--- Data for Name: Image; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: Image; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."Image" (id, "publicId", "secureUrl", "productId", "createdAt", "updatedAt", name) FROM stdin;
@@ -542,11 +548,13 @@ faabf75c-4434-4b58-b6ba-fdbdb66752ca	tienda/h0e89buxchmk0fiijylc	/tienda/h0e89bu
 36d18214-7adf-4356-b756-86768bf005ca	tienda/fdg4oymmkxeubtp3dcbu	/tienda/fdg4oymmkxeubtp3dcbu.png	9820a1b0-c947-490a-b7e8-cf7a92f06488	2023-05-21 18:18:32.906	2023-06-06 19:44:16.753	main
 4421a0da-f3a8-4ee6-a150-abe5df7232ce		/tienda/1686095916612.png	89334caa-1afb-460a-92c2-9abffbcd82fa	2023-06-06 23:58:36.835	2023-06-06 23:58:36.835	main
 45ceead7-b2b3-4a04-a210-7932c0c19dde		/tienda/1686095916612.png	89334caa-1afb-460a-92c2-9abffbcd82fa	2023-06-06 23:58:36.835	2023-06-06 23:58:36.835	one
+892a0046-0225-493d-ab24-4128927576b4		/tienda/1686327599335.png	b80fd054-a534-4a26-9c3d-4dea431fc149	2023-06-09 16:19:59.569	2023-06-09 16:19:59.569	main
+b14031ae-f672-4a84-8ae5-b44269961861		/tienda/1686327599335.png	b80fd054-a534-4a26-9c3d-4dea431fc149	2023-06-09 16:19:59.569	2023-06-09 16:19:59.569	one
 \.
 
 
 --
--- Data for Name: OrdenDePedido; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: OrdenDePedido; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."OrdenDePedido" (id, fecha, "userId", "direccionEntrega", "ciudadEnt", "departamentoEnt", "metodoPago", estado, "fechaDespacho", "updatedAt", notes) FROM stdin;
@@ -570,7 +578,7 @@ COPY public."OrdenDePedido" (id, fecha, "userId", "direccionEntrega", "ciudadEnt
 
 
 --
--- Data for Name: OrdenDePedidoProducto; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: OrdenDePedidoProducto; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."OrdenDePedidoProducto" ("ordenDePedidoId", "productoId", cantidad, precio, ccosto, category, "rootCategory") FROM stdin;
@@ -621,7 +629,7 @@ COPY public."OrdenDePedidoProducto" ("ordenDePedidoId", "productoId", cantidad, 
 
 
 --
--- Data for Name: Price; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: Price; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."Price" (id, price1, price2, price3, price4, price5, price6, "productId", "createdAt", "updatedAt") FROM stdin;
@@ -645,11 +653,12 @@ c570ea5f-d226-4bd1-a709-c92c6b8c5537	31000	32000	33000	\N	\N	\N	55c1a3cb-01f5-4a
 db6757e5-261c-4da8-aea9-c345b8a98984	1700	1800	1749	\N	\N	\N	ac6999ce-57af-46e9-a129-ea92331f8fbd	2023-05-21 18:41:39.22	2023-05-21 18:47:48.099
 fe6d2b88-30bd-48eb-bcb0-1b6e4a5f2143	3975	3812	3249	\N	\N	\N	9b38700d-f347-4ec3-96b4-89afdc9fb97b	2023-05-21 18:41:39.22	2023-05-21 18:47:48.099
 ed7d37ad-4207-4dfc-b4fd-c14da1a8a287	232	0	0	\N	\N	\N	89334caa-1afb-460a-92c2-9abffbcd82fa	2023-06-06 23:58:36.846	2023-06-06 23:58:36.846
+a16d3f98-804f-4a8a-aec2-75ce7f9bdba9	5000	0	0	\N	\N	\N	b80fd054-a534-4a26-9c3d-4dea431fc149	2023-06-09 16:19:59.58	2023-06-09 16:19:59.58
 \.
 
 
 --
--- Data for Name: Product; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: Product; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."Product" (id, name, description, brand, code, eancode, quantity, promo, active, "categoryId", "createdAt", "updatedAt") FROM stdin;
@@ -669,6 +678,7 @@ ddec76b9-67b6-40a8-8011-839d7769104e	Equipo17	Tocador, 2 unidades 220 grs	Colomb
 1e8e34ea-7752-40d2-aabe-2d30178a2e85	Equipo2	500 grs	Red Cut	STEAK002	775465851253	85	f	t	ab076f01-185c-4c85-9201-c1354ecf839c	2023-05-21 16:18:01.498	2023-06-07 23:11:27.882
 097858ca-8b2b-4c5e-b32d-d8c267573232	Equipo1	600 grs	GSF	STEAK0034	775465851260	138	f	t	ac6d39f5-e44a-47a6-9242-b776194d8270	2023-05-21 16:20:10.6	2023-06-07 23:11:27.882
 ac6999ce-57af-46e9-a129-ea92331f8fbd	Equipo11	450 grs	Horneaditos	BREAD002	775465851255	18	f	t	31950fa6-7fb0-489b-919f-42743fc40082	2023-05-21 17:58:15.513	2023-05-30 12:20:58.153
+b80fd054-a534-4a26-9c3d-4dea431fc149	Producto demo	Tuberia pvc	pavc	ad123	7897987987999	456	f	t	75eebb7e-5ee5-4cab-a7dd-bde8a85f61a6	2023-06-09 16:19:59.544	2023-06-09 16:19:59.544
 bc3bb3ba-9d3b-4761-b94a-9ebfc9d5e43c	Equipo14	Tajado	Horneaditos	BREAD003	775465851256	18	f	t	31950fa6-7fb0-489b-919f-42743fc40082	2023-05-21 16:25:59.268	2023-05-30 12:45:15.561
 bf87c9e2-5f50-43eb-8f53-430baeafc68a	Equiopo15	500 grs	Red Cut	STEAK003	775465851259	14	f	t	ac6d39f5-e44a-47a6-9242-b776194d8270	2023-05-21 16:19:06.757	2023-05-29 20:14:50.175
 bae41e85-c627-4b57-b1b9-a25b233ccdb8	Equipo13	Aerosol	Brilla King	CLEANP001	77515697565	119	f	t	9de62a43-d249-45d0-8fef-27cc6714258c	2023-05-21 17:46:58.136	2023-05-29 20:14:50.175
@@ -677,18 +687,18 @@ bae41e85-c627-4b57-b1b9-a25b233ccdb8	Equipo13	Aerosol	Brilla King	CLEANP001	7751
 
 
 --
--- Data for Name: Roles; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: Roles; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."Roles" (id, name) FROM stdin;
 1	cliente
 2	usuario
-3	admin
+3	ecommerce
 \.
 
 
 --
--- Data for Name: Usuario; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: Usuario; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."Usuario" (id, "roleId", name, phone, email, "docType", "numDoc", "Departament", city, address, "bussinessUnit", zone, asesor, discount) FROM stdin;
@@ -701,7 +711,7 @@ COPY public."Usuario" (id, "roleId", name, phone, email, "docType", "numDoc", "D
 
 
 --
--- Data for Name: Zones; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: Zones; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."Zones" (id, name, zone) FROM stdin;
@@ -715,7 +725,7 @@ COPY public."Zones" (id, name, zone) FROM stdin;
 
 
 --
--- Data for Name: _CategoriasZonas; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: _CategoriasZonas; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public."_CategoriasZonas" ("A", "B") FROM stdin;
@@ -723,7 +733,7 @@ COPY public."_CategoriasZonas" ("A", "B") FROM stdin;
 
 
 --
--- Data for Name: _prisma_migrations; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: _prisma_migrations; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count) FROM stdin;
@@ -732,7 +742,7 @@ COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs,
 
 
 --
--- Data for Name: auth_key; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: auth_key; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public.auth_key (id, hashed_password, user_id, primary_key, expires) FROM stdin;
@@ -744,16 +754,17 @@ username:super@example.com	s2:OmL4bO19NsozxZrf:6e65cc69945d1a2d6da07894d01aedfa9
 
 
 --
--- Data for Name: auth_session; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: auth_session; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public.auth_session (id, user_id, active_expires, idle_expires) FROM stdin;
-tnuWLer4nuyu8GgcF4spfP6JyNwaeJHKb2YTHpyb	YoCXI7QQcLdkJV2	1686368512481	1687578112481
+oOPm4J94OhLBq2KrKf0uihGofwg4yv3e1VCH8TAM	wpDMrek4jqymxhK	1686402079775	1687611679775
 LTbX1HEvYVHXFMwLX0T9xvVhpoMa9erzek2xtySg	wpDMrek4jqymxhK	1685158638668	1686368238668
 ooYs3GfwOSTnKObOq2K2td1vaMn9ySZzXLJBnOAQ	wpDMrek4jqymxhK	1685158691044	1686368291044
 WXRMPGrSnM6TH4QmHAdX7GLFsfafy9weaicf8aOH	wpDMrek4jqymxhK	1685206922284	1686416522284
 QxYxQ5qKK0GGN5skTLQpBfRPRvLHgBeDNpOaKxhg	wpDMrek4jqymxhK	1685215371106	1686424971106
 qzLmVDzskBQKoE6NjxGfUPzD5ircXEWyHDRcB91j	wpDMrek4jqymxhK	1685533283149	1686742883149
+5fhom2sTNrXEKaFy3YWoJBrhjCDuFcKDiigEZ11D	YoCXI7QQcLdkJV2	1686414725981	1687624325981
 NBPS54MdF08Ouqe2Qzi15reZoIClpyzMZlO47FMB	wpDMrek4jqymxhK	1685537441570	1686747041570
 x33acRTxICSlFiX2RAtL4G5YQA3ywDBW7iIeRQ7v	YoCXI7QQcLdkJV2	1685714605658	1686924205658
 ZcFoyEEZaTieksCnp4csKFvbpbyCYd4ru3toPhwg	YoCXI7QQcLdkJV2	1685930321625	1687139921625
@@ -768,7 +779,7 @@ iT2Q2PdBoYlsbNgX3twDccggR41W6qkM6k844o5M	wpDMrek4jqymxhK	1686314346891	168752394
 
 
 --
--- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: ecommerce
 --
 
 COPY public.auth_user (id, email) FROM stdin;
@@ -780,42 +791,42 @@ JE9hxCrDicyKeYX	wilfer.castano@equisol.com
 
 
 --
--- Name: CcostoZoneCategories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+-- Name: CcostoZoneCategories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ecommerce
 --
 
-SELECT pg_catalog.setval('public."CcostoZoneCategories_id_seq"', 34, true);
+SELECT pg_catalog.setval('public."CcostoZoneCategories_id_seq"', 36, true);
 
 
 --
--- Name: OrdenDePedido_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+-- Name: OrdenDePedido_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ecommerce
 --
 
 SELECT pg_catalog.setval('public."OrdenDePedido_id_seq"', 63, true);
 
 
 --
--- Name: Roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+-- Name: Roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ecommerce
 --
 
 SELECT pg_catalog.setval('public."Roles_id_seq"', 3, true);
 
 
 --
--- Name: Usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+-- Name: Usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ecommerce
 --
 
-SELECT pg_catalog.setval('public."Usuario_id_seq"', 9, true);
+SELECT pg_catalog.setval('public."Usuario_id_seq"', 10, true);
 
 
 --
--- Name: Zones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+-- Name: Zones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ecommerce
 --
 
 SELECT pg_catalog.setval('public."Zones_id_seq"', 20, true);
 
 
 --
--- Name: Category Category_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: Category Category_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Category"
@@ -823,7 +834,7 @@ ALTER TABLE ONLY public."Category"
 
 
 --
--- Name: CcostoZoneCategories CcostoZoneCategories_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: CcostoZoneCategories CcostoZoneCategories_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."CcostoZoneCategories"
@@ -831,7 +842,7 @@ ALTER TABLE ONLY public."CcostoZoneCategories"
 
 
 --
--- Name: Image Image_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: Image Image_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Image"
@@ -839,7 +850,7 @@ ALTER TABLE ONLY public."Image"
 
 
 --
--- Name: OrdenDePedidoProducto OrdenDePedidoProducto_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: OrdenDePedidoProducto OrdenDePedidoProducto_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."OrdenDePedidoProducto"
@@ -847,7 +858,7 @@ ALTER TABLE ONLY public."OrdenDePedidoProducto"
 
 
 --
--- Name: OrdenDePedido OrdenDePedido_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: OrdenDePedido OrdenDePedido_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."OrdenDePedido"
@@ -855,7 +866,7 @@ ALTER TABLE ONLY public."OrdenDePedido"
 
 
 --
--- Name: Price Price_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: Price Price_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Price"
@@ -863,7 +874,7 @@ ALTER TABLE ONLY public."Price"
 
 
 --
--- Name: Product Product_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: Product Product_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Product"
@@ -871,7 +882,7 @@ ALTER TABLE ONLY public."Product"
 
 
 --
--- Name: Roles Roles_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: Roles Roles_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Roles"
@@ -879,7 +890,7 @@ ALTER TABLE ONLY public."Roles"
 
 
 --
--- Name: Usuario Usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: Usuario Usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Usuario"
@@ -887,7 +898,7 @@ ALTER TABLE ONLY public."Usuario"
 
 
 --
--- Name: Zones Zones_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: Zones Zones_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Zones"
@@ -895,7 +906,7 @@ ALTER TABLE ONLY public."Zones"
 
 
 --
--- Name: _prisma_migrations _prisma_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: _prisma_migrations _prisma_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public._prisma_migrations
@@ -903,7 +914,7 @@ ALTER TABLE ONLY public._prisma_migrations
 
 
 --
--- Name: auth_key auth_key_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: auth_key auth_key_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public.auth_key
@@ -911,7 +922,7 @@ ALTER TABLE ONLY public.auth_key
 
 
 --
--- Name: auth_session auth_session_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: auth_session auth_session_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public.auth_session
@@ -919,7 +930,7 @@ ALTER TABLE ONLY public.auth_session
 
 
 --
--- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public.auth_user
@@ -927,105 +938,105 @@ ALTER TABLE ONLY public.auth_user
 
 
 --
--- Name: CcostoZoneCategories_ccosto_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: CcostoZoneCategories_ccosto_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX "CcostoZoneCategories_ccosto_key" ON public."CcostoZoneCategories" USING btree (ccosto);
 
 
 --
--- Name: Product_code_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: Product_code_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX "Product_code_key" ON public."Product" USING btree (code);
 
 
 --
--- Name: Product_eancode_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: Product_eancode_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX "Product_eancode_key" ON public."Product" USING btree (eancode);
 
 
 --
--- Name: Roles_name_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: Roles_name_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX "Roles_name_key" ON public."Roles" USING btree (name);
 
 
 --
--- Name: Usuario_email_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: Usuario_email_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX "Usuario_email_key" ON public."Usuario" USING btree (email);
 
 
 --
--- Name: Usuario_numDoc_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: Usuario_numDoc_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX "Usuario_numDoc_key" ON public."Usuario" USING btree ("numDoc");
 
 
 --
--- Name: _CategoriasZonas_AB_unique; Type: INDEX; Schema: public; Owner: admin
+-- Name: _CategoriasZonas_AB_unique; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX "_CategoriasZonas_AB_unique" ON public."_CategoriasZonas" USING btree ("A", "B");
 
 
 --
--- Name: _CategoriasZonas_B_index; Type: INDEX; Schema: public; Owner: admin
+-- Name: _CategoriasZonas_B_index; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE INDEX "_CategoriasZonas_B_index" ON public."_CategoriasZonas" USING btree ("B");
 
 
 --
--- Name: auth_key_id_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: auth_key_id_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX auth_key_id_key ON public.auth_key USING btree (id);
 
 
 --
--- Name: auth_key_user_id_idx; Type: INDEX; Schema: public; Owner: admin
+-- Name: auth_key_user_id_idx; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE INDEX auth_key_user_id_idx ON public.auth_key USING btree (user_id);
 
 
 --
--- Name: auth_session_id_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: auth_session_id_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX auth_session_id_key ON public.auth_session USING btree (id);
 
 
 --
--- Name: auth_session_user_id_idx; Type: INDEX; Schema: public; Owner: admin
+-- Name: auth_session_user_id_idx; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE INDEX auth_session_user_id_idx ON public.auth_session USING btree (user_id);
 
 
 --
--- Name: auth_user_email_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: auth_user_email_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX auth_user_email_key ON public.auth_user USING btree (email);
 
 
 --
--- Name: auth_user_id_key; Type: INDEX; Schema: public; Owner: admin
+-- Name: auth_user_id_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
 CREATE UNIQUE INDEX auth_user_id_key ON public.auth_user USING btree (id);
 
 
 --
--- Name: Category Category_padreId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: Category Category_padreId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Category"
@@ -1033,7 +1044,7 @@ ALTER TABLE ONLY public."Category"
 
 
 --
--- Name: CcostoZoneCategories CcostoZoneCategories_categoryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: CcostoZoneCategories CcostoZoneCategories_categoryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."CcostoZoneCategories"
@@ -1041,7 +1052,7 @@ ALTER TABLE ONLY public."CcostoZoneCategories"
 
 
 --
--- Name: Image Image_productId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: Image Image_productId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Image"
@@ -1049,7 +1060,7 @@ ALTER TABLE ONLY public."Image"
 
 
 --
--- Name: OrdenDePedidoProducto OrdenDePedidoProducto_ordenDePedidoId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: OrdenDePedidoProducto OrdenDePedidoProducto_ordenDePedidoId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."OrdenDePedidoProducto"
@@ -1057,7 +1068,7 @@ ALTER TABLE ONLY public."OrdenDePedidoProducto"
 
 
 --
--- Name: OrdenDePedidoProducto OrdenDePedidoProducto_productoId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: OrdenDePedidoProducto OrdenDePedidoProducto_productoId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."OrdenDePedidoProducto"
@@ -1065,7 +1076,7 @@ ALTER TABLE ONLY public."OrdenDePedidoProducto"
 
 
 --
--- Name: OrdenDePedido OrdenDePedido_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: OrdenDePedido OrdenDePedido_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."OrdenDePedido"
@@ -1073,7 +1084,7 @@ ALTER TABLE ONLY public."OrdenDePedido"
 
 
 --
--- Name: Price Price_productId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: Price Price_productId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Price"
@@ -1081,7 +1092,7 @@ ALTER TABLE ONLY public."Price"
 
 
 --
--- Name: Product Product_categoryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: Product Product_categoryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Product"
@@ -1089,7 +1100,7 @@ ALTER TABLE ONLY public."Product"
 
 
 --
--- Name: Usuario Usuario_roleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: Usuario Usuario_roleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."Usuario"
@@ -1097,7 +1108,7 @@ ALTER TABLE ONLY public."Usuario"
 
 
 --
--- Name: _CategoriasZonas _CategoriasZonas_A_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: _CategoriasZonas _CategoriasZonas_A_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."_CategoriasZonas"
@@ -1105,7 +1116,7 @@ ALTER TABLE ONLY public."_CategoriasZonas"
 
 
 --
--- Name: _CategoriasZonas _CategoriasZonas_B_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: _CategoriasZonas _CategoriasZonas_B_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public."_CategoriasZonas"
@@ -1113,7 +1124,7 @@ ALTER TABLE ONLY public."_CategoriasZonas"
 
 
 --
--- Name: auth_key auth_key_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: auth_key auth_key_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public.auth_key
@@ -1121,7 +1132,7 @@ ALTER TABLE ONLY public.auth_key
 
 
 --
--- Name: auth_session auth_session_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: auth_session auth_session_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
 --
 
 ALTER TABLE ONLY public.auth_session
@@ -1129,10 +1140,150 @@ ALTER TABLE ONLY public.auth_session
 
 
 --
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: admin
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: ecommerce
 --
 
 REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+
+
+--
+-- Name: TABLE "Category"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."Category" TO ecommerce;
+
+
+--
+-- Name: TABLE "CcostoZoneCategories"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."CcostoZoneCategories" TO ecommerce;
+
+
+--
+-- Name: SEQUENCE "CcostoZoneCategories_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON SEQUENCE public."CcostoZoneCategories_id_seq" TO ecommerce;
+
+
+--
+-- Name: TABLE "Image"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."Image" TO ecommerce;
+
+
+--
+-- Name: TABLE "OrdenDePedido"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."OrdenDePedido" TO ecommerce;
+
+
+--
+-- Name: TABLE "OrdenDePedidoProducto"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."OrdenDePedidoProducto" TO ecommerce;
+
+
+--
+-- Name: SEQUENCE "OrdenDePedido_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON SEQUENCE public."OrdenDePedido_id_seq" TO ecommerce;
+
+
+--
+-- Name: TABLE "Price"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."Price" TO ecommerce;
+
+
+--
+-- Name: TABLE "Product"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."Product" TO ecommerce;
+
+
+--
+-- Name: TABLE "Roles"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."Roles" TO ecommerce;
+
+
+--
+-- Name: SEQUENCE "Roles_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON SEQUENCE public."Roles_id_seq" TO ecommerce;
+
+
+--
+-- Name: TABLE "Usuario"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."Usuario" TO ecommerce;
+
+
+--
+-- Name: SEQUENCE "Usuario_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON SEQUENCE public."Usuario_id_seq" TO ecommerce;
+
+
+--
+-- Name: TABLE "Zones"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."Zones" TO ecommerce;
+
+
+--
+-- Name: SEQUENCE "Zones_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON SEQUENCE public."Zones_id_seq" TO ecommerce;
+
+
+--
+-- Name: TABLE "_CategoriasZonas"; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public."_CategoriasZonas" TO ecommerce;
+
+
+--
+-- Name: TABLE _prisma_migrations; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public._prisma_migrations TO ecommerce;
+
+
+--
+-- Name: TABLE auth_key; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public.auth_key TO ecommerce;
+
+
+--
+-- Name: TABLE auth_session; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public.auth_session TO ecommerce;
+
+
+--
+-- Name: TABLE auth_user; Type: ACL; Schema: public; Owner: ecommerce
+--
+
+GRANT ALL ON TABLE public.auth_user TO ecommerce;
 
 
 --
