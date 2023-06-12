@@ -3,7 +3,7 @@ import { prisma } from '$lib/server/prisma';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	
-	/* get cookies from browser
+	//* get cookies from browser
 	const session = event.cookies.get('session');
 
 	if (!session) {
@@ -16,7 +16,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		where: { userAuthToken: session },
 		select: { email: true }
 	});
-*/
+
 	const user = await prisma.Usuario.findUnique({
 		where: { email: 'oscar.padilla@equisol.com' },
 		select: {
