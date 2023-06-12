@@ -18,7 +18,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	});
 
 	const user = await prisma.Usuario.findUnique({
-		where: { email: 'oscar.padilla@equisol.com' },
+		where: { email: authUser.email},//'oscar.padilla@equisol.com' },
 		select: {
 			id: true,
 			name: true,
