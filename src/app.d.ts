@@ -1,15 +1,22 @@
-/// <reference types="lucia-auth" />
-declare namespace Lucia {
-	type Auth = import('$lib/server/lucia.js').Auth;
-	type UserAttributes = {
-		email: string;
-	};
-}
 
-/// <reference types="@sveltejs/kit" />
 declare namespace App {
 	interface Locals {
-		auth: import('lucia-auth').AuthRequest;
+		user:{
+			id: true,
+			name: true,
+			phone: true,
+			email: true,
+			docType: true,
+			numDoc: true,
+			Departament: true,
+			city: true,
+			address: true,
+			bussinessUnit: true,
+			zone: true,
+			discount: true,
+			role: true,
+			asesor: true
+		}
 	}
 }
 

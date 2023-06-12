@@ -1,28 +1,11 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { prisma } from '$lib/server/prisma';
+//import { prisma } from '$lib/server/prisma';
 import type { Actions } from './$types';
 
 export async function load({ locals }) {
 
-	const { user } = await locals.auth.validateUser();
-	if (!user) throw redirect(303, '/login');
-
-	const usuario = await prisma.usuario.findUnique({
-		where: { email: user.email },
-		select: {
-			id: true,
-			name: true,
-			phone: true,
-			email: true,
-			docType: true,
-			numDoc: true,
-			Departament: true,
-			city: true,
-			address: true,
-			role: { select: { name: true } }
-		}
-	});
-
+	const usuario  = locals.user;
+	if (!usuario) throw redirect(303, '/login');
 	return { usuario }
 }
 

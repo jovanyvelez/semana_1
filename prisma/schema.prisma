@@ -135,33 +135,8 @@ model Zones {
 }
 
 model AuthUser {
-  id           String        @id @unique
-  email        String        @unique
-  auth_key     AuthKey[]
-  auth_session AuthSession[]
-
-  @@map("auth_user")
-}
-
-model AuthSession {
-  id             String   @id @unique
-  user_id        String
-  active_expires BigInt
-  idle_expires   BigInt
-  auth_user      AuthUser @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@index([user_id])
-  @@map("auth_session")
-}
-
-model AuthKey {
-  id              String   @id @unique
-  hashed_password String?
-  user_id         String
-  primary_key     Boolean
-  expires         BigInt?
-  auth_user       AuthUser @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@index([user_id])
-  @@map("auth_key")
+  id            String @id @default(uuid())
+  email         String @unique
+  passwordHash  String
+  userAuthToken String @unique
 }

@@ -37,6 +37,20 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: AuthUser; Type: TABLE; Schema: public; Owner: ecommerce
+--
+
+CREATE TABLE public."AuthUser" (
+    id text NOT NULL,
+    email text NOT NULL,
+    "passwordHash" text NOT NULL,
+    "userAuthToken" text NOT NULL
+);
+
+
+ALTER TABLE public."AuthUser" OWNER TO ecommerce;
+
+--
 -- Name: Category; Type: TABLE; Schema: public; Owner: ecommerce
 --
 
@@ -352,47 +366,6 @@ CREATE TABLE public._prisma_migrations (
 ALTER TABLE public._prisma_migrations OWNER TO ecommerce;
 
 --
--- Name: auth_key; Type: TABLE; Schema: public; Owner: ecommerce
---
-
-CREATE TABLE public.auth_key (
-    id text NOT NULL,
-    hashed_password text,
-    user_id text NOT NULL,
-    primary_key boolean NOT NULL,
-    expires bigint
-);
-
-
-ALTER TABLE public.auth_key OWNER TO ecommerce;
-
---
--- Name: auth_session; Type: TABLE; Schema: public; Owner: ecommerce
---
-
-CREATE TABLE public.auth_session (
-    id text NOT NULL,
-    user_id text NOT NULL,
-    active_expires bigint NOT NULL,
-    idle_expires bigint NOT NULL
-);
-
-
-ALTER TABLE public.auth_session OWNER TO ecommerce;
-
---
--- Name: auth_user; Type: TABLE; Schema: public; Owner: ecommerce
---
-
-CREATE TABLE public.auth_user (
-    id text NOT NULL,
-    email text NOT NULL
-);
-
-
-ALTER TABLE public.auth_user OWNER TO ecommerce;
-
---
 -- Name: CcostoZoneCategories id; Type: DEFAULT; Schema: public; Owner: ecommerce
 --
 
@@ -425,6 +398,16 @@ ALTER TABLE ONLY public."Usuario" ALTER COLUMN id SET DEFAULT nextval('public."U
 --
 
 ALTER TABLE ONLY public."Zones" ALTER COLUMN id SET DEFAULT nextval('public."Zones_id_seq"'::regclass);
+
+
+--
+-- Data for Name: AuthUser; Type: TABLE DATA; Schema: public; Owner: ecommerce
+--
+
+COPY public."AuthUser" (id, email, "passwordHash", "userAuthToken") FROM stdin;
+5328d672-0931-4474-9433-23b830012746	jovany.velez@gmail.com	$2b$10$Icuu7MvNNJzb3OjzJ6tP6O1XJRjrnGYTOovPM8f0WlCNVYxBKA4my	1522c330-9682-471c-95d7-3128ed1aac97
+d20ae53e-4e46-4278-8b87-39e7ffb54eb3	oscar.padilla@equisol.com	$2b$10$qUTEXq9BUWnkDqRpuW.y..rPkqEjRC29.WCxJ62bd5sX5t9jrmhC.	85229246-daff-4522-8e8f-486abe646650
+\.
 
 
 --
@@ -692,8 +675,7 @@ bae41e85-c627-4b57-b1b9-a25b233ccdb8	Equipo13	Aerosol	Brilla King	CLEANP001	7751
 
 COPY public."Roles" (id, name) FROM stdin;
 1	cliente
-2	usuario
-3	ecommerce
+3	admin
 \.
 
 
@@ -742,55 +724,6 @@ COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs,
 
 
 --
--- Data for Name: auth_key; Type: TABLE DATA; Schema: public; Owner: ecommerce
---
-
-COPY public.auth_key (id, hashed_password, user_id, primary_key, expires) FROM stdin;
-username:jovany.velez@gmail.com	s2:6fDeFibRe2PHKsAt:459b92fde8c01946ddb61b285f3778d0f4790949897a80c0df841a7aa7f620b31403ba2d9b8621630014f637ef1b590d1ab63e3172294e9c0675934a7649f70d	wpDMrek4jqymxhK	t	\N
-username:oscar.padilla@equisol.com	s2:S2rUwIZewbEXTW8Z:15836fdca2fdbbee74b9344698335ccc70ab23d870646538d0db08a0e0b976cd73d35ce8c35c3c59db920a1d596f3e178cd87242b78d28e560a1a51f75af148b	YoCXI7QQcLdkJV2	t	\N
-username:wilfer.castano@equisol.com	s2:hhdDCAfoB6r9EJQ4:8c170fd16db52de56ae98a756397636b1e2349d610669da7d05a09f8bdd0e323cc2b95cfb7928c0e6bfc586800de8da0a8e275acb1f0928858662ca4b0c99406	JE9hxCrDicyKeYX	t	\N
-username:super@example.com	s2:OmL4bO19NsozxZrf:6e65cc69945d1a2d6da07894d01aedfa9ffa831c19ce4f486a85d0a4f4ab6c9601294afb0d8b65ba7836c8788d6ee69d258dc41cf186fcf768bc010c389f2453	1dy2HUxydxn7zkm	t	\N
-\.
-
-
---
--- Data for Name: auth_session; Type: TABLE DATA; Schema: public; Owner: ecommerce
---
-
-COPY public.auth_session (id, user_id, active_expires, idle_expires) FROM stdin;
-oOPm4J94OhLBq2KrKf0uihGofwg4yv3e1VCH8TAM	wpDMrek4jqymxhK	1686402079775	1687611679775
-LTbX1HEvYVHXFMwLX0T9xvVhpoMa9erzek2xtySg	wpDMrek4jqymxhK	1685158638668	1686368238668
-ooYs3GfwOSTnKObOq2K2td1vaMn9ySZzXLJBnOAQ	wpDMrek4jqymxhK	1685158691044	1686368291044
-WXRMPGrSnM6TH4QmHAdX7GLFsfafy9weaicf8aOH	wpDMrek4jqymxhK	1685206922284	1686416522284
-QxYxQ5qKK0GGN5skTLQpBfRPRvLHgBeDNpOaKxhg	wpDMrek4jqymxhK	1685215371106	1686424971106
-qzLmVDzskBQKoE6NjxGfUPzD5ircXEWyHDRcB91j	wpDMrek4jqymxhK	1685533283149	1686742883149
-5fhom2sTNrXEKaFy3YWoJBrhjCDuFcKDiigEZ11D	YoCXI7QQcLdkJV2	1686414725981	1687624325981
-NBPS54MdF08Ouqe2Qzi15reZoIClpyzMZlO47FMB	wpDMrek4jqymxhK	1685537441570	1686747041570
-x33acRTxICSlFiX2RAtL4G5YQA3ywDBW7iIeRQ7v	YoCXI7QQcLdkJV2	1685714605658	1686924205658
-ZcFoyEEZaTieksCnp4csKFvbpbyCYd4ru3toPhwg	YoCXI7QQcLdkJV2	1685930321625	1687139921625
-7b7BoiorW8gsPmBuefsDjYQRwy2d3ggfU7zPaxz4	wpDMrek4jqymxhK	1685995051669	1687204651669
-1j5XYWFpBvyGdgu4qzcatOIKH0KO9deSvKC8dyIr	wpDMrek4jqymxhK	1686087217768	1687296817768
-acq42AgaXFDvTon5znNNtmFyjMZZvRxgtJqoY9u5	wpDMrek4jqymxhK	1686173717969	1687383317969
-XW2gIP72R0bkBeSfWFyEJaVsA9sWYSC2BD4ek8jc	wpDMrek4jqymxhK	1686225818314	1687435418314
-uZWSloJzEud9uRn2Y2YIGI3AEE3jgMk0A9BIZkSg	wpDMrek4jqymxhK	1686264411402	1687474011402
-C7nkHvDA049NjXbncRQk6YXW9YlfldRNvVqBH85J	wpDMrek4jqymxhK	1686313771649	1687523371649
-iT2Q2PdBoYlsbNgX3twDccggR41W6qkM6k844o5M	wpDMrek4jqymxhK	1686314346891	1687523946891
-\.
-
-
---
--- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: ecommerce
---
-
-COPY public.auth_user (id, email) FROM stdin;
-wpDMrek4jqymxhK	jovany.velez@gmail.com
-YoCXI7QQcLdkJV2	oscar.padilla@equisol.com
-JE9hxCrDicyKeYX	wilfer.castano@equisol.com
-1dy2HUxydxn7zkm	super@example.com
-\.
-
-
---
 -- Name: CcostoZoneCategories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ecommerce
 --
 
@@ -823,6 +756,14 @@ SELECT pg_catalog.setval('public."Usuario_id_seq"', 10, true);
 --
 
 SELECT pg_catalog.setval('public."Zones_id_seq"', 20, true);
+
+
+--
+-- Name: AuthUser AuthUser_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
+--
+
+ALTER TABLE ONLY public."AuthUser"
+    ADD CONSTRAINT "AuthUser_pkey" PRIMARY KEY (id);
 
 
 --
@@ -914,27 +855,17 @@ ALTER TABLE ONLY public._prisma_migrations
 
 
 --
--- Name: auth_key auth_key_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
+-- Name: AuthUser_email_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
-ALTER TABLE ONLY public.auth_key
-    ADD CONSTRAINT auth_key_pkey PRIMARY KEY (id);
-
-
---
--- Name: auth_session auth_session_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
---
-
-ALTER TABLE ONLY public.auth_session
-    ADD CONSTRAINT auth_session_pkey PRIMARY KEY (id);
+CREATE UNIQUE INDEX "AuthUser_email_key" ON public."AuthUser" USING btree (email);
 
 
 --
--- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: ecommerce
+-- Name: AuthUser_userAuthToken_key; Type: INDEX; Schema: public; Owner: ecommerce
 --
 
-ALTER TABLE ONLY public.auth_user
-    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+CREATE UNIQUE INDEX "AuthUser_userAuthToken_key" ON public."AuthUser" USING btree ("userAuthToken");
 
 
 --
@@ -991,48 +922,6 @@ CREATE UNIQUE INDEX "_CategoriasZonas_AB_unique" ON public."_CategoriasZonas" US
 --
 
 CREATE INDEX "_CategoriasZonas_B_index" ON public."_CategoriasZonas" USING btree ("B");
-
-
---
--- Name: auth_key_id_key; Type: INDEX; Schema: public; Owner: ecommerce
---
-
-CREATE UNIQUE INDEX auth_key_id_key ON public.auth_key USING btree (id);
-
-
---
--- Name: auth_key_user_id_idx; Type: INDEX; Schema: public; Owner: ecommerce
---
-
-CREATE INDEX auth_key_user_id_idx ON public.auth_key USING btree (user_id);
-
-
---
--- Name: auth_session_id_key; Type: INDEX; Schema: public; Owner: ecommerce
---
-
-CREATE UNIQUE INDEX auth_session_id_key ON public.auth_session USING btree (id);
-
-
---
--- Name: auth_session_user_id_idx; Type: INDEX; Schema: public; Owner: ecommerce
---
-
-CREATE INDEX auth_session_user_id_idx ON public.auth_session USING btree (user_id);
-
-
---
--- Name: auth_user_email_key; Type: INDEX; Schema: public; Owner: ecommerce
---
-
-CREATE UNIQUE INDEX auth_user_email_key ON public.auth_user USING btree (email);
-
-
---
--- Name: auth_user_id_key; Type: INDEX; Schema: public; Owner: ecommerce
---
-
-CREATE UNIQUE INDEX auth_user_id_key ON public.auth_user USING btree (id);
 
 
 --
@@ -1124,166 +1013,10 @@ ALTER TABLE ONLY public."_CategoriasZonas"
 
 
 --
--- Name: auth_key auth_key_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
---
-
-ALTER TABLE ONLY public.auth_key
-    ADD CONSTRAINT auth_key_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.auth_user(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: auth_session auth_session_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
---
-
-ALTER TABLE ONLY public.auth_session
-    ADD CONSTRAINT auth_session_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.auth_user(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: ecommerce
 --
 
 REVOKE USAGE ON SCHEMA public FROM PUBLIC;
-
-
---
--- Name: TABLE "Category"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."Category" TO ecommerce;
-
-
---
--- Name: TABLE "CcostoZoneCategories"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."CcostoZoneCategories" TO ecommerce;
-
-
---
--- Name: SEQUENCE "CcostoZoneCategories_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON SEQUENCE public."CcostoZoneCategories_id_seq" TO ecommerce;
-
-
---
--- Name: TABLE "Image"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."Image" TO ecommerce;
-
-
---
--- Name: TABLE "OrdenDePedido"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."OrdenDePedido" TO ecommerce;
-
-
---
--- Name: TABLE "OrdenDePedidoProducto"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."OrdenDePedidoProducto" TO ecommerce;
-
-
---
--- Name: SEQUENCE "OrdenDePedido_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON SEQUENCE public."OrdenDePedido_id_seq" TO ecommerce;
-
-
---
--- Name: TABLE "Price"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."Price" TO ecommerce;
-
-
---
--- Name: TABLE "Product"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."Product" TO ecommerce;
-
-
---
--- Name: TABLE "Roles"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."Roles" TO ecommerce;
-
-
---
--- Name: SEQUENCE "Roles_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON SEQUENCE public."Roles_id_seq" TO ecommerce;
-
-
---
--- Name: TABLE "Usuario"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."Usuario" TO ecommerce;
-
-
---
--- Name: SEQUENCE "Usuario_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON SEQUENCE public."Usuario_id_seq" TO ecommerce;
-
-
---
--- Name: TABLE "Zones"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."Zones" TO ecommerce;
-
-
---
--- Name: SEQUENCE "Zones_id_seq"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON SEQUENCE public."Zones_id_seq" TO ecommerce;
-
-
---
--- Name: TABLE "_CategoriasZonas"; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public."_CategoriasZonas" TO ecommerce;
-
-
---
--- Name: TABLE _prisma_migrations; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public._prisma_migrations TO ecommerce;
-
-
---
--- Name: TABLE auth_key; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public.auth_key TO ecommerce;
-
-
---
--- Name: TABLE auth_session; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public.auth_session TO ecommerce;
-
-
---
--- Name: TABLE auth_user; Type: ACL; Schema: public; Owner: ecommerce
---
-
-GRANT ALL ON TABLE public.auth_user TO ecommerce;
 
 
 --

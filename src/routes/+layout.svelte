@@ -9,17 +9,20 @@
 	<title>Mi Tienda Virtuale</title>
 </svelte:head>
 
-{#if data?.email && data?.role==='cliente'}
+
+{#if data.user?.email && data?.user?.role?.name==='cliente'}
 	<Menu />
 {/if}
 
-{#if data?.email && data?.role==='admin'}
+{#if data.user?.email && data?.user?.role?.name==='admin'}
 	<MenuAdmon />
 {/if}
 
 <main class="overflow-auto">
 	<slot />
 </main>
+
+<pre>{JSON.stringify(data.user,null,2)}</pre>
 
 <style lang="postcss">
 	:global(h1) {

@@ -4,7 +4,7 @@ import { redirect } from '@sveltejs/kit';
 
 export async function load({ params, locals }) {
 
-	const { user } = await locals.auth.validateUser();
+	const user = locals.user;
 	if (!user) throw redirect(303, '/login');
 
 	type mQuery = {

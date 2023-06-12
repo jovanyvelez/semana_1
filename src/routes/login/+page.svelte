@@ -1,6 +1,7 @@
 <script lang="ts">
 	
 	export let data;
+	export let form;
 
 </script>
 
@@ -32,7 +33,9 @@
 			/>
 		</div>
 
-
+		{#if form?.message}
+			<small class="text-error">{form.message}</small>
+		{/if}
 		<div class="w-full flex justify-center">
 			<button type="submit" class="btn btn-xs w-full mt-4">Ingresar</button>
 		</div>

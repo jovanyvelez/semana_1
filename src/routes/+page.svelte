@@ -1,11 +1,11 @@
 <script>
   import { enhance } from '$app/forms';
+	import { stringify } from 'postcss';
   export let data;
   const {elResultado, role} = data;
 </script>
 
 {#if role === 'cliente'}
-    
 
 {#if elResultado.length > 0}
     <div class="flex flex-wrap justify-center">

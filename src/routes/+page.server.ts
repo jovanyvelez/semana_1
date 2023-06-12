@@ -1,10 +1,9 @@
 import { redirect, type Actions, fail } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-import { auth } from '$lib/server/lucia';
-import { LuciaError } from 'lucia-auth';
 
 export const load = async ({ locals }) => {
-	const { user } = await locals.auth.validateUser();
+	
+	const user = locals.user;
 	if (!user) throw redirect(303, '/login');
 
 	const result = await prisma.$queryRaw`
@@ -77,34 +76,24 @@ export const load = async ({ locals }) => {
 	);
 
 	prisma.$disconnect();
-	return { elResultado, user };
+	return { elResultado, role:user.role.name };
 };
 
+
+//Actions
 export const actions: Actions = {
 	// signout
-	default: async ({ locals }) => {
-		try {
-			const session1 = await locals.auth.validate();
-			if (!session1) return fail(401);
-			await auth.invalidateSession(session1.sessionId);
-			locals.auth.setSession(null);
+	default: async ({ cookies }) => {
+		// eat the cookie
 
-			//Crear usuario
-			/*const user = await auth.createUser({
-				primaryKey: {
-					providerId: 'username',
-					providerUserId: 'wilfer.castano@equisol.com',
-					password: 'wilfer123'
-				},
-				attributes: {
-					email: 'wilfer.castano@equisol.com'
-				}
-			});
-			const session = await auth.createSession(user.userId);
-			locals.auth.setSession(session);
-			console.log('usuario creado');*/
-		} catch (error) {
-			console.log('ERROR');
-		}
+		cookies.delete('session', { path: '/' });
+		throw redirect(302, '/login');
+
+		cookies.set('session', '', {
+			path: '/',
+			expires: new Date(0)
+		});
+
+		// redirect the user
 	}
 };

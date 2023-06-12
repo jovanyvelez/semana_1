@@ -1,59 +1,70 @@
-import {fail, redirect} from '@sveltejs/kit';
-import { auth } from '$lib/server/lucia';
-
+import { fail, redirect } from '@sveltejs/kit';
 import type { Action, Actions } from './$types';
+import bcrypt from 'bcrypt';
+import { prisma } from '$lib/server/prisma';
 
-import { LuciaError } from 'lucia-auth';
+export const load = async () => {
+	return {};
+};
 
+const login: Action = async ({ cookies, request }) => {
+	let form;
 
+	try {
+		form = await request.formData();
+	} catch (error) {
+		return fail(400, { message: 'error desconocido' });
+	}
 
-export const load =async ( {locals} ) => {
-    const session = await locals.auth.validate();
-    if(session) throw redirect(302,'/');
-    return {}
-}
+	const email = form.get('email');
+	const password = form.get('password');
 
-const login: Action = async ( { request, locals }  ) => {
-    
-    const session = await locals.auth.validate();
-    
-    if(session) return{}
-    
-    let form;
-    
-    try {
-        form = await request.formData()
-    } catch (error) {
-        return fail(400,{message:"error desconocido"})
-    }
-    const email = form.get('email');
-    const password = form.get('password');
-    if (!email || !password || typeof email !== 'string' || typeof password !== 'string') {
-        return fail(400, {
-            message: 'Invalid input'
-        });
-    }
+	if (!email || !password || typeof email !== 'string' || typeof password !== 'string') {
+		return fail(400, {
+			message: 'Login o contraseña incorrecta'
+		});
+	}
 
-    try {
-        const key = await auth.useKey('username', email, password);
-        const session = await auth.createSession(key.userId);
-        locals.auth.setSession(session);
-    } catch (error) {
-        if (
-            error instanceof LuciaError &&
-            (error.message === 'AUTH_INVALID_KEY_ID' || error.message === 'AUTH_INVALID_PASSWORD')
-        ) {
-            console.log('DATOS INCORRECTOS');
-            return fail(400, {
-                message: 'Incorrect username or password.'
-            });
-        }
-        // database connection error
-        console.error(error);
-        return fail(500, {
-            message: 'Unknown error occurred'
-        });
-    }
-}
+	try {
+		const user = await prisma.AuthUser.findUnique({ where: { email } });
+		if (!user) {
+			return fail(400, {
+				message: 'Login o contraseña incorrectaU'
+			});
+		}
+
+		const userPassword = await bcrypt.compare(password, user.passwordHash);
+
+		if (!userPassword) {
+			return fail(400, { message: 'usuario / contraseña incorrecta' });
+		}
+
+		const authenticatedUser = await prisma.AuthUser.update({
+			where: { email: user.email },
+			data: { userAuthToken: crypto.randomUUID() }
+		});
+
+		cookies.set('session', authenticatedUser.userAuthToken, {
+			// send cookie for every page
+			path: '/',
+			// server side only cookie so you can't use `document.cookie`
+			httpOnly: true,
+			// only requests from same site can send cookies
+			// https://developer.mozilla.org/en-US/docs/Glossary/CSRF
+			sameSite: 'strict',
+			// only sent over HTTPS in production
+			secure: false,
+			// set cookie to expire after a month
+			maxAge: 60 * 60 * 24 * 30
+		});
+	} catch (error) {
+		// database connection error
+		console.error(error);
+		return fail(500, {
+			message: 'Unknown error occurred'
+		});
+	}
+	throw redirect(302, '/');
+};
 
 export const actions: Actions = { login };

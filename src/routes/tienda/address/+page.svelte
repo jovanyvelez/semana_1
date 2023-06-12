@@ -8,6 +8,7 @@
 	export let data;
 	export let form;
 
+	let empty = true;
 	let address1 = '';
 	let address2 = '';
 	let address3 = '';
@@ -62,6 +63,8 @@
 	}
 
 	onMount(async () => {
+		empty = $cart.length > 0 ? false : true;
+		if(empty) goto('/carrito');
 		const response = await fetch('/api/department');
 		const data = await response.json();
 		departamentos = data;
@@ -69,7 +72,7 @@
 
 </script>
 
-
+{#if !empty}
 <form method="post" use:enhance={saveOrder}>
 	
 	<h1 class="text-center">Direccion de Envío</h1>
@@ -161,3 +164,4 @@
 		</div>
 	
 </form>
+{/if}
