@@ -22,7 +22,6 @@
 	<slot />
 </main>
 
-<pre>{JSON.stringify(data.user,null,2)}</pre>
 
 <style lang="postcss">
 	:global(h1) {
