@@ -8,13 +8,16 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	if (!session) {
 		// if there is no session load page as normal
-		return await resolve(event);
 	}
 	// find the user based on the session
 	const authUser = await prisma.AuthUser.findUnique({
 		where: { userAuthToken: session },
 		select: { email: true }
 	});
+	
+	if(!authUser){
+		return await resolve(event);
+	}
 
 	const user = await prisma.Usuario.findUnique({
 		where: { email: authUser.email },
