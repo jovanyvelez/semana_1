@@ -8,14 +8,18 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	if (!session) {
 		// if there is no session load page as normal
+		return await resolve(event);
 	}
 	// find the user based on the session
+
 	const authUser = await prisma.AuthUser.findUnique({
 		where: { userAuthToken: session },
 		select: { email: true }
 	});
-	
+
 	if(!authUser){
+		//event.cookies.delete('session', { path: '/' });
+		console.log("LA COOKIE NO COINCIDE")
 		return await resolve(event);
 	}
 

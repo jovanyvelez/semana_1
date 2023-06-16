@@ -1,7 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
 import type { Actions } from './$types';
-import { element } from 'svelte/internal';
+
 
 export async function load({ locals }) {
 	const usuario = locals.user;
@@ -17,8 +17,11 @@ export const actions = {
 		const datos = await request.formData();
 
 		const productos = JSON.parse(datos.get('products') as string);
+
 		const { userId, departamento, municipio, notes, discount,address, products, zone, bussinessUnit } =
 			productos;
+
+
 		let newProducts;
 		if (departamento.length > 1 && municipio.length > 1 && address.length > 1) {
 			newProducts = await Promise.all(
@@ -48,29 +51,37 @@ export const actions = {
 							category: element.category
 						};
 					} catch (error) {
+						console.log(error)
 						return fail(422, { success: false });
 					}
 				})
 			);
-
-			newProducts = await Promise.all(
-				newProducts.map(async (element) => {
-					const ccosto = await prisma.ccostoZoneCategories.findFirst({
-						where: { zone, categoryId: element.rootCategory },
-						select: { ccosto: true }
-					});
-					return { ...element, ccosto };
-				})
-			);
+			
+			try {
+				
+				newProducts = await Promise.all(
+					newProducts.map(async (element) => {
+						const ccosto = await prisma.ccostoZoneCategories.findFirst({
+							where: { zone, categoryId: element.rootCategory },
+							select: { ccosto: true }
+						});
+						return { ...element, ccosto };
+					})
+				);
+			} catch (error) {
+				console.log("No existe la zona o categoria en la tabla")
+				throw fail(400,{error:"Zona o Categoria no creados"})
+			}
 
 			newProducts = newProducts.map((obj) => {
 				return { ...obj, ccosto: bussinessUnit+obj.ccosto.ccosto };
 			});
-
+			
 			let valor = newProducts.reduce( (a,c)=> a + (c.precio*c.cantidad),0);
-
+			
 			valor = valor*(1-(discount/100));
-
+			
+			//Se crea la orden de pedido
 			const finalOrder = await prisma.OrdenDePedido.create({
 				data: {
 					userId,
@@ -81,10 +92,11 @@ export const actions = {
 					valor
 				}
 			});
+
+
 			newProducts = newProducts.map((element) => {
 				return { ...element, ordenDePedidoId: finalOrder.id };
 			});
-			console.log(newProducts);
 			try {
 				const detalle = await prisma.OrdenDePedidoProducto.createMany({
 					data: newProducts
@@ -92,7 +104,7 @@ export const actions = {
 			} catch (error) {
 				console.error(error);
 			}
-
+			
 			await Promise.all(
 				products.map(async (element) => {
 					await prisma.Product.update({
@@ -104,7 +116,7 @@ export const actions = {
 						}
 					});
 				})
-			);
+				);
 			prisma.$disconnect();
 			return { success: true, savedorder: finalOrder.id };
 		}

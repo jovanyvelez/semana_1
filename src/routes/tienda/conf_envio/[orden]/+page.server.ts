@@ -5,7 +5,7 @@ import { htmlTable } from '$lib/server/utils/htmlMail.js';
 export async function load({ params, locals }) {
 
 	const {email} = locals.user;
-	console.log(email)
+
 	const orden = await prisma.OrdenDePedido.findUnique({
 		where: { id: parseInt(params.orden, 10) },
 		include: {
@@ -15,6 +15,7 @@ export async function load({ params, locals }) {
 					phone: true,
 					email: true,
 					discount:true,
+					asesor:true
 				}
 			},
 
@@ -42,7 +43,7 @@ export async function load({ params, locals }) {
 	try {
 		let info = await transporter.sendMail({
 			from: '"Fred Foo 👻" jovany.velez@zohomail.com', // sender address
-			to: `${orden.cliente.email}`, // list of receivers
+			to: [`${orden.cliente.email}`, `${orden.cliente.asesor}`], // list of receivers
 			subject: `Numero de orden de compra: ${orden.id}`, // Subject line
 			//text: `${JSON.stringify(orden,null,2)}`, // plain text body
 			html: detalle, // html body
