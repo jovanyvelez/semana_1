@@ -36,11 +36,10 @@ export async function load({ params, locals }) {
 	
 	if(email !== orden.cliente.email) return { }
 
-	const detalle = htmlTable(orden.productos)
+	const detalle = htmlTable(orden)
 
 	
 	try {
-
 		let info = await transporter.sendMail({
 			from: '"Fred Foo 👻" jovany.velez@zohomail.com', // sender address
 			to: `${orden.cliente.email}`, // list of receivers

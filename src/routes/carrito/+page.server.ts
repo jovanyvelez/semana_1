@@ -3,8 +3,8 @@ import type { Actions } from '@sveltejs/kit';
 
 export const load = async ({locals}) => {
 	//todo
-	const discount = locals.user.discount
-	return { discount };
+	const {discount, name} = locals.user
+	return { discount, name };
 };
 
 export const actions: Actions = {

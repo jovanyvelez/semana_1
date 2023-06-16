@@ -5,15 +5,21 @@
 
 {#if orden}
 	
-<h1>Este es tu numero de orden de compra <span class="font-bold" /> {orden.id}</h1>
+<h1>Este es tu numero de orden de compra:  <span class="font-bold" /> {orden.id}</h1>
+
+<h3>{orden.cliente.name}</h3>
+<p>Direccion de Entrega: {orden.direccionEntrega}  {orden.ciudadEnt}, {orden.departamentoEnt}</p>
+<p>{orden.notes} </p>
+<p>Teléfono: {orden.cliente.phone}</p>
+<p>Email: {orden.cliente.email}</p>
 
 <div class="overflow-x-auto flex flex-wrap justify-center">
 	<table class="table flex">
 		<thead>
 			<tr class="bg-red-500">
-				<th>Product</th>
+				<th>Producto</th>
 				<th>Cantidad</th>
-				<th>Precio unit</th>
+				<th>Precio</th>
 				<th>Total</th>
 			</tr>
 		</thead>
@@ -35,9 +41,6 @@
 		</tbody>
 	</table>
 </div>
-<pre>
-    {JSON.stringify(orden, null, 2)}
-</pre>
 {:else}
 <p>Numero de orden no existe</p>
 {/if}

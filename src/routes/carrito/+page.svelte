@@ -28,10 +28,12 @@
 		{#each $cart as product (product.id)}
 			<div class="flex items-center">
 				<img src={product.image[0].secureUrl} alt="product" class="w-32 mb-2 mr-3" />
-				<ButonQuantity {product} mostrarCosto={true} />
+				<div class="container1 no-select " style="--watermark-content: '{data.name}'">
+					<ButonQuantity {product} mostrarCosto={true} />
+				</div>
 			</div>
 		{/each}
-		<div>
+		<div >
 			<span use:jovanyActions={`Items(${resum.items}) `} />
 			<span>Valor Total: </span>
 			<span use:jovanyActions={`$${resum.total}`} />
@@ -46,3 +48,26 @@
 	<span class="mr-2">No has hecho compras</span>
 	<a href="/" class="text-blue-500">Regresar a la tienda</a>
 {/if}
+
+
+<style>
+	.container1 {
+  		position: relative;
+	}
+
+.container1::after {
+  content: var(--watermark-content);
+  z-index: 9999;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9em;
+  font-weight: bold;
+  color: rgba(52, 166, 214, 0.4);
+}
+
+.no-select {
+  user-select: none;
+}
+</style>
