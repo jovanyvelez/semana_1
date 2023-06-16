@@ -2,18 +2,22 @@ import { prisma } from '$lib/server/prisma';
 import { transporter } from '$lib/server/nodemailer';
 import { htmlTable } from '$lib/server/utils/htmlMail.js';
 
-export async function load({ params }) {
+export async function load({ params, locals }) {
+
+	const {email} = locals.user;
+	console.log(email)
 	const orden = await prisma.OrdenDePedido.findUnique({
 		where: { id: parseInt(params.orden, 10) },
 		include: {
-
 			cliente: {
 				select: {
 					name: true,
 					phone: true,
-					email: true
+					email: true,
+					discount:true,
 				}
 			},
+
 
 			productos:{
 				include:{
@@ -23,14 +27,17 @@ export async function load({ params }) {
 						}
 					}
 				}
-			}
+			},
 
 		}
 	});
 
+	//Solo mostramos ordenes del usuario registrado
+	
+	if(email !== orden.cliente.email) return { }
+
 	const detalle = htmlTable(orden.productos)
 
-	console.log(`${JSON.stringify(orden,null,2)}`)
 	
 	try {
 

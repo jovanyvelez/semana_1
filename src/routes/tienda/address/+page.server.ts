@@ -1,23 +1,26 @@
 import { fail, redirect } from '@sveltejs/kit';
-//import { prisma } from '$lib/server/prisma';
+import { prisma } from '$lib/server/prisma';
 import type { Actions } from './$types';
+import { element } from 'svelte/internal';
 
 export async function load({ locals }) {
-
-	const usuario  = locals.user;
+	const usuario = locals.user;
 	if (!usuario) throw redirect(303, '/login');
-	return { usuario }
+	return { usuario };
 }
+
+//Action del form
 
 export const actions = {
 	default: async ({ request }) => {
 		// TODO log the user in
 		const datos = await request.formData();
-		
+
 		const productos = JSON.parse(datos.get('products') as string);
-		const { userId, departamento, municipio, notes, address, products, zone } = productos;
+		const { userId, departamento, municipio, notes, discount,address, products, zone, bussinessUnit } =
+			productos;
 		let newProducts;
-		if (departamento.length > 1 && municipio.length > 1 && address.length > 1 && notes.length > 1) {
+		if (departamento.length > 1 && municipio.length > 1 && address.length > 1) {
 			newProducts = await Promise.all(
 				products.map(async (element) => {
 					try {
@@ -45,50 +48,50 @@ export const actions = {
 							category: element.category
 						};
 					} catch (error) {
-
 						return fail(422, { success: false });
 					}
 				})
-				);
-				
-				
-				newProducts = await Promise.all(
-					newProducts.map(async (element) => {
-						const ccosto = await prisma.ccostoZoneCategories.findFirst({
-							where: { zone, categoryId: element.rootCategory },
-							select: { ccosto: true }
-						});
-						return { ...element, ccosto };
-					})
-					);
-					
-					newProducts = newProducts.map((obj) => {
-						return { ...obj, ccosto: obj.ccosto.ccosto };
+			);
+
+			newProducts = await Promise.all(
+				newProducts.map(async (element) => {
+					const ccosto = await prisma.ccostoZoneCategories.findFirst({
+						where: { zone, categoryId: element.rootCategory },
+						select: { ccosto: true }
 					});
-					
-					
-					
-					const finalOrder = await prisma.OrdenDePedido.create({
-						data: {
-							userId,
-							direccionEntrega: address,
-							ciudadEnt: municipio,
-							departamentoEnt: departamento,
-							notes
-						}
-					});
-					newProducts = newProducts.map((element) => {
+					return { ...element, ccosto };
+				})
+			);
+
+			newProducts = newProducts.map((obj) => {
+				return { ...obj, ccosto: bussinessUnit+obj.ccosto.ccosto };
+			});
+
+			let valor = newProducts.reduce( (a,c)=> a + (c.precio*c.cantidad),0);
+
+			valor = valor*(1-(discount/100));
+
+			const finalOrder = await prisma.OrdenDePedido.create({
+				data: {
+					userId,
+					direccionEntrega: address,
+					ciudadEnt: municipio,
+					departamentoEnt: departamento,
+					notes,
+					valor
+				}
+			});
+			newProducts = newProducts.map((element) => {
 				return { ...element, ordenDePedidoId: finalOrder.id };
 			});
-			
+			console.log(newProducts);
 			try {
 				const detalle = await prisma.OrdenDePedidoProducto.createMany({
 					data: newProducts
 				});
 			} catch (error) {
-				console.error(error)
+				console.error(error);
 			}
-
 
 			await Promise.all(
 				products.map(async (element) => {
@@ -102,10 +105,10 @@ export const actions = {
 					});
 				})
 			);
-            prisma.$disconnect();
+			prisma.$disconnect();
 			return { success: true, savedorder: finalOrder.id };
 		}
-        prisma.$disconnect()
+		prisma.$disconnect();
 		console.log('Sorry');
 		return fail(422, { success: false });
 	}

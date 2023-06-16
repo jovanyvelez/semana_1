@@ -20,10 +20,10 @@ model Usuario {
   address       String
   bussinessUnit String?
   zone          String
-  discount      Float?           @default(0)
+  asesor        String?
+  discount      Float?          @default(0)
   orders        OrdenDePedido[]
   role          Roles           @relation(fields: [roleId], references: [id])
-  asesor        String?
 }
 
 model Roles {
@@ -44,6 +44,7 @@ model OrdenDePedido {
   fechaDespacho    DateTime?
   updatedAt        DateTime                @updatedAt
   notes            String?
+  valor            Float?
   cliente          Usuario                 @relation(fields: [userId], references: [id])
   productos        OrdenDePedidoProducto[]
 }

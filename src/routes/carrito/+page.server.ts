@@ -1,10 +1,10 @@
 import type { Actions } from '@sveltejs/kit';
 
-import { redirect } from '@sveltejs/kit';
 
-export const load = async () => {
+export const load = async ({locals}) => {
 	//todo
-	return {};
+	const discount = locals.user.discount
+	return { discount };
 };
 
 export const actions: Actions = {

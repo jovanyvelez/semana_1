@@ -3,7 +3,8 @@ import { prisma } from '$lib/server/prisma';
 
 export const load = async ({ locals }) => {
 	
-	const user = locals.user;
+	const user = locals.user? locals.user?.role:undefined;
+
 	if (!user) throw redirect(303, '/login');
 
 	const result = await prisma.$queryRaw`
@@ -76,7 +77,7 @@ export const load = async ({ locals }) => {
 	);
 
 	prisma.$disconnect();
-	return { elResultado, role:user.role.name };
+	return { elResultado, user };
 };
 
 
@@ -93,7 +94,5 @@ export const actions: Actions = {
 			path: '/',
 			expires: new Date(0)
 		});
-
-		// redirect the user
 	}
 };

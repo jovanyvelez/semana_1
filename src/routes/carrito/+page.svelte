@@ -2,9 +2,10 @@
 	import ButonQuantity from '$lib/components/ButonQuantity.svelte';
 	import { jovanyActions } from '$lib/jovanyActions';
 	import { cart } from '$lib/stores/stores';
-	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-
+	
+	export let data;
+	
 	let empty: boolean = false;
 
 	let resum: { total: number; items: number };
@@ -17,7 +18,7 @@
 
 	$: $cart,
 		(resum = {
-			total: $cart.reduce((a, c) => a + c.qtyBuy * c.price[0].price1, 0),
+			total: $cart.reduce((a, c) => a + (c.qtyBuy * c.price[0].price1)*(1-(data.discount)/100), 0),
 			items: $cart.reduce((a, c) => a + c.qtyBuy, 0)
 		}); 
 </script>

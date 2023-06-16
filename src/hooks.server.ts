@@ -5,19 +5,16 @@ export const handle: Handle = async ({ event, resolve }) => {
 	
 	// get cookies from browser
 	const session = event.cookies.get('session');
-	console.log(session)
+
 	if (!session) {
 		// if there is no session load page as normal
 		return await resolve(event);
 	}
-
 	// find the user based on the session
 	const authUser = await prisma.AuthUser.findUnique({
 		where: { userAuthToken: session },
 		select: { email: true }
 	});
-
-	console.log(authUser)
 
 	const user = await prisma.Usuario.findUnique({
 		where: { email: authUser.email },

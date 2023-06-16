@@ -10,11 +10,11 @@
 </svelte:head>
 
 
-{#if data.user?.email && data?.user?.role?.name==='cliente'}
+{#if data.email && data.role==='cliente'}
 	<Menu />
 {/if}
 
-{#if data.user?.email && data?.user?.role?.name==='admin'}
+{#if data.email && data.role==='admin'}
 	<MenuAdmon />
 {/if}
 

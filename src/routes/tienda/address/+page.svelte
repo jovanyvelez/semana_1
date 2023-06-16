@@ -22,8 +22,10 @@
 	let order = {};
 
 	order.userId = data.usuario.id;
-	order.zone = data.usuario.zone;
+	order.zone = data.usuario.zone
+	order.bussinessUnit = data.usuario.bussinessUnit;
 	order.address = data.usuario.address;
+	order.discount = data.usuario.discount;
 	$: completeAddress = `${address1} ${address2} # ${address3}-${address4}`;
 
 	const saveOrder = ({cancel, formData})=>{
