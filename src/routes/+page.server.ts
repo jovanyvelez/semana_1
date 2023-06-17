@@ -89,10 +89,5 @@ export const actions: Actions = {
 
 		cookies.delete('session', { path: '/' });
 		throw redirect(302, '/');
-
-		cookies.set('session', '', {
-			path: '/',
-			expires: new Date(0)
-		});
 	}
 };
