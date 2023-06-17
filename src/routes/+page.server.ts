@@ -87,7 +87,13 @@ export const actions: Actions = {
 	default: async ({ cookies }) => {
 		// eat the cookie
 
+		
+		cookies.set('session', '', {
+			path: '/',
+			expires: new Date(0)
+		});
+
 		cookies.delete('session', { path: '/' });
-		throw redirect(302, '/');
+		throw redirect(302, '/login');
 	}
 };
