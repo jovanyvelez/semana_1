@@ -5,7 +5,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	
 	// get cookies from browser
 	const session = event.cookies.get('session');
-
+	console.log("En HOOKS")
 	if (!session) {
 		// if there is no session load page as normal
 		return await resolve(event);
