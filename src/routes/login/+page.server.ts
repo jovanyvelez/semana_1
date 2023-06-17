@@ -4,7 +4,10 @@ import bcrypt from 'bcrypt';
 import { prisma } from '$lib/server/prisma';
 
 export const load = async ({cookies}) => {
-	cookies.delete('session', { path: '/' });
+	cookies.set('session', '', {
+		path: '/',
+		expires: new Date(0)
+	});
 	return {};
 };
 
