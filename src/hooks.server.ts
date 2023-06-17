@@ -5,13 +5,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	
 	// get cookies from browser
 	const session = event.cookies.get('session');
-	console.log("En HOOKS")
+
 	if (!session) {
 		// if there is no session load page as normal
 		return await resolve(event);
 	}
 	
-	console.log(session);
 	// find the user based on the session
 
 	const authUser = await prisma.AuthUser.findUnique({
@@ -25,7 +24,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return await resolve(event);
 	}
 
-	console.log(authUser)
 
 	const user = await prisma.Usuario.findUnique({
 		where: { email: authUser.email },

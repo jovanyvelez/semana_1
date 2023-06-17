@@ -4,7 +4,8 @@ import bcrypt from 'bcrypt';
 import { prisma } from '$lib/server/prisma';
 
 export const load = async ({cookies}) => {
-	console.log('En el LOAD de LOGIN')
+	 
+	 
 	cookies.set('session', '', {
 		path: '/',
 		expires: new Date(0)
@@ -16,9 +17,10 @@ const login: Action = async ({ cookies, request }) => {
 	let form;
 	cookies.set('session', '', {
 		path: '/',
+		secure:false,
 		expires: new Date(0)
 	});
-	console.log('En el ACTION de LOGIN')
+	 
 	try {
 		form = await request.formData();
 	} catch (error) {
