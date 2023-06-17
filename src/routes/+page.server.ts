@@ -86,6 +86,6 @@ export const actions: Actions = {
 	// signout
 	default: async ({ cookies }) => {
 		// eat the cookie
-		cookies.delete('session', { path: '/', secure:false });
+		cookies.delete('session', { path: '/'});
 	}
 };

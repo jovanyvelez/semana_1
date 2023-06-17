@@ -39,7 +39,7 @@ export async function load({ params, locals }) {
 
 	const detalle = htmlTable(orden)
 
-	
+	let correo;
 	try {
 		let info = await transporter.sendMail({
 			from: '"Fred Foo 👻" jovany.velez@zohomail.com', // sender address
@@ -49,10 +49,11 @@ export async function load({ params, locals }) {
 			html: detalle, // html body
 		});
 
-		console.log("Message sent: %s", info.messageId);
+		correo = info.messageId;
+		console.log("Message sent: %s", correo);
 
     } catch (error) {
         console.log(error)
     }
-	return { orden };
+	return { orden, envio:correo };
 }

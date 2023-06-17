@@ -57,9 +57,7 @@ const login: Action = async ({ cookies, request }) => {
 
 		cookies.set('session', authenticatedUser.userAuthToken, {
 			// send cookie for every page
-			path: '/',
-			// only sent over HTTPS in production
-			secure: false
+			path: '/'
 		});
 	} catch (error) {
 		// database connection error
