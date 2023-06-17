@@ -88,7 +88,7 @@ export const actions: Actions = {
 		// eat the cookie
 
 		cookies.delete('session', { path: '/' });
-		throw redirect(302, '/login');
+		throw redirect(302, '/');
 
 		cookies.set('session', '', {
 			path: '/',
