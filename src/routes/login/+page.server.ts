@@ -5,7 +5,6 @@ import { prisma } from '$lib/server/prisma';
 
 export const load = async ({cookies}) => {
 	 
-	 
 	cookies.set('session', '', {
 		path: '/',
 		expires: new Date(0)

@@ -34,7 +34,7 @@
 </script>
 
 <div class="flex flex-wrap justify-center mb-3">
-	<div class="input-group w-4/12">
+	<div class="input-group w-4/12 flex justify-center">
 		<input
 			type="text"
 			placeholder="Buscar…"

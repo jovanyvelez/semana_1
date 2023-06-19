@@ -24,7 +24,7 @@
 </script>
 
 {#if !empty}
-	<div class="flex flex-col justify-center">
+	<div class="flex flex-col justify-center mx-10">
 		{#each $cart as product (product.id)}
 			<div class="flex items-center">
 				<img src={product.image[0].secureUrl} alt="product" class="w-32 mb-2 mr-3" />
