@@ -19,11 +19,11 @@ export const actions = {
 
         //valido los datos que envian
         if(!categoria.category) {
-            return fail(422, { error: true, message:"No hay nombre de la catetoria" });
+            return fail(422, { error: true, error_message:"No hay nombre de la catetoria" });
         }
 
         if(categoria.zones.length <1){
-            return fail(422, { error: true, message:"No seleccionas ninguna zona" });
+            return fail(422, { error: true, error_message:"No seleccionas ninguna zona" });
         }
 
         const count = categoria.zones.reduce((a,c) =>{
@@ -35,7 +35,7 @@ export const actions = {
         }, 0 )
 
         if(count > 0){
-            return fail(422, { error: true, messsage:"Algunas zonas no tienen centro de costo" });
+            return fail(422, { error: true, error_message:"Algunas zonas no tienen centro de costo" });
         }
 
         const exist = await prisma.category.findFirst({
@@ -43,7 +43,7 @@ export const actions = {
         })
         console.log(exist);
         if(exist){
-            return fail(422, { error: true, message: "ya existe la categoria" });
+            return fail(422, { error: true, error_message: "ya existe la categoria" });
         }
 
 		const newCategory = await prisma.category.create({
@@ -60,6 +60,6 @@ export const actions = {
         const grabaCcosto = await prisma.ccostoZoneCategories.createMany({
             data:ccostoCategoria
         })
-        return { success: true };
+        return { success: true, message:"Categoria Ingresada" };
 	}
 } satisfies Actions;

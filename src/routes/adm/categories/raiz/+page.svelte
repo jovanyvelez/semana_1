@@ -3,7 +3,6 @@
 
 	export let data;
 	export let form;
-	console.log(form);
 	let errors = {};
 
 	const zonas = data.zonas;
@@ -66,6 +65,14 @@
 
 <h1 class="text-center">Creacion de categoria raiz</h1>
 
+{#if form?.error_message}
+	<small class="text-center text-red-500">{form.error_message}</small>
+{/if}
+
+{#if form?.message}
+	<small class="text-center text-green-500">{form.message}</small>
+{/if}
+
 <div class="flex justify-center">
 	<div class="flex justify-center items-center flex-wrap border w-10/12 border-yellow-500 p-5">
 		<div class="flex flex-col md:flex-row mr-5">
@@ -109,3 +116,6 @@
 		<button type="submit" class="btn btn-warning btn-sm mt-5">Grabar</button>
 	</form>
 </div>
+{#if form?.error_message}
+	<small class="text-center text-red-500">{form.error_message}</small>
+{/if}
