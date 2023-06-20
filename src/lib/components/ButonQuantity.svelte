@@ -17,6 +17,7 @@
 	$: cost = quantity * product.price[0].price1;
 
 	const addToCart = (product: ProductStore) => {
+		if(product.quantity === 0)return;
 		const index = $cart.findIndex((x) => x.id === product.id);
 		
 		if (index < 0) {

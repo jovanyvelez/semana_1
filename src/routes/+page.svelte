@@ -22,6 +22,4 @@
 		</div>
 	{/if}
 {/if}
-<form use:enhance method="post">
-	<input type="submit" class="btn btn-warning" value="Sign out" />
-</form>
+

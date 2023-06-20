@@ -1,7 +1,8 @@
 <script lang="ts">
-	
+
 	let buttonMenu = true;
 	let showClass = 'hidden';
+	let salir = false;
 	const buttonToggle = () => {
 		buttonMenu = !buttonMenu;
 		buttonMenu ? (showClass = 'hidden') : (showClass = '');
@@ -9,6 +10,7 @@
 	
 </script>
 
+{#if !salir }
 <div class="navbar bg-base-100 bg-gradient-to-t mb-4 from-yellow-50 to-yellow-600 text-black">
 	
 	<div class="flex-1">
@@ -67,6 +69,7 @@
 					<li><a href="/adm/auth">Contraseña</a></li>
 				</ul>
 			</li>
+			<li><a on:click={()=>{salir = true}} href="/login"><li>Salir</a></li>
 		</ul>
 	</div>
 
@@ -114,3 +117,4 @@
 		</ul>
 	</div>
 </div>
+{/if}
