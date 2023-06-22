@@ -3,11 +3,9 @@
 
     export let data;
 	export let form;
-	console.log(form)
-
-
-	const categorias = data.categoriasHijasRaiz;
 	
+	const categorias = data.categoriasHijasRaiz;
+	console.log(categorias);
     let errors
     let name = '';
     let selected;
@@ -20,7 +18,7 @@
         let padreId;
 
         if(typeof name !=='string'|| name.length < 1){
-				alert("Categoria debe tener nombre")
+				errors.name = "No ingresa nombre de categoria"
                 cancel()
             }
 
@@ -31,13 +29,15 @@
         if(option===1){
             padreId = selected;
             if(typeof selected !=='string'|| selected.length < 1){
-                cancel()
+                errors.raiz = "No selecciona cat padre"
+				cancel()
             }
         }
 
         if(option===2){
             padreId = selected1;
             if(typeof selected1 !=='string'|| selected1.length < 1){
+				errors.padre = "No selecciona cat padre"
                 cancel()
             }
         }
@@ -48,7 +48,9 @@
 		return async ({ result }) => {
 			console.log(result);
 			if (result.type === 'success') {
-				console.log(result);
+				name = '';
+				option = 0;
+				alert('Categoria grabada')
 				//goto(`/tienda/conf_envio/${result.data.savedorder}`)
 			}
 			if (result.type === 'failure') {
@@ -67,6 +69,9 @@
 		Nombre de Categoria
 		<input type="text" bind:value={name} id="catName" class="input input-warning input-sm" />
 	</label>
+	{#if errors?.name}
+			<small class="text-error">{errors.name}</small>
+	{/if}
 	{#if option === 0}
 		<div>
 			<div class="form-control">
@@ -107,7 +112,12 @@
 				{/each}
 			</select>
 		</label>
+		{#if errors?.raiz}
+			<small class="text-error">{errors.raiz}</small>
+		{/if}
+
 		{#if option === 2}
+
 			<label for="">
 				Pertenece a:
 				<select bind:value={selected1} class="select select-bordered w-full max-w-xs">
@@ -116,7 +126,11 @@
 					{/each}
 				</select>
 			</label>
+			{#if errors?.padre}
+			<small class="text-error">{errors.padre}</small>
 		{/if}
+		{/if}
+		
 		<form method="post" use:enhance={saveCategory}>
 			<button type="submit" class="btn btn-warning mt-5">Grabar</button>
 		</form>

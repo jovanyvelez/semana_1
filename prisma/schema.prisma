@@ -19,11 +19,12 @@ model Usuario {
   city          String
   address       String
   bussinessUnit String?
-  zone          String
+  zoneid          Int
   asesor        String?
   discount      Float?          @default(0)
   orders        OrdenDePedido[]
   role          Roles           @relation(fields: [roleId], references: [id])
+  zone          Zones           @relation(fields: [zoneid], references: [id])
 }
 
 model Roles {
@@ -73,7 +74,6 @@ model Category {
   hijos     Category[]             @relation("PadreHijos")
   ccosto    CcostoZoneCategories[]
   product   Product[]
-  zones     Zones[]                @relation("CategoriasZonas")
 }
 
 model Product {
@@ -82,7 +82,7 @@ model Product {
   description     String
   brand           String
   code            String                  @unique
-  eancode         String                  @unique
+  eancode         String?                 @unique
   quantity        Float
   promo           Boolean
   active          Boolean
@@ -131,8 +131,8 @@ model CcostoZoneCategories {
 model Zones {
   id         Int        @id @default(autoincrement())
   name       String
-  zone       String
-  categorias Category[] @relation("CategoriasZonas")
+  zone       String     @unique
+  usuarios   Usuario[]
 }
 
 model AuthUser {

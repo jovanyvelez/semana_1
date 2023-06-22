@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
+	import { goto, invalidateAll } from '$app/navigation';
 
 	export let data;
 	export let form;
@@ -36,11 +37,14 @@
 		return async ({ result }) => {
 			console.log(result);
 			if (result.type === 'success') {
-				console.log(result);
-				//goto(`/tienda/conf_envio/${result.data.savedorder}`)
+				alert('Categoria Creada');
+				category = '';
+				selectedZones = [];
+				await invalidateAll()
 			}
 			if (result.type === 'failure') {
-				errors.generic = result.data.message;
+
+				errors.generic = result.data.error_message;
 			}
 		};
 	};
@@ -60,7 +64,9 @@
 	}
 
 	$: final = { category, zones: selectedZones };
-	//$:console.log(final)
+
+
+
 </script>
 
 <h1 class="text-center">Creacion de categoria raiz</h1>
@@ -73,6 +79,7 @@
 	<small class="text-center text-green-500">{form.message}</small>
 {/if}
 
+<form method="post" use:enhance={saveCategory}>
 <div class="flex justify-center">
 	<div class="flex justify-center items-center flex-wrap border w-10/12 border-yellow-500 p-5">
 		<div class="flex flex-col md:flex-row mr-5">
@@ -108,14 +115,23 @@
 		</div>
 	</div>
 </div>
+
 <div class="flex flex-col justify-center items-center">
 	{#if errors?.generic}
 		<small class="text-red-600 text-center">{errors.generic}</small>
 	{/if}
-	<form method="post" use:enhance={saveCategory}>
 		<button type="submit" class="btn btn-warning btn-sm mt-5">Grabar</button>
-	</form>
-</div>
-{#if form?.error_message}
+	</div>
+</form>
+
+	
+<div>
+	{#if form?.error_message}
 	<small class="text-center text-red-500">{form.error_message}</small>
-{/if}
+	{/if}
+	
+	{#if form?.message}
+	<small class="text-center text-green-500">{form.message}</small>
+	{/if}
+</div>
+

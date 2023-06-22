@@ -65,7 +65,7 @@
 					>
 				</a>
 				<ul class="p-2 bg-base-100">
-					<li><a href="/adm/register">Crear</a></li>
+					<!--li><a href="/adm/register">Crear</a></li-->
 					<li><a href="/adm/auth">Contraseña</a></li>
 				</ul>
 			</li>
@@ -95,8 +95,56 @@
 <div class="navbar md:hidden">
 	<div class="{showClass} flex-none">
 		<ul class="menu menu-vertical px-1">
-			<li><a on:click={buttonToggle} href="/">Inicio</a></li>
-			<li><a on:click={buttonToggle} href="/tienda">Tienda</a></li>
+			<li>
+				<a href="/">
+					Categorias
+					<svg
+						class="fill-current"
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg
+					>
+				</a>
+				<ul class="p-2 bg-base-100">
+					<li ><a on:click={buttonToggle} href="/adm/categories/raiz">Crear Raiz</a></li>
+					<li><a on:click={buttonToggle} href="/adm/categories/hija">Crear Secundaria</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="/">
+					Productos
+					<svg
+						class="fill-current"
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg
+					>
+				</a>
+				<ul class="p-2 bg-base-100">
+					<li><a on:click={buttonToggle}  href="/adm/createProducts">Crear</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="/">
+					Usuarios
+					<svg
+						class="fill-current"
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg
+					>
+				</a>
+				<ul class="p-2 bg-base-100">
+					<!--li><a href="/adm/register">Crear</a></li-->
+					<li><a on:click={buttonToggle} href="/adm/auth">Contraseña</a></li>
+				</ul>
+			</li>
 			<li>
 				<a href="/">
 					Parent

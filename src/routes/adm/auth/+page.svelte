@@ -5,14 +5,13 @@
 
 	export let data;
 
-	const { form, enhance, reset, constraints, errors } = superForm(data.form, {
-		applyAction: true,
+	const { form, enhance, reset, constraints, errors, message } = superForm(data.form, {
+		//applyAction: true,
 		invalidateAll: true,
 		resetForm: false,
 		validators: authSchema
 	});
 </script>
-
 
 <form action="?/register" method="post" use:enhance>
 	<div class="flex flex-wrap items-center p-5 flex-col">
@@ -24,10 +23,9 @@
 				name="email"
 				data-invalid={$errors.email}
 				{...$constraints.email}
-				class="input {$errors?.email ? 'input-error' : 'input-bordered'} input-sm rounded-md "
+				class="input {$errors?.email ? 'input-error' : 'input-bordered'} input-sm rounded-md"
 				bind:value={$form.email}
 			/>
-			
 		</div>
 
 		<label for="password" class="label">password</label>
@@ -36,7 +34,7 @@
 				type="password"
 				id="password"
 				name="password"
-				class="input {$errors?.email ? 'input-error' : 'input-bordered'} input-sm rounded-md "
+				class="input {$errors?.email ? 'input-error' : 'input-bordered'} input-sm rounded-md"
 				data-invalid={$errors.password}
 				{...$constraints.password}
 				bind:value={$form.password}
@@ -44,12 +42,15 @@
 		</div>
 		<div>
 			{#if $errors.password}
-					<small class="jovastext-red-500">{$errors.password}</small>
+				<small class="jovastext-red-500">{$errors.password}</small>
 			{/if}
 			{#if $errors.email}
 				<small class="text-red-500">{$errors.email}</small>
 			{/if}
 		</div>
+		{#if $message}
+			<div class="message">{$message}</div>
+		{/if}
 
 		<input type="submit" value="Continue" class="btn btn-warning mt-4 btn-sm" />
 	</div>
