@@ -49,6 +49,7 @@ export const productSchema = z
 			type: z.enum(["image/gif", "image/jpeg", "image/png"])
 		  })
 	})
+	//
 	/*	
         code: z.string({required_error:"Debe ingresar codigo"}).trim(),
         eancode: z.string({required_error:"Falta codigo Ean"}).length(13).regex(/^\d+$/),
