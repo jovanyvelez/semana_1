@@ -2,7 +2,8 @@ import { prisma } from '$lib/server/prisma';
 import { productSchema } from '$lib/zodSchemas/productSchema.js';
 import { fail } from '@sveltejs/kit';
 import sharp from 'sharp';
-//import fs from 'fs-extra';
+import fs from 'fs-extra';
+import path from 'path'
 //import { uploadImage } from '$lib/server/cloudinary';
 
 import { ZodError, string } from 'zod';
@@ -107,16 +108,20 @@ export const actions = {
 		 * con ayuda de la libreria sharp
 		 * y la guardamos en el directorio static/tienda
 		 */
-		const path = `/tienda/${Date.now()}.png`;
-		try {
+		//const path = `/images/${Date.now()}.png`;
+		const filePath = `/tienda/${Date.now()}.png`;
+		const outputFilePath = path.join('static', filePath);
+		try {	
 			await sharp(buffer)
 				.resize(200, 300, {
 					kernel: sharp.kernel.nearest,
 					fit: 'contain',
 					background: { r: 255, g: 255, b: 255, alpha: 0.5 }
 				})
-				.toFile(`static${path}`)
+				.toFile(outputFilePath)
 				.then(() => {
+					// Set permissions to read for all users
+					fs.chmodSync(outputFilePath, '777');
 					// output.png is a 200 pixels wide and 300 pixels high image
 					// containing a centered scaled version
 					// contained within the north-east corner of a semi-transparent white canvas
