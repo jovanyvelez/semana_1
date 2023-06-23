@@ -22,11 +22,6 @@ export const productSchema = z
 		.min(1, { message: 'Se requiere codigo' })
 		.max(16)
 		.trim(),
-		eancode: z
-		.string({ required_error: 'Se requiere codgio Ean' })
-		.min(13, { message: 'Se requieren 13 caracteres' })
-		.max(13)
-		.trim(),
 		quantity: z
 		.number({required_error:'Se requiere cantidad'})
 		.nonnegative({message:'No puede ser negativa'})
