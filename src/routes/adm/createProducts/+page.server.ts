@@ -3,7 +3,7 @@ import { productSchema } from '$lib/zodSchemas/productSchema.js';
 import { fail } from '@sveltejs/kit';
 import sharp from 'sharp';
 import fs from 'fs-extra';
-import path from 'path'
+
 //import { uploadImage } from '$lib/server/cloudinary';
 
 import { ZodError, string } from 'zod';
@@ -108,10 +108,9 @@ export const actions = {
 		 * con ayuda de la libreria sharp
 		 * y la guardamos en el directorio static/tienda
 		 */
-		//const path = `/images/${Date.now()}.png`;
 		const filePath = `/tienda/${Date.now()}.png`;
-		const outputFilePath = path.join('static', filePath);
-		try {	
+		const outputFilePath = `static${filePath}`
+		try {
 			await sharp(buffer)
 				.resize(200, 300, {
 					kernel: sharp.kernel.nearest,
@@ -120,16 +119,16 @@ export const actions = {
 				})
 				.toFile(outputFilePath)
 				.then(() => {
-					// Set permissions to read for all users
-					fs.chmodSync(outputFilePath, '777');
 					// output.png is a 200 pixels wide and 300 pixels high image
 					// containing a centered scaled version
 					// contained within the north-east corner of a semi-transparent white canvas
+					
 				});
 		} catch (error) {
 			console.log('No se pudo redimensionar la imagen');
 			return fail(400, { message: 'No se pudo Redim Image', error:'no se redimensionó la imagen' });
 		}
+		
 		/**
 		 * Si quisieramos guardar en cloudinary
 		 */
@@ -160,13 +159,13 @@ export const actions = {
 				data: [
 					{
 						publicId: '', //result1?.public_id,
-						secureUrl: path, //result1?.secure_url,
+						secureUrl: filePath, //result1?.secure_url,
 						productId: newProduct.id,
 						name: 'main'
 					},
 					{
 						publicId: '',
-						secureUrl: path,
+						secureUrl: filePath,
 						productId: newProduct.id,
 						name: 'one'
 					}
@@ -184,7 +183,7 @@ export const actions = {
 		} catch (error) {
 			console.error(error);
 		}
-
+		fs.chmodSync(outputFilePath, '777');
 		return { success: true };
 	},
 
