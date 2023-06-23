@@ -58,14 +58,13 @@ export const actions = {
 		};
 		try {
 			const result = productSchema.parse(product);
-			console.log(product);
+
 		} catch (error: unknown) {
 			if (error instanceof ZodError) {
-				//console.log(error.flatten());
 				const { fieldErrors: errors } = error.flatten();
 				console.log(errors);
 				const { imagen, ...data } = product;
-				return fail(400, { data, errors });
+				return fail(400, { data, errors, error:'tipo de datos incorrectos' });
 			}
 		}
 
@@ -80,21 +79,10 @@ export const actions = {
 			if (codigo) {
 				await prisma.$disconnect();
 				const { imagen, ...data } = product;
-				return fail(400, { data, codeExist: true });
+				return fail(400, { data, error: 'Codigo ya existe' });
 			}
 
-			//Verificamos que el código ean no exista
-			const eancode = await prisma.Product.findFirst({
-				where: {
-					eancode: product.eancode
-				}
-			});
 
-			if (eancode) {
-				await prisma.$disconnect();
-				const { imagen, ...data } = product;
-				return fail(400, { data, eancodExist: true });
-			}
 		} catch (error) {
 			console.log('No se pudo hacer la consulta en la tabla Productos');
 		} finally {
@@ -103,10 +91,9 @@ export const actions = {
 
 		let buffer;
 		try {
-			console.log('buffer');
 			buffer = Buffer.from(await product.imagen.arrayBuffer());
 		} catch (error) {
-			return fail(400, { message: 'error' });
+			return fail(400, { message: 'errorImagen', error: 'No se pudo crear buffer' });
 		}
 
 		/**
@@ -121,7 +108,6 @@ export const actions = {
 		 * y la guardamos en el directorio static/tienda
 		 */
 		const path = `/tienda/${Date.now()}.png`;
-		console.log(path);
 		try {
 			await sharp(buffer)
 				.resize(200, 300, {
@@ -137,7 +123,7 @@ export const actions = {
 				});
 		} catch (error) {
 			console.log('No se pudo redimensionar la imagen');
-			return fail(400, { message: 'No se pudo Redim Image' });
+			return fail(400, { message: 'No se pudo Redim Image', error:'no se redimensionó la imagen' });
 		}
 		/**
 		 * Si quisieramos guardar en cloudinary
@@ -153,7 +139,7 @@ export const actions = {
 		}
 		*/
 		const { price1, price2, price3, imagen, ...rest } = product;
-		console.log(rest);
+
 		let newProduct;
 
 		try {
@@ -193,6 +179,7 @@ export const actions = {
 		} catch (error) {
 			console.error(error);
 		}
+
 		return { success: true };
 	},
 

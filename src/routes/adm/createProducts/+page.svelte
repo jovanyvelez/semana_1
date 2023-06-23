@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
+	import { stringify } from 'postcss';
+	import { message } from 'sveltekit-superforms/server';
 	export let data;
 	export let form;
 
@@ -14,7 +16,9 @@
 		precio1: 0,
 		precio2: 0,
 		precio3: 0,
-		selected: undefined
+		selected: undefined,
+		error: '',
+		status: false
 	};
 	interface StoreSections {
 		id: string;
@@ -64,19 +68,22 @@
 					descripcion: '',
 					marca: '',
 					codigo: '',
-					ean: '',
 					inventario: 0,
 					precio1: 0,
 					precio2: 0,
 					precio3: 0,
-					selected: undefined
+					selected: undefined,
+					error: '',
+					status: false,
 				};
 				change();
-				await invalidateAll();
-				alert('Producto creado');
+					alert('Producto creado');
+					producto.status = true
 			}
 			if (result.type === 'failure') {
-				//para implementar
+				alert("NO SE CREO NADA")
+				producto.error = result.data.error;
+
 			}
 		};
 	};
@@ -155,25 +162,6 @@
 			<span class="label-text-alt text-error">{form?.errors.code[0]}</span>
 		{/if}
 		{#if form?.codeExist}
-			<span class="label-text-alt text-error">Codigo ya existe</span>
-		{/if}
-	</div>
-
-	<div class="flex flex-col">
-		<label for="codigoean" class={labelClass}>Codigo Ean:</label>
-
-		<input
-			type="text"
-			id="codigoean"
-			name="eancode"
-			bind:value={producto.ean}
-			placeholder="Ean code"
-			class="input input-warning {`${form?.errors?.eancode ? 'border-error' : ''}`}"
-		/>
-		{#if form?.errors?.eancode}
-			<span class="label-text-alt text-error">{form?.errors.eancode[0]}</span>
-		{/if}
-		{#if form?.eancodExist}
 			<span class="label-text-alt text-error">Codigo ya existe</span>
 		{/if}
 	</div>
@@ -314,10 +302,15 @@
 		class="text-yellow-400"
 		placeholder=" "
 	/>
-	{#if form?.errors?.imagen}
-	<span class="label-text-alt text-error">{form?.errors.imagen[0]}</span>
+	{#if form?.errors}
+		<pre class="text-error">{JSON.stringify(form?.errors,null,2)}</pre>
 	{/if}
-	
+	{#if producto.error}
+	<small class="label-text-alt text-error">{producto.error}</small>
+	{/if}
+	{#if producto.status}
+	<small class="label-text-alt text-green-400">producto creado!</small>
+	{/if}
 	<input type="submit" class="btn btn-warning" />
 </div>
 </form>

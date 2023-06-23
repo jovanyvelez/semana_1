@@ -30,14 +30,6 @@ export const productSchema = z
 		.number({required_error:'Se requiere cantidad'})
 		.nonnegative({message:'No puede ser negativa'}),
 		
-		price2: z
-		.number({required_error:'Se requiere cantidad'})
-		.nonnegative({message:'No puede ser negativa'}),
-
-		price3: z
-		.number({required_error:'Se requiere cantidad'})
-		.nonnegative({message:'No puede ser negativa'}),
-		
 		categoryId: z
 		.string({required_error:'Debes escoger una categoria'}).uuid({message:'Error'}),
 
