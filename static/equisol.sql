@@ -376,10 +376,10 @@ ALTER TABLE ONLY public."Zones" ALTER COLUMN id SET DEFAULT nextval('public."Zon
 --
 
 COPY public."AuthUser" (id, email, "passwordHash", "userAuthToken") FROM stdin;
-458de0e6-d0da-4ea0-b6a6-e6d572d924c9	jovany.velez@gmail.com	$2b$10$1wI/zWcCEj3xXVGckd2bfObIDE3e04XkeVc3Czi5/gpiGE5L8pN4a	c57975cf-6862-4df8-ba22-b2d99de40b22
-8a1e6285-2a83-495a-97dc-8dc41b2d4d7b	jvelez23@misena.edu.co	$2b$10$bPM4bgDU5uC/wJEQgbrfReHHuZbjUvLqm1luxPBqEnYSkGrb0fmIi	0af9c613-2da8-4318-be5a-a86c5f535c28
+458de0e6-d0da-4ea0-b6a6-e6d572d924c9	jovany.velez@gmail.com	$2b$10$1wI/zWcCEj3xXVGckd2bfObIDE3e04XkeVc3Czi5/gpiGE5L8pN4a	d35c23f0-a835-40fc-8493-a9b1119cb7c2
+8a1e6285-2a83-495a-97dc-8dc41b2d4d7b	jvelez23@misena.edu.co	$2b$10$bPM4bgDU5uC/wJEQgbrfReHHuZbjUvLqm1luxPBqEnYSkGrb0fmIi	b72e9f8d-0cf9-40d4-bd8e-8b4b09286c25
 cc26b23a-7e4b-447a-9608-e0f0bcb53db3	jairo.rivera@equisol.com.co	$2b$10$iO2FNS.zgAn2wrC5R7tlmO13XdeouqKERAyhYeXZYJ3aEokeoFCKW	923d5479-3ca4-483e-bf4a-bb66e2c1a3d5
-b9f52fdf-6cc2-4ff9-a3a8-815405d82bae	ejara461@gmail.com	$2b$10$E7Qy22SaL69c6LSiqzEbYu5cz1xUM6ZraDeVBCUqqz1WQ77Cob.w2	31d709d6-c7e3-46cd-a73a-fdf6847af943
+b9f52fdf-6cc2-4ff9-a3a8-815405d82bae	ejara461@gmail.com	$2b$10$E7Qy22SaL69c6LSiqzEbYu5cz1xUM6ZraDeVBCUqqz1WQ77Cob.w2	9edfe49b-6159-4669-96b7-16cf033cb5a5
 \.
 
 
@@ -388,6 +388,7 @@ b9f52fdf-6cc2-4ff9-a3a8-815405d82bae	ejara461@gmail.com	$2b$10$E7Qy22SaL69c6LSiq
 --
 
 COPY public."Category" (id, name, "padreId", "createdAt", "updatedAt") FROM stdin;
+178c0668-5076-4d34-942d-83893934346c	Parker	\N	2023-06-23 13:47:22.726	2023-06-23 13:47:22.726
 \.
 
 
@@ -396,6 +397,7 @@ COPY public."Category" (id, name, "padreId", "createdAt", "updatedAt") FROM stdi
 --
 
 COPY public."CcostoZoneCategories" (id, zone, "categoryId", ccosto) FROM stdin;
+17	1	178c0668-5076-4d34-942d-83893934346c	123123
 \.
 
 
@@ -404,6 +406,8 @@ COPY public."CcostoZoneCategories" (id, zone, "categoryId", ccosto) FROM stdin;
 --
 
 COPY public."Image" (id, "publicId", "secureUrl", "productId", "createdAt", "updatedAt", name) FROM stdin;
+c85f3f12-3e34-47af-bd62-ec7692ff24c3		/tienda/1687561952510.png	9ec66f94-8ae0-4730-bf5c-2624f72d0eee	2023-06-23 23:12:32.68	2023-06-23 23:12:32.68	main
+3ab22b9e-65fa-44bd-8c24-4b7a0ec8e784		/tienda/1687561952510.png	9ec66f94-8ae0-4730-bf5c-2624f72d0eee	2023-06-23 23:12:32.68	2023-06-23 23:12:32.68	one
 \.
 
 
@@ -428,6 +432,7 @@ COPY public."OrdenDePedidoProducto" ("ordenDePedidoId", "productoId", cantidad, 
 --
 
 COPY public."Price" (id, price1, price2, price3, price4, price5, price6, "productId", "createdAt", "updatedAt") FROM stdin;
+06730f29-5498-4a83-8a07-3c9062932f7f	4	0	0	\N	\N	\N	9ec66f94-8ae0-4730-bf5c-2624f72d0eee	2023-06-23 23:12:32.76	2023-06-23 23:12:32.76
 \.
 
 
@@ -436,6 +441,7 @@ COPY public."Price" (id, price1, price2, price3, price4, price5, price6, "produc
 --
 
 COPY public."Product" (id, name, description, brand, code, eancode, quantity, promo, active, "categoryId", "createdAt", "updatedAt") FROM stdin;
+9ec66f94-8ae0-4730-bf5c-2624f72d0eee	Taladro Inalámbrico Rotación 3/8-pulg 20V I-L	1100W 10500Rpm	El Cairo	asdffdhdgfsdsd	\N	3	f	t	178c0668-5076-4d34-942d-83893934346c	2023-06-23 23:12:32.645	2023-06-23 23:12:32.645
 \.
 
 
@@ -479,7 +485,7 @@ COPY public."Zones" (id, name, zone) FROM stdin;
 -- Name: CcostoZoneCategories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ecommerce
 --
 
-SELECT pg_catalog.setval('public."CcostoZoneCategories_id_seq"', 16, true);
+SELECT pg_catalog.setval('public."CcostoZoneCategories_id_seq"', 17, true);
 
 
 --
