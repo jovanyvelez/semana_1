@@ -2,7 +2,7 @@
 	export let data;
 	const { elResultado, role } = data;
 </script>
-<pre>{JSON.stringify(elResultado,null,2)}</pre>
+
 {#if role === 'cliente'}
 	{#if elResultado.length > 0}
 		<div class="flex flex-wrap justify-center">
