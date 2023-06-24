@@ -2,6 +2,7 @@ import { prisma } from '$lib/server/prisma';
 import { productSchema } from '$lib/zodSchemas/productSchema.js';
 import { fail } from '@sveltejs/kit';
 import sharp from 'sharp';
+import { uploadImage } from '$lib/server/cloudinary';
 import fs from 'fs-extra';
 
 //import { uploadImage } from '$lib/server/cloudinary';
@@ -108,8 +109,8 @@ export const actions = {
 		 * con ayuda de la libreria sharp
 		 * y la guardamos en el directorio static/tienda
 		 */
-		const filePath = `/tienda/${Date.now()}.png`;
-		const outputFilePath = `static${filePath}`
+		//const filePath = `/tienda/${Date.now()}.png`;
+		const outputFilePath = 'static/tmp.png';
 		try {
 			await sharp(buffer)
 				.resize(200, 300, {
@@ -121,8 +122,7 @@ export const actions = {
 				.then(() => {
 					// output.png is a 200 pixels wide and 300 pixels high image
 					// containing a centered scaled version
-					// contained within the north-east corner of a semi-transparent white canvas
-					
+					// contained within the north-east corner of a semi-transparent white canvas					
 				});
 		} catch (error) {
 			console.log('No se pudo redimensionar la imagen');
@@ -130,18 +130,20 @@ export const actions = {
 		}
 		
 		/**
-		 * Si quisieramos guardar en cloudinary
+		 * Guardamos en cloudinary
 		 */
 
-		/*
-        let result, result1;
+		
+        let result;
 		try {
-			result = await uploadImage('./temp/temp.png');
-			result1 = await uploadImage('./temp/output.png');
+			result = await uploadImage(outputFilePath);
 		} catch (err) {
 			console.log('No fue posible crear algunas imagenes en cloudinary');
+			return fail(400, { message: 'No se pudo Redim Image', error:'no se guardo cloudinary' });
 		}
-		*/
+		
+		fs.writeFileSync(`static/${result.public_id}.${result.format}`, buffer, 'base64');
+
 		const { price1, price2, price3, imagen, ...rest } = product;
 
 		let newProduct;
@@ -155,21 +157,14 @@ export const actions = {
 		}
 
 		try {
-			const newImage = await prisma.Image.createMany({
-				data: [
+			const newImage = await prisma.Image.create({
+				data: 
 					{
-						publicId: '', //result1?.public_id,
-						secureUrl: filePath, //result1?.secure_url,
+						publicId: result.public_id,
+						secureUrl: result.secure_url,
 						productId: newProduct.id,
 						name: 'main'
 					},
-					{
-						publicId: '',
-						secureUrl: filePath,
-						productId: newProduct.id,
-						name: 'one'
-					}
-				]
 			});
 
 			const newPrice = await prisma.Price.create({
@@ -183,7 +178,7 @@ export const actions = {
 		} catch (error) {
 			console.error(error);
 		}
-		fs.chmodSync(outputFilePath, '777');
+		//fs.chmodSync(outputFilePath, '777');
 		return { success: true };
 	},
 

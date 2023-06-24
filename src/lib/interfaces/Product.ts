@@ -28,7 +28,7 @@ export interface Product {
     active        : boolean,
     categoryId    : string,
     price         : [Price],
-    image         : [Image],
+    image         : Image,
   };
 
   export interface ProductStore extends Product{
