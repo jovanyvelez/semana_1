@@ -126,6 +126,7 @@ model CcostoZoneCategories {
   categoryId String
   ccosto     String   @unique
   category   Category @relation(fields: [categoryId], references: [id])
+  zona       Zones    @relation(fields: [zone], references: [zone])
 }
 
 model Zones {
@@ -133,6 +134,7 @@ model Zones {
   name       String
   zone       String     @unique
   usuarios   Usuario[]
+  categorias CcostoZoneCategories[]
 }
 
 model AuthUser {

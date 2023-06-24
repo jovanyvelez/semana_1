@@ -62,14 +62,15 @@ export const actions = {
 				newProducts = await Promise.all(
 					newProducts.map(async (element) => {
 						const ccosto = await prisma.ccostoZoneCategories.findFirst({
-							where: { zone, categoryId: element.rootCategory },
+							where: { zone:zone.zone, categoryId: element.rootCategory },
 							select: { ccosto: true }
 						});
 						return { ...element, ccosto };
 					})
 				);
 			} catch (error) {
-				console.log("No existe la zona o categoria en la tabla")
+				console.log(`No existe la zona o categoria en la tabla, la zona es: ${JSON.stringify(zone,null,2)}`)
+				console.log(JSON.stringify(newProducts,null,2))
 				throw fail(400,{error:"Zona o Categoria no creados"})
 			}
 
@@ -97,11 +98,14 @@ export const actions = {
 			newProducts = newProducts.map((element) => {
 				return { ...element, ordenDePedidoId: finalOrder.id };
 			});
+
 			try {
 				const detalle = await prisma.OrdenDePedidoProducto.createMany({
 					data: newProducts
 				});
 			} catch (error) {
+				console.log("No se pudo guardar el detalle de los produtos")
+				console.log(JSON.stringify(newProducts,null,2))
 				console.error(error);
 			}
 			
