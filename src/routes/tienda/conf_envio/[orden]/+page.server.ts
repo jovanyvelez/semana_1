@@ -39,12 +39,12 @@ export async function load({ params, locals }) {
 
 	const detalle = htmlTable(orden)
 
-	let correo;
+	/*let correo;
 	try {
 		let info = await transporter.sendMail({
-			from: '"Fred Foo 👻" jovany.velez@zohomail.com', // sender address
-			to: [`${orden.cliente.email}`, `${orden.cliente.asesor}`], // list of receivers
-			subject: `Numero de orden de compra: ${orden.id}`, // Subject line
+			from: '"Equisol" jovany.velez@zohomail.com', // direccion de quien envía
+			to: [`${orden.cliente.email}`, `${orden.cliente.asesor}`], // direcciones de quien recibe
+			subject: `Numero de orden de compra: ${orden.id}`, // 
 			//text: `${JSON.stringify(orden,null,2)}`, // plain text body
 			html: detalle, // html body
 		});
@@ -55,5 +55,16 @@ export async function load({ params, locals }) {
     } catch (error) {
         console.log(error)
     }
-	return { orden, envio:correo };
+	return { orden, envio:correo };*/
+
+	return {//Vemos que pasa con esto
+		orden,
+		envio: await transporter.sendMail({
+			from: '"Equisol" jovany.velez@zohomail.com', // direccion de quien envía
+			to: [`${orden.cliente.email}`, `${orden.cliente.asesor}`], // direcciones de quien recibe
+			subject: `Numero de orden de compra: ${orden.id}`, // 
+			//text: `${JSON.stringify(orden,null,2)}`, // plain text body
+			html: detalle, // html body
+		}).messageId
+	}//Hastaaquí el ensayo
 }
