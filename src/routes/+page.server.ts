@@ -1,5 +1,6 @@
 import { redirect, type Actions, fail } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
+import { env } from '$env/dynamic/private';
 
 export const load = async ({ locals }) => {
 	
@@ -77,7 +78,8 @@ export const load = async ({ locals }) => {
 	);
 
 	prisma.$disconnect();
-	return { elResultado, user };
+
+	return { elResultado, user, images: env.CLOUD_IMAGES };
 };
 
 

@@ -1,6 +1,6 @@
 import { prisma } from '$lib/server/prisma';
 import { redirect } from '@sveltejs/kit';
-
+import { env } from '$env/dynamic/private';
 
 export async function load({ params, locals }) {
 
@@ -85,7 +85,7 @@ export async function load({ params, locals }) {
 
 			image: {
 				where: { name: 'main' },
-				select: { secureUrl: true }
+				select: { secureUrl: true, publicId:true }
 			}
 		},
 		skip: pageSize * (query.page - 1),
@@ -102,5 +102,5 @@ export async function load({ params, locals }) {
 
 	prisma.$disconnect();
 
-	return { products, query, page: query.page, pages: Math.ceil(count / pageSize), cliente };
+	return { products, query, page: query.page, pages: Math.ceil(count / pageSize), cliente, images: env.CLOUD_IMAGES };
 }

@@ -3,6 +3,8 @@
 	import Item from '$lib/components/Item.svelte';
 
 	export let data;
+	const {images} = data;
+	console.log(images)
 
 	let products = [];
 	let datos = [];
@@ -30,7 +32,7 @@
 	} else {
 		datos = products;
 	}
-
+	console.log(datos)
 </script>
 
 <div class="flex flex-wrap justify-center mb-3">
@@ -64,7 +66,7 @@
 {#if datos.length > 0}
 	<div class="flex flex-wrap justify-center">
 		{#each datos as product (product.id)}
-			<Item {product} nombre={data.cliente.name} />
+			<Item {product} {images} nombre={data.cliente.name} />
 		{/each}
 	</div>
 {:else}

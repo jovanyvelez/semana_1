@@ -1,3 +1,4 @@
+import { env } from '$env/dynamic/private';
 import { prisma } from '$lib/server/prisma';
 import { productSchema } from '$lib/zodSchemas/productSchema.js';
 import { fail } from '@sveltejs/kit';
@@ -110,7 +111,16 @@ export const actions = {
 		 * y la guardamos en el directorio static/tienda
 		 */
 		//const filePath = `/tienda/${Date.now()}.png`;
-		const outputFilePath = 'static/tmp.png';
+
+		let outputFilePath;		
+
+
+		if(env.NODE_ENV === "development"){
+			outputFilePath = 'static/tmp.png';
+		}else{
+			outputFilePath = 'build/client/tmp.png';
+		}
+
 		try {
 			await sharp(buffer)
 				.resize(200, 300, {
@@ -135,6 +145,7 @@ export const actions = {
 
 		
         let result;
+
 		try {
 			result = await uploadImage(outputFilePath);
 		} catch (err) {
@@ -143,8 +154,16 @@ export const actions = {
 		}
 		
 		try {
+			console.log("vamos aqui")
+			console.log(outputFilePath)
+	
+			if(env.NODE_ENV === "development"){
+				fs.copyFile(outputFilePath, `static/${result.public_id}.${result.format}`);
+			}else{
+				fs.copyFile(outputFilePath, `build/client/${result.public_id}.${result.format}`);
+				fs.rename(`build/client/${result.public_id}.${result.format}`,'build/client/tienda/tmp.png')
+			}
 			
-			fs.writeFileSync(`build/client/${result.public_id}.${result.format}`, buffer, 'base64');
 		} catch (error) {
 			return fail(400, { message: 'No se creó backup de imagen', error:'no se guardo backup de imagen' });
 		}
@@ -165,7 +184,7 @@ export const actions = {
 			const newImage = await prisma.Image.create({
 				data: 
 					{
-						publicId: result.public_id,
+						publicId: `${result.public_id}.${result.format}`,
 						secureUrl: result.secure_url,
 						productId: newProduct.id,
 						name: 'main'
