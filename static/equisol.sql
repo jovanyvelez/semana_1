@@ -376,10 +376,10 @@ ALTER TABLE ONLY public."Zones" ALTER COLUMN id SET DEFAULT nextval('public."Zon
 --
 
 COPY public."AuthUser" (id, email, "passwordHash", "userAuthToken") FROM stdin;
-458de0e6-d0da-4ea0-b6a6-e6d572d924c9	jovany.velez@gmail.com	$2b$10$1wI/zWcCEj3xXVGckd2bfObIDE3e04XkeVc3Czi5/gpiGE5L8pN4a	d35c23f0-a835-40fc-8493-a9b1119cb7c2
-8a1e6285-2a83-495a-97dc-8dc41b2d4d7b	jvelez23@misena.edu.co	$2b$10$bPM4bgDU5uC/wJEQgbrfReHHuZbjUvLqm1luxPBqEnYSkGrb0fmIi	b72e9f8d-0cf9-40d4-bd8e-8b4b09286c25
 cc26b23a-7e4b-447a-9608-e0f0bcb53db3	jairo.rivera@equisol.com.co	$2b$10$iO2FNS.zgAn2wrC5R7tlmO13XdeouqKERAyhYeXZYJ3aEokeoFCKW	923d5479-3ca4-483e-bf4a-bb66e2c1a3d5
-b9f52fdf-6cc2-4ff9-a3a8-815405d82bae	ejara461@gmail.com	$2b$10$E7Qy22SaL69c6LSiqzEbYu5cz1xUM6ZraDeVBCUqqz1WQ77Cob.w2	9edfe49b-6159-4669-96b7-16cf033cb5a5
+b9f52fdf-6cc2-4ff9-a3a8-815405d82bae	ejara461@gmail.com	$2b$10$E7Qy22SaL69c6LSiqzEbYu5cz1xUM6ZraDeVBCUqqz1WQ77Cob.w2	63db79ea-7524-4d15-88d9-467a2aeac998
+458de0e6-d0da-4ea0-b6a6-e6d572d924c9	jovany.velez@gmail.com	$2b$10$1wI/zWcCEj3xXVGckd2bfObIDE3e04XkeVc3Czi5/gpiGE5L8pN4a	594fd3a1-e4eb-40ff-b7fa-7f45423554bd
+8a1e6285-2a83-495a-97dc-8dc41b2d4d7b	jvelez23@misena.edu.co	$2b$10$bPM4bgDU5uC/wJEQgbrfReHHuZbjUvLqm1luxPBqEnYSkGrb0fmIi	a7bff9bd-34da-4fc4-94a1-d807d5011543
 \.
 
 
@@ -406,8 +406,7 @@ COPY public."CcostoZoneCategories" (id, zone, "categoryId", ccosto) FROM stdin;
 --
 
 COPY public."Image" (id, "publicId", "secureUrl", "productId", "createdAt", "updatedAt", name) FROM stdin;
-c85f3f12-3e34-47af-bd62-ec7692ff24c3		/tienda/1687561952510.png	9ec66f94-8ae0-4730-bf5c-2624f72d0eee	2023-06-23 23:12:32.68	2023-06-23 23:12:32.68	main
-3ab22b9e-65fa-44bd-8c24-4b7a0ec8e784		/tienda/1687561952510.png	9ec66f94-8ae0-4730-bf5c-2624f72d0eee	2023-06-23 23:12:32.68	2023-06-23 23:12:32.68	one
+52b5d61e-7cc4-49c6-958a-9087e20b9d1c	tienda/i1np4yldyieebsccxcsu.png	https://res.cloudinary.com/dqlbbx7ud/image/upload/v1687819443/tienda/i1np4yldyieebsccxcsu.png	5dabcb03-ca6c-4834-b4cb-4ae9deed2f84	2023-06-26 22:44:03.948	2023-06-26 22:44:03.948	main
 \.
 
 
@@ -416,6 +415,7 @@ c85f3f12-3e34-47af-bd62-ec7692ff24c3		/tienda/1687561952510.png	9ec66f94-8ae0-47
 --
 
 COPY public."OrdenDePedido" (id, fecha, "userId", "direccionEntrega", "ciudadEnt", "departamentoEnt", "metodoPago", estado, "fechaDespacho", "updatedAt", notes, valor) FROM stdin;
+10	2023-06-26 14:26:46.624	3	Calle 52D # 57A-40	Bello	Antioquia	\N	\N	\N	2023-06-26 14:26:46.624	Mirador de altavista, Apartamento 402	2552000
 \.
 
 
@@ -432,7 +432,7 @@ COPY public."OrdenDePedidoProducto" ("ordenDePedidoId", "productoId", cantidad, 
 --
 
 COPY public."Price" (id, price1, price2, price3, price4, price5, price6, "productId", "createdAt", "updatedAt") FROM stdin;
-06730f29-5498-4a83-8a07-3c9062932f7f	4	0	0	\N	\N	\N	9ec66f94-8ae0-4730-bf5c-2624f72d0eee	2023-06-23 23:12:32.76	2023-06-23 23:12:32.76
+915f3093-170d-4afe-ba2f-ada91b28817c	234234234	0	0	\N	\N	\N	5dabcb03-ca6c-4834-b4cb-4ae9deed2f84	2023-06-26 22:44:03.959	2023-06-26 22:44:03.959
 \.
 
 
@@ -441,7 +441,7 @@ COPY public."Price" (id, price1, price2, price3, price4, price5, price6, "produc
 --
 
 COPY public."Product" (id, name, description, brand, code, eancode, quantity, promo, active, "categoryId", "createdAt", "updatedAt") FROM stdin;
-9ec66f94-8ae0-4730-bf5c-2624f72d0eee	Taladro Inalámbrico Rotación 3/8-pulg 20V I-L	1100W 10500Rpm	El Cairo	asdffdhdgfsdsd	\N	3	f	t	178c0668-5076-4d34-942d-83893934346c	2023-06-23 23:12:32.645	2023-06-23 23:12:32.645
+5dabcb03-ca6c-4834-b4cb-4ae9deed2f84	Comedor Moderno	Media libra	Bulldog Frances	dsdfs	\N	23	f	t	178c0668-5076-4d34-942d-83893934346c	2023-06-26 22:44:03.915	2023-06-26 22:44:03.915
 \.
 
 
@@ -492,7 +492,7 @@ SELECT pg_catalog.setval('public."CcostoZoneCategories_id_seq"', 17, true);
 -- Name: OrdenDePedido_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ecommerce
 --
 
-SELECT pg_catalog.setval('public."OrdenDePedido_id_seq"', 1, false);
+SELECT pg_catalog.setval('public."OrdenDePedido_id_seq"', 10, true);
 
 
 --
@@ -681,6 +681,14 @@ ALTER TABLE ONLY public."Category"
 
 ALTER TABLE ONLY public."CcostoZoneCategories"
     ADD CONSTRAINT "CcostoZoneCategories_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES public."Category"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: CcostoZoneCategories CcostoZoneCategories_zone_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ecommerce
+--
+
+ALTER TABLE ONLY public."CcostoZoneCategories"
+    ADD CONSTRAINT "CcostoZoneCategories_zone_fkey" FOREIGN KEY (zone) REFERENCES public."Zones"(zone) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
