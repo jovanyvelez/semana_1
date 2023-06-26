@@ -17,7 +17,7 @@
 				id="email"
 				name="email"
 				type="text"
-				class="input input-md input-warning input-bordered rounded-md w-full max-w-xs"
+				class="input input-md input-primary input-bordered rounded-md w-full max-w-xs"
 			/>
 		</div>
 
@@ -29,7 +29,7 @@
 				id="password"
 				name="password"
 				type="password"
-				class="input input-warning input-bordered w-full max-w-xs"
+				class="input input-primary input-bordered w-full max-w-xs"
 			/>
 		</div>
 
@@ -37,7 +37,7 @@
 			<small class="text-error">{form.message}</small>
 		{/if}
 		<div class="w-full flex justify-center">
-			<button type="submit" class="btn btn-xs w-full mt-4">Ingresar</button>
+			<button type="submit" class="btn btn-xs btn-primary w-full mt-4">Ingresar</button>
 		</div>
 	</form>
 

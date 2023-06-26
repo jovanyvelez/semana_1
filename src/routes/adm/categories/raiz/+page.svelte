@@ -81,10 +81,10 @@
 
 <form method="post" use:enhance={saveCategory}>
 <div class="flex justify-center">
-	<div class="flex justify-center items-center flex-wrap border w-10/12 border-yellow-500 p-5">
+	<div class="flex justify-center items-center flex-wrap border w-10/12 border-blue-600 p-5">
 		<div class="flex flex-col md:flex-row mr-5">
 			<label for="catName" class="mr-5 text-xl"> Nombre de la categoría </label>
-			<input type="text" id="catName" class="input input-warning input-xs" bind:value={category} />
+			<input type="text" id="catName" class="input input-primary input-xs" bind:value={category} />
 			{#if errors?.category}
 				<small class="text-red-600">{errors.category}</small>
 			{/if}
@@ -120,7 +120,7 @@
 	{#if errors?.generic}
 		<small class="text-red-600 text-center">{errors.generic}</small>
 	{/if}
-		<button type="submit" class="btn btn-warning btn-sm mt-5">Grabar</button>
+		<button type="submit" class="btn btn-primary btn-sm mt-5">Grabar</button>
 	</div>
 </form>
 

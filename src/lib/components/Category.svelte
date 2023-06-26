@@ -12,12 +12,12 @@
 </script>
 
 <div class="category" style="margin-left: {depth * 2}rem;">
-	<button class="my-2 arrow hover:text-red-600" class:arrowDown on:click={toggleExpand}
-		>&#x25b6;</button
+	<button class="my-2 arrow font-extrabold text-blue-600 hover:text-slate-950 text-2xl" class:arrowDown on:click={toggleExpand}
+		>&gt;</button
 	>
 	<a
 		href="/tienda/{category.id}"
-		class="font-extrabold py-5 px-3 sm:text-xl md:text-2xl lg:text-3xl hover:text-yellow-600 transition duration-200"
+		class="font-extrabold py-5 px-3 sm:text-xl md:text-2xl lg:text-3xl hover:text-blue-600 transition duration-200"
 		>{category.name}</a
 	>
 
@@ -45,17 +45,18 @@
 </div>
 
 <style>
+
 	.category {
 		margin-bottom: 20px;
 	}
 	.arrow {
-		cursor: pointer;
+		cursor: pointer;	
 		display: inline-block;
 		transition-duration: 300ms;
 		transition-property: transform;
 	}
 	.arrowDown {
 		transform: rotate(90deg);
-		color: red;
+		color:red
 	}
 </style>

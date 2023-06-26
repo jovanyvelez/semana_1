@@ -80,14 +80,14 @@
 	<h1 class="text-center">Direccion de Envío</h1>
 
 	<div class="flex justify flex-col ml-5">
-		<label class="font-bold text-yellow-400 text-xl mr-6 my-2 p-2" for="departamento"
+		<label class="font-bold text-blue-600 text-xl mr-6 my-2 p-2" for="departamento"
 			>Seleccione el Departamento</label
 		>
 
 		<select
 			id="departamento"
 			bind:value={departamento}
-			class="select select-warning select-xs md:select-md w-11/12 mb-5"
+			class="select select-primary select-xs md:select-md w-11/12 mb-5"
 			on:change={() => handleSubmit()}
 			name="departamento"
 		>
@@ -99,13 +99,13 @@
 		</select>
 
 		{#if municipios.length > 0}
-			<label class="font-bold text-yellow-400 text-xl mr-6 my-2 p-2" for="departamento"
+			<label class="font-bold text-blue-600 text-xl mr-6 my-2 p-2" for="departamento"
 				>Seleccione Ciudad</label
 			>
 			<select
 				id="municipio"
 				bind:value={municipio}
-				class="select select-warning select-xs md:select-md w-11/12 mb-5"
+				class="select select-primary select-xs md:select-md w-11/12 mb-5"
 				name="municipio"
 			>
 				{#each municipios as municipio (municipio.c_digo_dane_del_municipio)}
@@ -118,9 +118,9 @@
 
 		{#if municipio !== ''}
 			<div class="flex flex-col">
-				<h3 class="text-warning font-bold">Direccion</h3>
+				<h3 class="text-blue-600 font-bold">Direccion</h3>
 				<div class="flex flex-nowrap">
-					<select bind:value={address1} class="select select-warning select-xs w-3/12 ml-5 mr-2">
+					<select bind:value={address1} class="select select-primary select-xs w-3/12 ml-5 mr-2">
 						<option value="Calle">Calle</option>
 						<option value="Carrera">Carrera</option>
 						<option value="Avenida">Avenida</option>
@@ -135,25 +135,25 @@
 					<input
 						type="text"
 						bind:value={address2}
-						class="input input-warning input-xs w-2/12 mr-1"
+						class="input input-primary input-xs w-2/12 mr-1"
 					/>
-					<span class="font-bold">#</span>
+					<span class="font-bold text-blue-600">#</span>
 					<input
 						type="text"
 						bind:value={address3}
-						class="input input-warning w-2/12 input-xs ml-1 mr-2"
+						class="input input-primary w-2/12 input-xs ml-1 mr-2"
 					/>
-					<span class="font-bold">-</span>
+					<span class="font-bold text-blue-600">-</span>
 					<input
 						type="text"
 						bind:value={address4}
-						class="input input-warning w-2/12 input-xs ml-1 mr-2"
+						class="input input-primary w-2/12 input-xs ml-1 mr-2"
 					/>
 				</div>
 
 				<input
 					type="text"
-					class="input input-warning mx-5 w-10/12 input-md p-3 mt-5"
+					class="input input-primary mx-5 w-10/12 input-md p-3 mt-5"
 					placeholder="Notas: Barrio, edificio, casa apartamento, piso"
 					bind:value={notes}
 				/>
@@ -162,7 +162,7 @@
 		</div>
 		<div class="flex justify-center mt-3">
 
-			<button type="submit" class="btn btn-warning btn-sm mr-5 w-2/12">Finalizar compra </button>
+			<button type="submit" class="btn btn-primary btn-sm mr-5 w-2/12">Finalizar compra </button>
 		</div>
 	
 </form>

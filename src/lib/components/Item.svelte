@@ -35,7 +35,7 @@
   transform: translateX(-50%) rotate(-90deg);
   font-size: 1.5em;
   font-weight: bold;
-  color: rgba(52, 166, 214, 0.4);
+  color: rgba(7, 16, 97, 0.4);
 }
 
 .no-select {

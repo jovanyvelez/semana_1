@@ -41,7 +41,7 @@
 	</div>
 	<div class="flex flex-wrap justify-center">
 
-			<button on:click={()=>goto('/tienda/address')} type="submit" class="btn btn-warning btn-wide">Hacer compra</button>
+			<button on:click={()=>goto('/tienda/address')} type="submit" class="btn btn-primary btn-wide">Hacer compra</button>
 
 	</div>
 {:else}
@@ -64,7 +64,7 @@
   transform: translateX(-50%);
   font-size: 0.9em;
   font-weight: bold;
-  color: rgba(52, 166, 214, 0.4);
+  color: rgba(3, 28, 39, 0.4);
 }
 
 .no-select {

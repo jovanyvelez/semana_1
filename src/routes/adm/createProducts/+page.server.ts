@@ -142,7 +142,12 @@ export const actions = {
 			return fail(400, { message: 'No se pudo Redim Image', error:'no se guardo cloudinary' });
 		}
 		
-		fs.writeFileSync(`static/${result.public_id}.${result.format}`, buffer, 'base64');
+		try {
+			
+			fs.writeFileSync(`build/client/${result.public_id}.${result.format}`, buffer, 'base64');
+		} catch (error) {
+			return fail(400, { message: 'No se creó backup de imagen', error:'no se guardo backup de imagen' });
+		}
 
 		const { price1, price2, price3, imagen, ...rest } = product;
 

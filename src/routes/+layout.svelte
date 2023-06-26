@@ -2,15 +2,17 @@
 	import '../app.css';
 	import Menu from '$lib/components/Menu.svelte';
 	import MenuAdmon from '$lib/components/MenuAdmon.svelte';
+	import MenuRedes from '$lib/components/MenuRedes.svelte';
 	export let data;
 </script>
 
 <svelte:head>
-	<title>Mi Tienda Virtuale</title>
+	<title>equisol-ecommerce</title>
 </svelte:head>
 
 
 {#if data.email && data.role==='cliente'}
+	<MenuRedes />
 	<Menu />
 {/if}
 

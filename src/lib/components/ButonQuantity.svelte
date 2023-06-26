@@ -66,7 +66,7 @@
 {#if show}
 	<button
 		on:click={() => addToCart(mProduct)}
-		class="bg-yellow-500 border-lg border-yellow-700 w-32 py-2 text-xl text-black"
+		class="bg-blue-400 border-lg border-yellow-700 w-32 py-2 text-xl text-black"
 	>
 		Comprar
 	</button>
@@ -74,7 +74,7 @@
 	<div>
 		<button
 			on:click={() => outOfCart(mProduct)}
-			class='bg-yellow-500 border-lg border-yellow-700 px-3 py-2 text-2xl text-black w-8'
+			class='bg-blue-400 border-lg border-yellow-700 px-3 py-2 text-2xl text-black w-8'
 		>
 			-
 		</button>
@@ -82,7 +82,7 @@
 		<button
 			disabled={disabled}
 			on:click={() => addToCart(mProduct)}
-			class="{disabled ? 'bg-yellow-300 border-lg border-yellow-100 px-3 py-2 text-2xl text-slate-400 w-8':'bg-yellow-500 border-lg border-yellow-700 px-3 py-2 text-2xl text-black w-8'}"
+			class="{disabled ? 'bg-blue-400 border-lg border-yellow-100 px-3 py-2 text-2xl text-slate-400 w-8':'bg-blue-400 border-lg border-yellow-700 px-3 py-2 text-2xl text-black w-8'}"
 		>
 			+
 		</button>

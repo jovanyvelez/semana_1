@@ -53,7 +53,7 @@ export const actions = {
 		});
 
 		const ccostoCategoria = categoria.zones.map((e) => {
-			return { zone: e.zone, ccosto: e.ccosto, categoryId: newCategory.id };
+			return { zone: e.zone.trim(), ccosto: e.ccosto.trim(), categoryId: newCategory.id.trim() };
 		});
 
 

@@ -65,9 +65,9 @@
 </script>
 
 <div class="flex justify-center flex-wrap items-center p-2 flex-col">
-	<label for="catName">
+	<label for="catName" class="text-blue-400">
 		Nombre de Categoria
-		<input type="text" bind:value={name} id="catName" class="input input-warning input-sm" />
+		<input type="text" bind:value={name} id="catName" class="input input-primary input-sm" />
 	</label>
 	{#if errors?.name}
 			<small class="text-error">{errors.name}</small>
@@ -75,7 +75,7 @@
 	{#if option === 0}
 		<div>
 			<div class="form-control">
-				<label class="label cursor-pointer">
+				<label class="label cursor-pointer mt-2">
 					<input
 						type="radio"
 						name="radio-10"
@@ -132,7 +132,7 @@
 		{/if}
 		
 		<form method="post" use:enhance={saveCategory}>
-			<button type="submit" class="btn btn-warning mt-5">Grabar</button>
+			<button type="submit" class="btn btn-sm btn-primary mt-5">Grabar</button>
 		</form>
 	</div>
 

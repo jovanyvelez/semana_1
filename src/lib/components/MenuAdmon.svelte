@@ -11,16 +11,16 @@
 </script>
 
 {#if !salir }
-<div class="navbar bg-base-100 bg-gradient-to-t mb-4 from-yellow-50 to-yellow-600 text-black">
+<div class="navbar bg-base-100 border-b-2  border-blue-300 text-black font-bold font-sans">
 	
-	<div class="flex-1">
-		<div class="ml-3 text-xl text-black sm:text-xl font-bold">EQUISOL STORE</div>
+	<div class="flex-1 ml-5">
+		<img src="menu.png" alt="">
 	</div>
 
 	<div class="hidden md:block flex-none">
 		<ul class="menu menu-horizontal px-1">
 			<li>
-				<a href="/">
+				<a class="hover:text-blue-600" href="/">
 					Categorias
 					<svg
 						class="fill-current"
@@ -32,12 +32,12 @@
 					>
 				</a>
 				<ul class="p-2 bg-base-100">
-					<li><a href="/adm/categories/raiz">Crear Raiz</a></li>
-					<li><a href="/adm/categories/hija">Crear Secundaria</a></li>
+					<li><a class="hover:text-blue-600" href="/adm/categories/raiz">Crear Raiz</a></li>
+					<li><a class="hover:text-blue-600" href="/adm/categories/hija">Crear Secundaria</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="/">
+				<a class="hover:text-blue-600" href="/">
 					Productos
 					<svg
 						class="fill-current"
@@ -49,11 +49,11 @@
 					>
 				</a>
 				<ul class="p-2 bg-base-100">
-					<li><a href="/adm/createProducts">Crear</a></li>
+					<li><a class="hover:text-blue-600" href="/adm/createProducts">Crear</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="/">
+				<a class="hover:text-blue-600" href="/">
 					Usuarios
 					<svg
 						class="fill-current"

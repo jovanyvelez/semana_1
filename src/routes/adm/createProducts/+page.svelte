@@ -48,7 +48,7 @@
 		categoria = selected.id;
 		//product.hijos = selected.name;
 	};
-	let labelClass = 'text-yellow-400 text-xl mr-6 my-2';
+	let labelClass = 'text-blue-400 text-xl mr-6 my-2';
 
 	const save = ({ cancel, formData }) => {
 		if (!selected || selected.name === '') {
@@ -103,7 +103,7 @@
 		name="name"
 		placeholder="product name"
 		bind:value={producto.name}
-		class="input input-warning {` ${form?.errors?.name ? 'border-error' : ''}`}"
+		class="input input-primary {` ${form?.errors?.name ? 'border-error' : ''}`}"
 		/>
 		
 		{#if form?.errors?.name}
@@ -119,7 +119,7 @@
 		id="description"
 			name="description"
 			bind:value={producto.descripcion}
-			class="input input-warning {` ${form?.errors?.description ? 'border-error' : ''}`}"
+			class="input input-primary {` ${form?.errors?.description ? 'border-error' : ''}`}"
 			placeholder="description"
 		/>
 
@@ -136,7 +136,7 @@
 		id="brand"
 		name="brand"
 		bind:value={producto.marca}
-			class="input input-warning {`${form?.errors?.brand ? 'border-error' : ''}`}"
+			class="input input-primary {`${form?.errors?.brand ? 'border-error' : ''}`}"
 			placeholder="type"
 			/>
 			
@@ -152,7 +152,7 @@
 			id="codigo"
 			name="code"
 			bind:value={producto.codigo}
-			class="input input-warning {`${form?.errors?.code ? 'border-error' : ''}`}"
+			class="input input-primary {`${form?.errors?.code ? 'border-error' : ''}`}"
 			placeholder="code"
 		/>
 		{#if form?.errors?.code}
@@ -170,7 +170,7 @@
 			id="qty"
 			name="quantity"
 			bind:value={producto.inventario}
-			class="input input-warning {` ${form?.errors?.quantity ? 'border-error' : ''}`}"
+			class="input input-primary {` ${form?.errors?.quantity ? 'border-error' : ''}`}"
 		/>
 		{#if form?.errors?.quantity}
 			<span class="label-text-alt text-error">{form?.errors.quantity[0]}</span>
@@ -184,7 +184,7 @@
 			name="price1"
 			id="precio1"
 			bind:value={producto.precio1}
-			class="input input-warning {` ${form?.errors?.price1 ? 'border-error' : ''}`}"
+			class="input input-primary {` ${form?.errors?.price1 ? 'border-error' : ''}`}"
 		/>
 		{#if form?.errors?.price1}
 			<span class="label-text-alt text-error">{form?.errors.price1[0]}</span>
@@ -198,7 +198,7 @@
 			id="precio2"
 			name="price2"
 			bind:value={producto.precio2}
-			class="input input-warning {` ${form?.errors?.price2 ? 'border-error' : ''}`}"
+			class="input input-primary {` ${form?.errors?.price2 ? 'border-error' : ''}`}"
 		/>
 		{#if form?.errors?.price2}
 		<span class="label-text-alt text-error">{form?.errors.price2[0]}</span>
@@ -213,7 +213,7 @@
 			id="precio3"
 			name="price3"
 			bind:value={producto.precio3}
-			class="input input-warning {` ${form?.errors?.price3 ? 'border-error' : ''}`}"
+			class="input input-primary {` ${form?.errors?.price3 ? 'border-error' : ''}`}"
 			/>
 			{#if form?.errors?.price3}
 			<span class="label-text-alt text-error">{form?.errors.price3[0]}</span>
@@ -231,7 +231,7 @@
 			id="active"
 			name="active"
 			checked
-			class="mr-6 h-10 w-6 border border-yellow-400"
+			class="mr-6 h-10 w-6 border border-blue-400"
 			/>
 			<label for="active" class={labelClass}>Activar en stock?</label><br />
 		</div>
@@ -239,7 +239,7 @@
 		<div class="px-4 pt-8 flex flex-col w-full place-items-center">
 			<div class="grid gap-6 mb-6 md:grid-cols-2">
 				<div>
-					<select bind:value={selected} on:change={change} class="select select-warning select-lg">
+					<select bind:value={selected} on:change={change} class="select select-primary select-lg">
 						<option value={undefined} on:click={change} />
 						{#each allSections as section}
 						{#if section.name !== ''}
@@ -260,7 +260,7 @@
 					selected2 = undefined;
 					categoria = selected1?.id;
 				}}
-					class="select select-warning select-md"
+					class="select select-primary select-md"
 					>
 					{#each sections as section}
 						<option value={section}>
@@ -275,7 +275,7 @@
 					<select
 						bind:value={selected2}
 						on:change={() => (categoria = selected2?.id)}
-						class="select select-warning select-sm w-full max-w-xs"
+						class="select select-primary select-sm w-full max-w-xs"
 						>
 						{#each sections1 as section}
 						<option value={section}>
@@ -296,7 +296,7 @@
 		name="imagen"
 		id="floating_filled"
 		accept=".jpg, .jpeg, .png"
-		class="text-yellow-400"
+		class="bg-blue-400 mb-2"
 		placeholder=" "
 	/>
 	{#if form?.errors}
@@ -308,6 +308,6 @@
 	{#if producto.status}
 	<small class="label-text-alt text-green-400">producto creado!</small>
 	{/if}
-	<input type="submit" class="btn btn-warning" />
+	<input type="submit" class="btn btn-primary btn-sm my-5" />
 </div>
 </form>
