@@ -44,23 +44,15 @@ export async function load({ params, locals }) {
 	//detalle is a function that grab the html to send in the email body
 	const detalle = htmlTable(orden)
 
-	//transporter.sendMail in return object, for show quick the final order to the user
-	try {
+	
+	//transporter.sendMail in return	 object, for show quick the final order to the user
 		return {
-			envio: await transporter.sendMail({
-				from: `"Equisol" ${env.MAIL_USER}`, // email address sender
+			orden, envio: await transporter.sendMail({
+				from: `"Equisol" ${env.NODE_MAILER_USER}`, // email address sender
 				to: [`${orden.cliente.email}`, `${orden.cliente.asesor}`], // Email, client and seller
 				subject: `Numero de orden de compra: ${orden.id}`, // Order number in a subject
 				//text: `${JSON.stringify(orden,null,2)}`, // plain text body
 				html: detalle, // html body
-			}).messageId,
-			orden
+			})
 		}
-	} catch (error) {
-		if(!orden){
-			return {error:"No se pudo crear la orden, Favor contactenos"}
-		}
-		console.log("Fallo en transporter.sendMail. El Correo no se envió")
-		return {envio: "No fue posible enviar el email"}
-	}
 }

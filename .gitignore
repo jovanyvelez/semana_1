@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /build
+/static/tienda/
+/src/routes/correo
 /.svelte-kit
 /package
 .env
