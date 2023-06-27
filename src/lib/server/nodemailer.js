@@ -3,11 +3,11 @@ import { env } from '$env/dynamic/private';
 
 // create reusable transporter object using the default SMTP transport
 export let transporter = nodemailer.createTransport({
-	host: env.HOST,
-	port: env.PUERTO,
+	host: env.NODE_MAILER_HOST,
+	port: env.NODE_MAILER_PORT,
 	secure: true, // true si uso puerto 465, falso para otros puertos
 	auth: {
-		user: env.MAIL_USER, 
-		pass: env.MAIL_PASS 
+		user: env.NODE_MAILER_USER, 
+		pass: env.NODE_MAILER_PASS 
 	}
 });
