@@ -78,7 +78,7 @@ export const load = async ({ locals }) => {
 	);
 
 	prisma.$disconnect();
-
+	console.log(env.CLOUD_IMAGES);
 	return { elResultado, user, images: env.CLOUD_IMAGES };
 };
 

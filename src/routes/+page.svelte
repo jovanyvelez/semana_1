@@ -1,7 +1,6 @@
 <script>
 	export let data;
 	const { elResultado, role, images } = data;
-	console.log(images)
 </script>
 
 {#if role === 'cliente'}
