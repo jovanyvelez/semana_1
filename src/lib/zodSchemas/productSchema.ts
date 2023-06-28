@@ -10,7 +10,7 @@ export const productSchema = z
 		description: z
 		.string({ required_error: 'Se requiere descripcion' })
 		.min(3, { message: 'Se requiere minimo de 3 caracteres' })
-		.max(32)
+		.max(100)
 		.trim(),
 		brand: z
 		.string({ required_error: 'Se requiere Marca' })
