@@ -12,7 +12,11 @@
 					<div class="card glass w-48 sm:w-64 bg-base-100 shadow-xl mx-2 mt-2">
 						<figure><img src={images==='true' ? product.image[0].secureUrl:product.image[0].publicId} alt="article" class="" /></figure>
 						<div class="card-body">
-							<h2 class="card-title">{product.name.trim()}</h2>
+							<h2 class="card-title font-bold">{product.name.trim()}</h2>
+							<p>{product.description}</p>
+							<div class="card-actions justify-end">
+								<small class="font-bold">code: {product.code}</small>
+							</div>
 						</div>
 					</div>
 				{/each}

@@ -15,9 +15,11 @@
 	<img src={ images==='true' ? imgCloud : imgServer } alt="article" class="w-45" />
 	
 	
-	<div class="container1 no-select" style="--watermark-content: '{nombre}'">
+	<div class="container1 no-select" style="--watermark-content: '{nombre}'">	
+		<small><span class="font-bold">code:</span> {product.code}</small>
 		<p class="">{product.name}</p>
-		<p class=""><strong>${product.price[0].price1}</strong></p>
+		<p class="text-slate-700"><strong>${product.price[0].price1.toLocaleString('es-CO', { currency: 'COP', minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></p>
+		<p><small class="font-semibold">{product.description}</small></p>
 		<p>disponible: {product.quantity}</p>
 	</div>
 	

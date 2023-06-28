@@ -35,7 +35,7 @@
 	console.log(datos)
 </script>
 
-<div class="flex flex-wrap justify-center mb-3">
+<div class="flex flex-wrap justify-center mb-3 mt-5">
 	<div class="input-group w-4/12 flex justify-center">
 		<input
 			type="text"
@@ -44,13 +44,13 @@
 			bind:value={texto}
 			on:keydown={handleKeyDown}
 		/>
-		<button class="btn btn-square" on:click={() => handleClick()}>
+		<button class="btn btn-square bg-blue-200" on:click={() => handleClick()}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-6 w-6"
 				fill="none"
 				viewBox="0 0 24 24"
-				stroke="currentColor"
+				stroke="#1877F2"
 				><path
 					stroke-linecap="round"
 					stroke-linejoin="round"
