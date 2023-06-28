@@ -5,7 +5,7 @@ export const productSchema = z
 		name: z
 		.string({ required_error: 'Se requiere nombre' })
 		.min(3, { message: 'Se requiere minimo de 3 caracteres' })
-		.max(48, { message: 'Debe usar menos de 49 caracteres' })
+		.max(100, { message: 'Debe usar menos de 49 caracteres' })
 		.trim(),
 		description: z
 		.string({ required_error: 'Se requiere descripcion' })
@@ -15,12 +15,12 @@ export const productSchema = z
 		brand: z
 		.string({ required_error: 'Se requiere Marca' })
 		.min(3, { message: 'Se requiere minimo de 3 caracteres' })
-		.max(32)
+		.max(100)
 		.trim(),
 		code: z
 		.string({ required_error: 'Se requiero Codigo' })
 		.min(1, { message: 'Se requiere codigo' })
-		.max(16)
+		.max(50)
 		.trim(),
 		quantity: z
 		.number({required_error:'Se requiere cantidad'})
