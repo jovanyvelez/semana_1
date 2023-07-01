@@ -7,7 +7,8 @@ export const GET = async ({ url }: { url: any }): Promise<Response> => {
 		where: {
 			OR: [
 				{ name: { contains: searchTerm, mode: 'insensitive' } },
-				{ code: { contains: searchTerm, mode: 'insensitive' } }
+				{ code: { contains: searchTerm, mode: 'insensitive' } },
+				{ description: { contains: searchTerm, mode: 'insensitive' } }
 			]
 		},
 		select: {
