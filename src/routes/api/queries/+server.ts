@@ -15,13 +15,16 @@ export const GET = async ({ url }: { url: any }): Promise<Response> => {
 			id: true,
 			name: true,
 			quantity: true,
+			description:true,
+			code:true,
+			categoryId: true,
 			price: {
 				select: { price1: true }
 			},
 
 			image: {
 				where: { name: 'main' },
-				select: { secureUrl: true }
+				select: { secureUrl: true, publicId:true }
 			}
 		}
 	});
