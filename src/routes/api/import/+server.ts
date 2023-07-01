@@ -1,5 +1,6 @@
 
-export const POST = async ({request}:{request:any}):Promise<Response> => {
+
+export const POST = async ({request}:{request:Request}):Promise<Response> => {
     
     const temporal = await request.json();
   

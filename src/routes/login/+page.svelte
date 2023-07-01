@@ -10,6 +10,7 @@
 
 <!--SuperDebug data={$form}/-->
 <div class="px-4 pt-8 flex flex-col w-full place-items-center">
+	<img src="menu.png" alt="">
 	<form action="?/login" method="post">
 		<div>
 			<label for="email" class="label">Email</label>

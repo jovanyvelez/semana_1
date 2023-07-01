@@ -8,12 +8,6 @@ import { userSchema } from '$lib/zodSchemas/schemas.js';
 
 export const load = async () => {
 	
-	//const session = await locals.auth.validate();
-	
-	//if (session) throw redirect(302, '/');
-
-	//const user = auth.deleteUser('Q7RD8tt47Qy3RKV');
-
 	const tipos = await prisma.roles.findMany();
 
 	const form = await superValidate(userSchema);

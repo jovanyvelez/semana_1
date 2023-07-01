@@ -161,7 +161,7 @@ export const actions = {
 				fs.copyFile(outputFilePath, `static/${result.public_id}.${result.format}`);
 			}else{
 				fs.copyFile(outputFilePath, `build/client/${result.public_id}.${result.format}`);
-				fs.rename(`build/client/${result.public_id}.${result.format}`,'build/client/tienda/tmp.png')
+				//fs.rename(`build/client/${result.public_id}.${result.format}`,'build/client/tienda/tmp.png')
 			}
 			
 		} catch (error) {
