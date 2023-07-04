@@ -15,7 +15,7 @@
 	<img src={ images==='true' ? imgCloud : imgServer } alt="article" class="w-45" />
 	
 	
-	<div class="container1" style="--watermark-content: '{nombre}'">	
+	<div class="container1 no-select " style="--watermark-content: '{nombre}'">	
 		<small><span class="font-bold">code:</span> {product.code}</small>
 		<p class="">{product.name}</p>
 		<p class="text-slate-700"><strong>${product.price[0].price1.toLocaleString('es-CO', { currency: 'COP', minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></p>
@@ -23,10 +23,12 @@
 		<p>disponible: {product.quantity}</p>
 	</div>
 	
-	{#key product}
-		<ButonQuantity product = {{...product, qtyBuy:0}} mostrarCosto={false}/>
-	{/key}
+	<div class="z-30">
+		{#key product}
+			<ButonQuantity product = {{...product, qtyBuy:0}} mostrarCosto={false}/>
+		{/key}
 	</div>
+</div>
 
 <style>
 	.container1 {
@@ -35,7 +37,7 @@
 
 .container1::after {
   content: var(--watermark-content);
-  z-index: 9999;
+  z-index: 20;
   position: absolute;
   bottom: 0;
   left: 50%;
