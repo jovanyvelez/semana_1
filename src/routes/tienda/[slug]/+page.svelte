@@ -32,7 +32,7 @@
 	} else {
 		datos = products;
 	}
-	console.log(datos)
+
 </script>
 
 <div class="flex flex-wrap justify-center mb-3 mt-5">
@@ -76,7 +76,7 @@
 
 
 {#if pags.length > 1 && paginacion}
-	<div class="flex justify-center pagination">
+	<div class="flex flex-wrap justify-center pagination">
 		{#each pags as pag, i}
 			<a
 				class="mx-1 {i + 1 === data.page ? 'active' : ''}"
@@ -92,11 +92,11 @@
 
 <style>
 	.pagination a {
-		padding: 1rem;
+		padding: 0.5rem;
 		margin: 0.5rem;
 		border-radius: 0.5rem;
 		border: 0.1rem #a4a4a4 solid;
-		font-size: 1.6rem;
+		font-size: 0.8rem;
 		font-family: Helvetica, Arial, sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
