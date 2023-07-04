@@ -89,7 +89,7 @@
 {/if}
 
 
-
+<!---->
 <style>
 	.pagination a {
 		padding: 0.5rem;
