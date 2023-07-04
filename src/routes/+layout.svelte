@@ -32,4 +32,7 @@
 	:global(h2) {
 		@apply text-2xl font-semibold w-full mb-2;
 	}
+	:global(body) {
+		@apply bg-slate-100
+	}
 </style>
