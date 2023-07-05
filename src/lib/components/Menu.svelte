@@ -27,10 +27,9 @@
 	
 	<div class="hidden md:block flex-none mr-10 text-xl">
 		<ul class="menu menu-horizontal px-1">
-			
 			<li class="hover:text-blue-600"><a href="/"><span >Inicio</span></a></li>
 			<li class="hover:text-blue-600"><a href="/tienda">Tienda</a></li>
-			<li class="hover:text-blue-600"><a href="/carrito">Comprar</a></li>
+			<!--li class="hover:text-blue-600"><a href="/carrito">Comprar</a></li-->
 			<li class="hover:text-blue-00"><a on:click={()=>{salir = true}} href="/login"><li>Salir</a></li>
 		</ul>
 	</div>
@@ -59,7 +58,7 @@
 		<ul class="menu menu-vertical px-1">
 			<li><a on:click={buttonToggle} href="/">Inicio</a></li>
 			<li><a on:click={buttonToggle} href="/tienda">Tienda</a></li>
-			<li><a on:click={buttonToggle} href="/carrito">Comprar</a></li>
+			<!--li><a on:click={buttonToggle} href="/carrito">Comprar</a></li-->
 			<li><a on:click={()=>{salir = true}} href="/login"><li>Salir</a></li>
 		</ul>
 	</div>

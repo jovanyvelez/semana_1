@@ -5,7 +5,7 @@ import type { Actions } from './$types';
 
 export async function load({ locals }) {
 	const usuario = locals.user;
-	if (!usuario) throw redirect(303, '/login');
+	if (!usuario) throw redirect(303, '/');
 	return { usuario };
 }
 

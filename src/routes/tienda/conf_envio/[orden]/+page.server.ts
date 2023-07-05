@@ -2,9 +2,14 @@ import { env } from '$env/dynamic/private';
 import { prisma } from '$lib/server/prisma';
 import { transporter } from '$lib/server/nodemailer';
 import { htmlTable } from '$lib/server/utils/htmlMail.js';
+import { redirect } from '@sveltejs/kit';
 
 export async function load({ params, locals }) {
 
+	
+	const user = locals.user
+	if(!user) throw redirect(302,'/')
+	
 	//Get email from locals
 	const {email} = locals.user;
 

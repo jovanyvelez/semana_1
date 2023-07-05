@@ -5,7 +5,7 @@ import { env } from '$env/dynamic/private';
 export async function load({ params, locals }) {
 
 	const user = locals.user;
-	if (!user) throw redirect(303, '/login');
+	if (!user) throw redirect(303, '/');
 
 	type mQuery = {
 		param: string;
