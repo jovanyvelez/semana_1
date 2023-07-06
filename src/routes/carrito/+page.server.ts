@@ -3,7 +3,7 @@ import { redirect, type Actions } from '@sveltejs/kit';
 
 export const load = async ({locals}) => {
 	
-	const user =  locals.user;
+	const user =   locals.user;
 	if(!user) throw redirect(303, '/');
 	
 	const {discount, name} = locals.user

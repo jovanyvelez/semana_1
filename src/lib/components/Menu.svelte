@@ -30,7 +30,7 @@
 			<li class="hover:text-blue-600"><a href="/"><span >Inicio</span></a></li>
 			<li class="hover:text-blue-600"><a href="/tienda">Tienda</a></li>
 			<!--li class="hover:text-blue-600"><a href="/carrito">Comprar</a></li-->
-			<li class="hover:text-blue-00"><a on:click={()=>{salir = true}} href="/login"><li>Salir</a></li>
+			<li class="hover:text-blue-00"><a data-sveltekit-preload-data="tap" on:click={()=>{salir = true}} href="/login"><li>Salir</a></li>
 		</ul>
 	</div>
 	

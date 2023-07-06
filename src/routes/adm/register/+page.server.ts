@@ -1,4 +1,4 @@
-import { fail, type Actions, type Action } from '@sveltejs/kit';
+import { fail, type Actions, type Action, redirect } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma.js';
 import { superValidate, message } from 'sveltekit-superforms/server';
 import { userSchema } from '$lib/zodSchemas/schemas.js';
@@ -6,8 +6,11 @@ import { userSchema } from '$lib/zodSchemas/schemas.js';
 
 
 
-export const load = async () => {
+export const load = async ({locals}) => {
 	
+	const user =   locals.user;
+	if(!user) throw redirect(303, '/'); 
+
 	const tipos = await prisma.roles.findMany();
 
 	const form = await superValidate(userSchema);
@@ -24,7 +27,7 @@ const register: Action = async ({ request }) => {
 	if (!form.valid) return fail(400, {form});
 	//const newUser = JSON.parse(JSON.stringify(form.data));
 	try {
-		const user = await prisma.usuario.create({
+			await prisma.usuario.create({
 			data: {
 				name:form.data.name as string,
 				email: form.data.email as string,
