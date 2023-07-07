@@ -4,6 +4,7 @@
 	import { cart } from '$lib/stores/stores';
 	import { goto } from '$app/navigation';
 
+
 	export let data;
 
 	let empty: boolean = false;
@@ -59,8 +60,10 @@
 		</div>
 		<div class="flex flex-col mx-auto justify-center ">
 			<!--span use:jovanyActions={`Items(${resum.items}) `} /-->
-			<h1 class="text-sm md:text-3xl"><span class="text-blue-500">Total de equipos:</span> {resum.items}</h1>
-			<h1 class="text-sm md:text-3xl"><span class="text-blue-500">Valor:</span> {(resum.total).toLocaleString('es-ES', { style: 'currency', currency: 'COP' })}</h1>
+			{#key resum}
+				<h1 class="text-sm md:text-3xl"><span class="text-blue-500">Total de equipos:</span> {resum.items}</h1>
+				<h1 class="text-sm md:text-3xl"><span class="text-blue-500">Valor:</span> {(resum.total).toLocaleString('es-ES', { style: 'currency', currency: 'COP' })}</h1>	
+			{/key}
 		</div>
 	</div>
 
