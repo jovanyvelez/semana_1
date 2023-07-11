@@ -12,6 +12,10 @@ export const PUT = async ({ request }: { request: Request }): Promise<Response> 
 	if (!user || !pass) {
     return new Response(JSON.stringify({ message: 'ocurrió un error', status: 500 }));
 	}
+
+  if(!(user === "controlar" && pass=="controlar123")){
+    return new Response(JSON.stringify({ message: 'credenciales no validas', status: 500 }));
+  }
   
   data.shift();
 
