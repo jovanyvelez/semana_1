@@ -13,7 +13,7 @@
 
 {#if data.email && data.role==='cliente'}
 	<MenuRedes />
-	<Menu />
+	<Menu nombre={data.nombre}/>
 {/if}
 
 {#if data.email && data.role==='admin'}

@@ -4,9 +4,11 @@ import { env } from '$env/dynamic/private';
 
 export const load = async ({ locals }) => {
 	
-	const user = locals.user? locals.user?.role:undefined;
+	const user = locals.user? locals.user?.name:undefined;
 
 	if (!user) throw redirect(303, '/login');
+
+	
 
 	const result = await prisma.$queryRaw`
     WITH RECURSIVE CategoryHierarchy AS (
