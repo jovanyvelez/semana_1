@@ -26,7 +26,7 @@
 			items: $cart.reduce((a, c) => a + c.qtyBuy, 0)
 		});
 </script>
-
+<h1 class="my-16 text-center">TU CARRITO</h1>
 {#if !empty}
 	<div class="flex flex-col md:flex-row w-10/12 mx-auto">
 		<div class="">

@@ -12,10 +12,11 @@ export async function load({ params, locals }) {
 	
 	//Get email from locals
 	const {email} = locals.user;
-
+	const ordenNumber = parseInt(params.orden, 10);
+	console.log(typeof ordenNumber)
 	//Query order with the route parameter
 	const orden = await prisma.OrdenDePedido.findUnique({
-		where: { id: parseInt(params.orden, 10) },
+		where: { id: ordenNumber },
 		
 		include: {
 			cliente: {
@@ -58,6 +59,6 @@ export async function load({ params, locals }) {
 				subject: `Numero de orden de compra: ${orden.id}`, // Order number in a subject
 				//text: `${JSON.stringify(orden,null,2)}`, // plain text body
 				html: detalle, // html body
-			})
+			}) 
 		}
 }
