@@ -1,9 +1,22 @@
+import { prisma } from '$lib/server/prisma';
+
+
 export const GET = async ({ url }: { url: any }): Promise<Response> => {
 	let myDepartment = String(url.searchParams.get('departamento')).trim();
-	const response = await fetch(
-		`https://www.datos.gov.co/resource/xdk5-pm3f.json?$select=municipio,c_digo_dane_del_municipio&$where=departamento%20like%20%27${myDepartment}%27&$order=municipio ASC,c_digo_dane_del_municipio ASC`
-	);
-	const data = await response.json();
+	const departamento:string = myDepartment;
+	let ciudades;
+	try {
+		ciudades = await prisma.departamentos.findFirst({
+			where:{departamento},
+			select:{ciudad:{orderBy:{ciudad:'asc'}}}
+		});
+		console.log(JSON.stringify(ciudades,null,2));
+	} catch (error) {
+		console.error('Error al obtener los departamentos:', error);
+	} finally {
+		await prisma.$disconnect();
+	}
+	
 
-	return new Response(JSON.stringify(data), { status: 201 });
+	return new Response(JSON.stringify(ciudades.ciudad), { status: 201 });
 };

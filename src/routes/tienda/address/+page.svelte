@@ -20,12 +20,15 @@
 	let municipio = '';
 	let municipios = [];
 	let order = {};
+	let ciudadOrder = {}
 
 	order.userId = data.usuario.id;
 	order.zone = data.usuario.zone
 	order.bussinessUnit = data.usuario.bussinessUnit;
 	order.address = data.usuario.address;
 	order.discount = data.usuario.discount;
+	order.codVendedor = data.usuario.codVendedor;
+
 	$: completeAddress = `${address1} ${address2} # ${address3}-${address4}`;
 
 	const saveOrder = ({cancel, formData})=>{
@@ -33,18 +36,19 @@
 		order.address = completeAddress;
 		order.notes = notes;
 		order.departamento = departamento;
-		order.municipio = municipio;
+		order.municipio = municipio
+		order.codMunicipio = ciudadOrder[0].codigo;
 		order.products = $cart.map((e) => {
 			return { 	id: e.id, 
 						quantity:e.quantity, 
 						cantidad: e.qtyBuy, 
-						price: e.price[0].price1, 
+						price: e.price[0].price1*(1-data.usuario.discount/100), 
 						category: e.categoryId };
 		});
 
 		formData.append('products', JSON.stringify(order,null,2))
 
-
+		
 		//cancel();
 
 		return async({result})=>{
@@ -58,10 +62,14 @@
 		}
 	}
 
-	async function handleSubmit(event) {
+	async function handleSubmit() {
 		const response = await fetch(`/api/ciudad?departamento=${departamento}`);
 		const data = await response.json();
 		municipios = data;
+	}
+
+	function asignarCiudad(){
+		ciudadOrder = municipios.filter(objeto => objeto.ciudad.includes(municipio));
 	}
 
 	onMount(async () => {
@@ -91,7 +99,7 @@
 			on:change={() => handleSubmit()}
 			name="departamento"
 		>
-			{#each departamentos as departamento (departamento.c_digo_dane_del_departamento)}
+			{#each departamentos as departamento (departamento.codigo)}
 				<option value={departamento.departamento}>
 					{departamento.departamento}
 				</option>
@@ -105,12 +113,13 @@
 			<select
 				id="municipio"
 				bind:value={municipio}
+				on:change={() => asignarCiudad()}
 				class="select select-primary select-xs md:select-md w-11/12 mb-5"
 				name="municipio"
 			>
-				{#each municipios as municipio (municipio.c_digo_dane_del_municipio)}
-					<option value={municipio.municipio}>
-						{municipio.municipio}
+				{#each municipios as municipio (municipio.codigo)}
+					<option value={municipio.ciudad}>
+						{municipio.ciudad}
 					</option>
 				{/each}
 			</select>

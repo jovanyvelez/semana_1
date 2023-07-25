@@ -19,12 +19,23 @@ model Usuario {
   city          String
   address       String
   bussinessUnit String?
-  zoneid          Int
-  asesor        String?
+  zoneid        Int
+  asesor        String
   discount      Float?          @default(0)
+  codVendedor   String
   orders        OrdenDePedido[]
+  vendedor      sellers         @relation(fields: [codVendedor], references: [code])
   role          Roles           @relation(fields: [roleId], references: [id])
   zone          Zones           @relation(fields: [zoneid], references: [id])
+
+  @@index([asesor], map: "fki_Usuario_asesor_fkey")
+}
+
+model sellers {
+  id       Int       @id @default(autoincrement())
+  code     String    @unique
+  email    String
+  clientes Usuario[]
 }
 
 model Roles {
@@ -46,6 +57,9 @@ model OrdenDePedido {
   updatedAt        DateTime                @updatedAt
   notes            String?
   valor            Float?
+  Procesado        Boolean                 @default(false)
+  codMunicipio     String?
+  codVendedor      String?
   cliente          Usuario                 @relation(fields: [userId], references: [id])
   productos        OrdenDePedidoProducto[]
 }
@@ -89,6 +103,7 @@ model Product {
   categoryId      String
   createdAt       DateTime                @default(now())
   updatedAt       DateTime                @updatedAt
+  tax             Float                   @default(19.0)
   image           Image[]
   ordenesDePedido OrdenDePedidoProducto[]
   price           Price[]
@@ -130,11 +145,11 @@ model CcostoZoneCategories {
 }
 
 model Zones {
-  id         Int        @id @default(autoincrement())
+  id         Int                    @id @default(autoincrement())
   name       String
-  zone       String     @unique
-  usuarios   Usuario[]
+  zone       String                 @unique
   categorias CcostoZoneCategories[]
+  usuarios   Usuario[]
 }
 
 model AuthUser {
@@ -142,4 +157,19 @@ model AuthUser {
   email         String @unique
   passwordHash  String
   userAuthToken String @unique
+}
+
+model departamentos {
+  id           String     @id @default(uuid())
+  departamento String
+  codigo       String
+  ciudad       ciudades[]
+}
+
+model ciudades {
+  id             String        @id @default(uuid())
+  ciudad         String
+  codigo         String
+  departamentoId String
+  departamento   departamentos @relation(fields: [departamentoId], references: [id])
 }

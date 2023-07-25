@@ -39,6 +39,7 @@ export const authtenticateUser = async (event: RequestEvent) => {
 			bussinessUnit: true,
 			zone: true,
 			discount: true,
+			codVendedor: true,
 			role: {
 				select: {
 					name: true

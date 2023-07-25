@@ -18,7 +18,7 @@ export const actions = {
 
 		const productos = JSON.parse(datos.get('products') as string);
 
-		const { userId, departamento, municipio, notes, discount,address, products, zone, bussinessUnit } =
+		const { userId, departamento, municipio, notes, discount,address, products,codMunicipio, zone, bussinessUnit, codVendedor } =
 			productos;
 
 
@@ -80,7 +80,6 @@ export const actions = {
 			
 			let valor = newProducts.reduce( (a,c)=> a + (c.precio*c.cantidad),0);
 			
-			valor = valor*(1-(discount/100));
 			
 			//Se crea la orden de pedido
 			const finalOrder = await prisma.OrdenDePedido.create({
@@ -89,6 +88,8 @@ export const actions = {
 					direccionEntrega: address,
 					ciudadEnt: municipio,
 					departamentoEnt: departamento,
+					codMunicipio,
+					codVendedor,
 					notes,
 					valor
 				}
