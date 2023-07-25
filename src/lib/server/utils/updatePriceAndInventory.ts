@@ -1,6 +1,12 @@
 import { prisma } from '$lib/server/prisma';
 
-export const actualizarProductos = async (productosActualizar) => {
+interface Producto {
+    code: string;
+    quantity: number;
+    price1: number;
+}
+
+export const actualizarProductos = async (productosActualizar:Producto[]) => {
 	const productosNoActualizados = [];
 
 	for (const producto of productosActualizar) {

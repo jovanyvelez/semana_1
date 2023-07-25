@@ -1,6 +1,6 @@
 
-import { arrayBienFormado } from '$lib/server/utils/check_data';
-import { actualizarProductos } from '$lib/server/utils/updatePriceAndInventory';
+import { arrayBienFormado1 } from '$lib/server/utils/check_data';
+import { updateOrders } from '$lib/server/utils/updateStateOrders';
 
 export const PUT = async ({ request }: { request: Request }): Promise<Response> => {
 
@@ -26,12 +26,12 @@ export const PUT = async ({ request }: { request: Request }): Promise<Response> 
   
   data.shift();
 
-  if(!arrayBienFormado(data)){
+  if(!arrayBienFormado1(data)){
     return new Response(JSON.stringify({ message: 'json mal formado', status: 500 }));
 
   }
 
-  const result = await actualizarProductos(data);
+  const result = await updateOrders(data);
 
   if(result.length === 0){
     return new Response(JSON.stringify({ success: 'Actualizado', status: 201 }));
