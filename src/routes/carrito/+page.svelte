@@ -73,8 +73,8 @@
 		</h1>
 		<div class="flex justify-end">
 			<label class="label cursor-pointer">
-				<input type="checkbox" bind:checked={yes}  class="checkbox mr-1" />
-				<span class=" font-semibold text-slate-400 text-sm lg:text-lg">Acepto los terminos y condiciones</span> 
+				<input type="checkbox" bind:checked={yes}  class="checkbox mr-1 border-primary" />
+				<span class=" font-semibold text-slate-600 text-sm lg:text-lg">Acepto los terminos y condiciones</span> 
 			</label>
 		</div>
 	</div>

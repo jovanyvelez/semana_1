@@ -65,7 +65,8 @@
 					>
 				</a>
 				<ul class="p-2 bg-base-100">
-					<!--li><a href="/adm/register">Crear</a></li-->
+					<li><a href="/adm/sellers">Crear Vendedores</a></li>
+					<li><a href="/adm/users">Crear Clientes</a></li>
 					<li><a href="/adm/auth">Contraseña</a></li>
 				</ul>
 			</li>
@@ -142,6 +143,8 @@
 				</a>
 				<ul class="p-2 bg-base-100">
 					<!--li><a href="/adm/register">Crear</a></li-->
+					<li><a on:click={buttonToggle}  href="/adm/sellers">Crear Vendedores</a></li>
+					<li><a on:click={buttonToggle}  href="/adm/users">Crear Clientes</a></li>
 					<li><a on:click={buttonToggle} href="/adm/auth">Contraseña</a></li>
 				</ul>
 			</li>

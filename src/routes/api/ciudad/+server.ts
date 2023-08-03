@@ -10,7 +10,6 @@ export const GET = async ({ url }: { url: any }): Promise<Response> => {
 			where:{departamento},
 			select:{ciudad:{orderBy:{ciudad:'asc'}}}
 		});
-		console.log(JSON.stringify(ciudades,null,2));
 	} catch (error) {
 		console.error('Error al obtener los departamentos:', error);
 	} finally {

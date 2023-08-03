@@ -1,5 +1,6 @@
 <script>
 	import Category from '$lib/components/Category.svelte';
+	import Pie from '$lib/components/Pie.svelte';
 	export let data;
 </script>
 
@@ -8,3 +9,5 @@
 		<Category {category} />
 	</div>
 {/each}
+
+<Pie />

@@ -1,5 +1,6 @@
 <script>
 	import Marcas from '$lib/components/Marcas.svelte';
+	import Pie from '$lib/components/Pie.svelte';
 	export let data;
 	const { elResultado, role, images } = data;
 </script>
@@ -39,3 +40,4 @@
 	{/if}
 {/if}
 
+<Pie />

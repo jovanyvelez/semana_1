@@ -2,10 +2,13 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	import { userSchema } from '$lib/zodSchemas/schemas.js';
 
+	const userCreateSchema = userSchema.extend({
+		id: userSchema.shape.id.optional()
+	});
+
 	export let data;
-	const {departamentos} = data;
+	const { departamentos } = data;
 	const { tipos } = data;
-	
 
 	type Municipio = {
 		municipio: string;
@@ -14,33 +17,26 @@
 
 	let municipios: Array<Municipio> = [];
 
-	const { form, errors, enhance, delayed, message, reset, constraints } = superForm(
-		data.form,
-		{
-			validators: userSchema,
-			applyAction: true,
-  			invalidateAll: true,
-  			resetForm: true,
-		}
-	);
+	const { form, errors, enhance, delayed, message, reset, constraints } = superForm(data.form, {
+		resetForm: true,
+		validators: userCreateSchema,
+	});
 
 	async function handleSubmit() {
 		const response = await fetch(`/api/ciudad?departamento=${$form.Departament}`);
 		const data = await response.json();
 		municipios = data;
+		console.log(municipios);
 	}
-
-
 </script>
 
 <div class="px-4 pt-8 flex flex-col w-full place-items-center">
 	<h1 class="text-center">Registro</h1>
 	{#if $message}
-  		<h3>{$message}</h3>
+		<h3>{$message}</h3>
 	{/if}
-
 	<form action="?/register" method="post" use:enhance>
-		<input type="hidden" name="id" bind:value={$form.id}>
+		<input type="hidden" name="id" bind:value={$form.id} />
 		<label for="name" class="label">Nombre/Razón Social</label>
 		<div class="flex flex-wrap">
 			<input
@@ -124,7 +120,7 @@
 				class="select select-xs max-w-xs mb-3"
 			>
 				<option disabled>tipo</option>
-				<option value="CC" >CC</option>
+				<option value="CC">CC</option>
 				<option value="CA">CA</option>
 				<option value="PA">PA</option>
 				<option value="NIT">NIT</option>
@@ -230,7 +226,7 @@
 			<input
 				id="zona"
 				name="zoneid"
-				type="text"
+				type="number"
 				bind:value={$form.zoneid}
 				{...$constraints.zoneid}
 				class="input {$errors?.zoneid
@@ -283,8 +279,9 @@
 
 		<div class="w-full flex justify-center mt-5">
 			<button type="submit" class="btn btn-sm">Registrar</button>
+			{#if $delayed}
+				<span class="text-4xl">Un momento</span>
+			{/if}
 		</div>
 	</form>
 </div>
-
-

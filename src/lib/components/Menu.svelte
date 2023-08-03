@@ -18,12 +18,13 @@
 		<div class=" ml-10">
 			<img src="menu.png" alt="logo equisol" />
 		</div>
-
+		
 		<div class=" hidden md:flex justify-start text-xl">
 			<ul class="menu menu-horizontal px-1">
 				<li class="hover:text-blue-600"><a href="/"><span>Inicio</span></a></li>
 				<li class="hover:text-blue-600"><a href="/tienda">Tienda</a></li>
 				<!--li class="hover:text-blue-600"><a href="/carrito">Comprar</a></li-->
+				
 				<li class="hover:text-blue-00">
 					<a
 						data-sveltekit-preload-data="tap"
