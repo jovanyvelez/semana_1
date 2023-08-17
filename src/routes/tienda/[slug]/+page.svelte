@@ -3,7 +3,7 @@
 	import Item from '$lib/components/Item.svelte';
 
 	export let data;
-	const {images} = data;
+	const {images, user} = data;
 	console.log(images)
 
 	let products = [];
@@ -66,7 +66,7 @@
 {#if datos.length > 0}
 	<div class="flex flex-wrap justify-center">
 		{#each datos as product (product.id)}
-			<Item {product} {images} nombre={data.cliente.name} />
+			<Item {product} {images} nombre={data.cliente.name} user={data.cliente.id}/>
 		{/each}
 	</div>
 {:else}

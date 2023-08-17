@@ -10,6 +10,7 @@ const userCreateSchema = userSchema.extend({
 
 export const load = async ({locals, params}) => {
 	
+	//Usuario traido del inicio de seccion
 	const user =   locals.user;
 	if(!user) throw redirect(303, '/'); 	
 
@@ -30,10 +31,14 @@ export const load = async ({locals, params}) => {
 		}
 	}
 
-	console.log(usersDb)
-
+	//form con los tipos de datos
 	const form = await superValidate(usersDb,userCreateSchema);
+
+	//consulta a la bd de los tipos de usuarios para ingreso de nuevo usuario
 	const tipos = await prisma.roles.findMany();
+
+	//Traemos toda la tabla de vendedores para asignación de asesor
+	const vendedores = await prisma.sellers.findMany()
 	
 	let departamentos;
 	
@@ -55,26 +60,33 @@ export const load = async ({locals, params}) => {
 	}
 	
 	return {
-		form, tipos, departamentos
+		form, tipos, departamentos, vendedores
 	};
 };
 
 const register: Action = async ({ request }) => {
 	
-	console.log("En la accion registro");
+	//Traemos todos los datos del formulario web
 	const datos = await request.formData();
+
+	//Asignamos los datos enviados a un form de superform
 	const form = await superValidate(datos, userCreateSchema);
-	let registro = form.data;
+
+	//let registro = form.data;
+
+	//Prueba de verificacion de los datos colectados
 	console.log(form.data);
 	if(!form.valid) return fail(400, {form})
 	
-	const vendedor = await prisma.sellers.findFirst({
-		where: { email: registro.asesor },
-	});
+	/*const vendedor = await prisma.sellers.findFirst({
+		*/
 	
-	registro = {...registro, codVendedor: vendedor.code}
+	//Agregamos los datos del código del vendedor
+	//registro = {...registro, codVendedor: vendedor.code}
 	
-	console.log(registro)
+	//compruebo que todo esté OK
+	//console.log(registro)
+	//return message(form, 'Usuario creado!');
 	
 	try {
 			await prisma.usuario.create({
@@ -88,9 +100,10 @@ const register: Action = async ({ request }) => {
 					city: form.data.city,
 					address: form.data.address,
 					bussinessUnit: form.data.bussinessUnit,
+					discount:form.data.discount,
 					zoneid: form.data.zoneid,
 					asesor:form.data.asesor,
-					codVendedor: vendedor?.code
+					codVendedor: form.data.codVendedor
 				}
 
 		})

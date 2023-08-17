@@ -18,9 +18,10 @@ export const userSchema = z
 		bussinessUnit: z.string({required_error:"Se requiere ccosto"})
 			.max(2,{message:"No puede ser mas de 2 caracteres"}).trim().default('6'),
 		zoneid: z.number().int(),
-		discount: z.number().lte(100).nonnegative(),
+		discount: z.number().nonnegative(),
 		asesor: z.string().email().min(5),
 		roleId: z.number().lte(3).nonnegative().default(1),
+		codVendedor: z.string().max(2),
 	});
 
 	export const createUserSchema = z

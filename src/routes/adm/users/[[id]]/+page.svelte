@@ -1,25 +1,38 @@
 <script lang="ts">
 	import { superForm } from 'sveltekit-superforms/client';
 	import { userSchema } from '$lib/zodSchemas/schemas.js';
+	
+	
+	export let data;
+	const { departamentos, vendedores } = data;
 
 	const userCreateSchema = userSchema.extend({
-		id: userSchema.shape.id.optional()
+		id: userSchema.shape.id.optional(),
+		codVendedor: userSchema.shape.codVendedor.optional()
 	});
+	
+	type Municipio = {
+		municipio: string,
+		codigo: string,
+	};
+	
+	type Vendedor = {
+		code: string,
+		email: string
+		id: number,
+	}
+	
+	let vendedor: Vendedor | undefined = undefined;
 
-	export let data;
-	const { departamentos } = data;
 	const { tipos } = data;
 
-	type Municipio = {
-		municipio: string;
-		codigo: string;
-	};
+
 
 	let municipios: Array<Municipio> = [];
 
 	const { form, errors, enhance, delayed, message, reset, constraints } = superForm(data.form, {
 		resetForm: true,
-		validators: userCreateSchema,
+		validators: userCreateSchema
 	});
 
 	async function handleSubmit() {
@@ -28,7 +41,19 @@
 		municipios = data;
 		console.log(municipios);
 	}
+
+	function ejecutar() {
+		vendedor = vendedores.find((option) => option.email === $form.asesor)
+		if ( vendedor === undefined) {
+			$form.asesor = '';
+			$form.codVendedor = '';
+		}else{
+			$form.codVendedor = vendedor.code;
+		}
+
+	}
 </script>
+
 
 <div class="px-4 pt-8 flex flex-col w-full place-items-center">
 	<h1 class="text-center">Registro</h1>
@@ -36,7 +61,8 @@
 		<h3>{$message}</h3>
 	{/if}
 	<form action="?/register" method="post" use:enhance>
-		<input type="hidden" name="id" bind:value={$form.id} />
+		<input type="hidden" name="codVendedor" bind:value={$form.codVendedor}>
+		<input type="hidden" name="id" bind:value={$form.id} on:focusout={ejecutar} />
 		<label for="name" class="label">Nombre/Razón Social</label>
 		<div class="flex flex-wrap">
 			<input
@@ -257,7 +283,7 @@
 			<small class="text-error">{$errors.discount}</small>
 		{/if}
 
-		<div>
+		<!--div>
 			<label for="asesors" class="label">Email Asesor</label>
 			<input
 				id="asesors"
@@ -271,14 +297,36 @@
 					? 'input-error'
 					: 'input-bordered'}  input-bordered input-sm rounded-md w-full max-w-xs"
 			/>
-		</div>
+		</div-->
 
+		<div>
+			<input
+				list="sellers"
+				type="email"
+				id="asesors"
+				name="asesor"
+				placeholder="Ingrese correo valido"
+				data-invalid={$errors.asesor}
+				{...$constraints.asesor}
+				class="input {$errors?.asesor
+					? 'input-error'
+					: 'input-bordered'}  input-bordered input-sm rounded-md w-full max-w-xs"
+				bind:value={$form.asesor}
+				on:blur={ejecutar}
+			/>
+			<datalist id="sellers">
+				{#each vendedores as vendedor}
+					<option value={vendedor.email} />
+				{/each}
+			</datalist>
+		</div>
 		{#if $errors.asesor}
 			<small class="text-error">{$errors.asesor}</small>
 		{/if}
 
 		<div class="w-full flex justify-center mt-5">
 			<button type="submit" class="btn btn-sm">Registrar</button>
+
 			{#if $delayed}
 				<span class="text-4xl">Un momento</span>
 			{/if}

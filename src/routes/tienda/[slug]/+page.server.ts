@@ -25,6 +25,7 @@ export async function load({ params, locals }) {
 	const cliente = await prisma.usuario.findUnique({
 		where: { email: user.email },
 		select: {
+			id:true,
 			name: true,
 			phone: true,
 			email: true,

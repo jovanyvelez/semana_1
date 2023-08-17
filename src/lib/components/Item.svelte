@@ -6,6 +6,7 @@
 	const imgServer = product.image[0].publicId.split('/').pop();
 	export let nombre: string;
 	export let images: string;
+	export let user: number;
 	//class="container1 no-select" style="--watermark-content: '{nombre}'"
 </script>
 
@@ -16,7 +17,7 @@
 	<img src={images === 'true' ? imgCloud : imgServer} alt="article" class="w-45" />
 
 	<div>
-		<small><span class="font-bold">code:</span> {product.code}</small>
+		<small><span class="font-bold">code:</span> {product.code}-{user}</small>
 		<p class="mx-2 text-sm font-bold">{product.name}</p>
 		<p class="text-slate-700">
 			<strong
