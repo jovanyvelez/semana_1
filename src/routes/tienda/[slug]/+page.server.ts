@@ -89,7 +89,8 @@ export async function load({ params, locals }) {
 			image: {
 				where: { name: 'main' },
 				select: { secureUrl: true, publicId:true }
-			}
+			},
+			tax:true,
 		},
 		skip: pageSize * (query.page - 1),
 		take: pageSize

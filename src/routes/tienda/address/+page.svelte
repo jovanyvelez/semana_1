@@ -14,13 +14,15 @@
 	let address3 = '';
 	let address4 = '';
 	let notes = '';
-
+	
 	let departamento = '';
 	let departamentos = [];
 	let municipio = '';
 	let municipios = [];
 	let order = {};
 	let ciudadOrder = {}
+
+	let disabled  = false;
 
 	order.userId = data.usuario.id;
 	order.zone = data.usuario.zone
@@ -41,8 +43,8 @@
 		order.products = $cart.map((e) => {
 			return { 	id: e.id, 
 						quantity:e.quantity, 
-						cantidad: e.qtyBuy, 
-						price: e.price[0].price1*(1-data.usuario.discount/100), 
+						cantidad: e.qtyBuy,
+						price: e.price[0].price1*(1-data.usuario.discount/100)*(1+e.tax/100), 
 						category: e.categoryId };
 		});
 
@@ -170,8 +172,8 @@
 			{/if}
 		</div>
 		<div class="flex justify-center mt-3">
-
-			<button type="submit" class="btn btn-primary btn-sm mr-5 w-2/12">Finalizar compra </button>
+			<button type="submit" on:click={()=>disabled = true}
+			class={disabled ? 'btn btn-primary btn-sm mr-5 w-2/12 btn-disabled':'btn btn-primary btn-sm mr-5 w-2/12'}>Continuar </button>
 		</div>
 	
 </form>

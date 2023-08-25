@@ -5,6 +5,7 @@
 
 
 	export let data;
+	const {discount} = data;
 
 	let empty: boolean = false;
 	let yes = false;
@@ -34,13 +35,15 @@
 
 <h1 class="my-16 text-center">TU CARRITO</h1>
 {#if !empty}
-<div class="grid grid-cols-1 sm:grid-cols-4 mx-5 sm:mx-10 lg:mx-36 my-5">
-	<div class="flex justify-center items-center"></div>
+<div class="grid grid-cols-1 sm:grid-cols-6 mx-5 my-5">
+	<div class="flex justify-center items-center font-semibold">Producto</div>
 	<div class="hidden sm:block text-center font-semibold">Precio</div>
+	<div class="hidden sm:block text-center font-semibold">Descuento</div>
+	<div class="hidden sm:block text-center font-semibold">Iva</div>
 	<div class="hidden sm:block text-center font-semibold">Cantidad</div>
 	<div class="hidden sm:block text-center font-semibold">Total</div>
 	{#each $cart as product (product.id)}
-		<div class="divider sm:col-span-4 mx-10"></div>
+		<div class="divider sm:col-span-6 mx-10"></div>
 		<div class="flex flex-col items-center justify-center">
 			<img src={product.image[0].secureUrl} alt="product" class="w-20 mb-2 mx-3" />
 			<div class="flex">
@@ -53,11 +56,17 @@
 		<div class="flex justify-center items-center">
 			${(product.price[0].price1).toLocaleString()}
 		</div>
+		<div class="flex justify-center items-center">
+			${(product.price[0].price1*(discount/100)).toLocaleString()}
+		</div>
+		<div class="flex justify-center items-center">
+			${(product.price[0].price1*(1-discount/100)*(product.tax/100)).toLocaleString()}
+		</div>
 		<div class="flex flex-col justify-center items-center">
 			<ButonQuantity {product} />
 		</div>
 		<div class="flex justify-center items-center">
-			${(product.price[0].price1*product.qtyBuy).toLocaleString()}
+			${(product.price[0].price1*(1-discount/100)*(1+product.tax/100)*product.qtyBuy).toLocaleString()}
 		</div>
 		<div class="divider  mx-10  sm:col-span-4"></div>
 	{/each}

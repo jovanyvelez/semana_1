@@ -154,9 +154,6 @@ export const actions = {
 		}
 		
 		try {
-			console.log("vamos aqui")
-			console.log(outputFilePath)
-	
 			if(env.NODE_ENV === "development"){
 				fs.copyFile(outputFilePath, `static/${result.public_id}.${result.format}`);
 			}else{

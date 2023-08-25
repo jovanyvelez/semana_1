@@ -29,6 +29,7 @@ export interface Product {
     categoryId    : string,
     price         : [Price],
     image         : Image,
+    tax           : number,
   };
 
   export interface ProductStore extends Product{

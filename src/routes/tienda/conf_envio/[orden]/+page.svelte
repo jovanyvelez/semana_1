@@ -30,7 +30,7 @@
 			<p>Email: {orden.cliente.email}</p>
 		</div>
 
-		<div class="p-5 h-screen mx-5">
+		<div class="p-5  mx-5">
 			<div class="overflow-auto rounded-lg shadow hidden md:block">
 				<table class="w-full">
 					<thead class="bg-gray-100 border-b-2 border-gray-200">
@@ -80,6 +80,7 @@
 						</tr>
 					</tbody>
 				</table>
+				
 			</div>
 
 			<h2 class="text-lg md:hidden">Resumen de Pedido</h2>
@@ -119,4 +120,4 @@
 		<p>Numero de orden no existe</p>
 	{/if}
 {/await}
-
+<div class="flex justify-center btn btn-primary w-1/12 mx-auto"><a href="/" class="mx-auto">Volver al comercio</a></div>
