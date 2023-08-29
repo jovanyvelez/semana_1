@@ -44,25 +44,25 @@ model Roles {
   User Usuario[]
 }
 
-model OrdenDePedido {
-  id               Int                     @id @default(autoincrement())
-  fecha            DateTime                @default(now())
-  userId           Int
-  direccionEntrega String
-  ciudadEnt        String
-  departamentoEnt  String
-  metodoPago       String?
-  estado           String?
-  fechaDespacho    DateTime?
-  updatedAt        DateTime                @updatedAt
-  notes            String?
-  valor            Float?
-  Procesado        Boolean                 @default(false)
-  codMunicipio     String?
-  codVendedor      String?
-  cliente          Usuario                 @relation(fields: [userId], references: [id])
-  productos        OrdenDePedidoProducto[]
-}
+  model OrdenDePedido {
+    id               Int                     @id @default(autoincrement())
+    fecha            DateTime                @default(now())
+    userId           Int
+    direccionEntrega String
+    ciudadEnt        String
+    departamentoEnt  String
+    metodoPago       String?
+    estado           String?
+    fechaDespacho    DateTime?
+    updatedAt        DateTime                @updatedAt
+    notes            String?
+    valor            Float?
+    Procesado        Boolean                 @default(false)
+    codMunicipio     String?
+    codVendedor      String?
+    cliente          Usuario                 @relation(fields: [userId], references: [id])
+    productos        OrdenDePedidoProducto[]
+  }
 
 model OrdenDePedidoProducto {
   ordenDePedidoId Int
@@ -104,6 +104,7 @@ model Product {
   createdAt       DateTime                @default(now())
   updatedAt       DateTime                @updatedAt
   tax             Float                   @default(19.0)
+  rootCategory    String?
   image           Image[]
   ordenesDePedido OrdenDePedidoProducto[]
   price           Price[]
