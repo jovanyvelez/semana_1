@@ -149,7 +149,7 @@ export const actions = {
 
 		
         let result;
-/*
+
 		try {
 			result = await uploadImage(outputFilePath);
 		} catch (err) {
@@ -168,11 +168,11 @@ export const actions = {
 		} catch (error) {
 			return fail(400, { message: 'No se creó backup de imagen', error:'no se guardo backup de imagen' });
 		}
-*/
+
 		const { price1, price2, price3, imagen, ...rest } = product;
 
 		let newProduct;
-		console.log(JSON.stringify(rest,null,2))
+
 
 		try {
 			newProduct = await prisma.product.create({
