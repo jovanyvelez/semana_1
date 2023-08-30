@@ -33,6 +33,9 @@ export const productSchema = z
 		categoryId: z
 		.string({required_error:'Debes escoger una categoria'}).uuid({message:'Error'}),
 
+		rootCategory:z
+		.string({required_error:'Debes escoger una categoria raiz'}).uuid({message:'Error'}),
+
 		imagen: z
 		.object({
 			size: z.number({required_error:"Debe incluir archivo"})

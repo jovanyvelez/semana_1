@@ -26,7 +26,9 @@
 	let categoria: string | undefined;
 
 	let allSections: StoreSections[] = data.categories;
+
 	let sections: StoreSections[] = [];
+
 	let sections1: StoreSections[] | undefined = [];
 	let sections2 = [];
 	let selected: StoreSections;
@@ -57,7 +59,7 @@
 		}
 
 		formData.append('categoryId', categoria ? categoria : '');
-
+		formData.append('rootCategory', selected ? selected.id : '');
 		return async ({ result }) => {
 			if (result.type === 'success') {
 				producto = {
@@ -311,3 +313,5 @@
 	<input type="submit" class="btn btn-primary btn-sm my-5" />
 </div>
 </form>
+
+<pre>{JSON.stringify(selected,null,2)}</pre>

@@ -3,56 +3,31 @@ import { prisma } from '$lib/server/prisma';
 import { env } from '$env/dynamic/private';
 
 export const load = async ({ locals }) => {
-	
-	const user = locals.user? locals.user?.name:undefined;
+	const user = locals.user ? locals.user?.name : undefined;
 
 	if (!user) throw redirect(303, '/login');
 
-	
-
-	const result = await prisma.$queryRaw`
-    WITH RECURSIVE CategoryHierarchy AS (
-        SELECT "id", "name", "padreId", "id" AS rootId, 0 AS level
-        FROM "Category"
-        WHERE "padreId" IS NULL
-        
-        UNION ALL
-        
-        SELECT c."id", c."name", c."padreId", ch.rootId, ch.level + 1
-        FROM "Category" c
-        INNER JOIN CategoryHierarchy ch ON c."padreId" = ch."id"
-    )
-    SELECT 
-        ch."id", 
-        ch."name", 
-        ch."padreId",
-        ch.level,
-        (SELECT "name" FROM "Category" WHERE "id" = ch.rootId) AS rootName,
-		(SELECT "id" FROM "Category" WHERE "id" = ch.rootId) AS rootid
-    FROM CategoryHierarchy ch
-    ORDER BY ch.rootId, ch.level;
-`;
-
-	const categoriesAndDescendants = result.reduce((result, objeto) => {
-		const existingItem = result.find((item) => item.rootid === objeto.rootid);
-		if (existingItem) {
-			existingItem.ids.push(objeto.id);
-		} else {
-			result.push({ rootid: objeto.rootid, name: objeto.name, ids: [objeto.id] });
+	const root = await prisma.category.findMany({
+		where: {
+			padreId: null
+		},
+		select: {
+			id: true,
+			name: true
 		}
-		return result;
-	}, []);
+	});
+	prisma.$disconnect();
 
 	const elResultado = await Promise.all(
-		categoriesAndDescendants.map(async (obj) => {
-			const quantity = await prisma.Product.count({
+		root.map(async (obj) => {
+			const quantity = await prisma.product.count({
 				where: {
-					categoryId: { in: obj.ids }
+					rootCategory: obj.id
 				}
 			});
 
 			let skip;
-			let take = 4;
+			const take = 4;
 
 			if (quantity < 5) {
 				skip = 0;
@@ -63,15 +38,18 @@ export const load = async ({ locals }) => {
 				}
 			}
 
-			let values;
-
-			values = await prisma.Product.findMany({
+			const values = await prisma.product.findMany({
 				take,
 				skip,
 				where: {
-					categoryId: { in: obj.ids }
+					rootCategory: obj.id
 				},
-				include: { image: true }
+				select: {
+					id: true,
+					name: true,
+					code: true,
+					image: true
+				}
 			});
 
 			obj['products'] = values;
@@ -80,10 +58,8 @@ export const load = async ({ locals }) => {
 	);
 
 	prisma.$disconnect();
-	
+
 	return { elResultado, user, images: env.CLOUD_IMAGES };
 };
 
-
 //Actions
-

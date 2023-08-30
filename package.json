@@ -25,7 +25,7 @@
 		"postcss": "^8.4.23",
 		"prettier": "^2.8.8",
 		"prettier-plugin-svelte": "^2.10.1",
-		"prisma": "^5.0.0",
+		"prisma": "^5.2.0",
 		"svelte": "^3.59.1",
 		"svelte-check": "^3.4.3",
 		"sveltekit-superforms": "1.0.0-rc.2",
@@ -37,9 +37,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@prisma/client": "^5.0.0",
+		"@prisma/client": "^5.2.0",
 		"bcrypt": "^5.1.0",
-		
 		"cloudinary": "^1.37.2",
 		"dotenv": "^16.1.4",
 		"fs-extra": "^11.1.1",

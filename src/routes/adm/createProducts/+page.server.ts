@@ -57,6 +57,7 @@ export const actions = {
 			promo: data.get('promo') ? true : false,
 			active: data.get('active') ? true : false,
 			categoryId: data.get('categoryId'),
+			rootCategory: data.get('rootCategory'),
 			imagen: data.get('imagen') as Blob
 		};
 		try {
@@ -68,6 +69,9 @@ export const actions = {
 				console.log(errors);
 				const { imagen, ...data } = product;
 				return fail(400, { data, errors, error:'tipo de datos incorrectos' });
+			}else{
+				console.log("Error de validación de datos")
+				return fail(400, { data, error:'tipo de datos incorrectos' });
 			}
 		}
 
@@ -145,7 +149,7 @@ export const actions = {
 
 		
         let result;
-
+/*
 		try {
 			result = await uploadImage(outputFilePath);
 		} catch (err) {
@@ -164,19 +168,22 @@ export const actions = {
 		} catch (error) {
 			return fail(400, { message: 'No se creó backup de imagen', error:'no se guardo backup de imagen' });
 		}
-
+*/
 		const { price1, price2, price3, imagen, ...rest } = product;
 
 		let newProduct;
+		console.log(JSON.stringify(rest,null,2))
 
 		try {
-			newProduct = await prisma.Product.create({
+			newProduct = await prisma.product.create({
 				data: rest
 			});
 		} catch (error) {
+			console.log("No se creo nada!!")
 			console.error(error);
+			return fail(400, { message: 'No se grabó en db', error:'nada Grabado' })
 		}
-
+		return { success: true };
 		try {
 			const newImage = await prisma.Image.create({
 				data: 

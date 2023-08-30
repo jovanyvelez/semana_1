@@ -22,7 +22,7 @@
 
 	{#if elResultado.length > 0}
 		<div class="flex flex-wrap justify-center">
-			{#each elResultado as category (category.rootid)}
+			{#each elResultado as category (category.id)}
 				<h1 class="my-10 ml-12 text-blue-600">{category.name}</h1>
 				{#each category.products as product (product.id)}
 					<div class="card glass w-96 sm:w-64 bg-base-100 shadow-xl mx-2 mt-2">

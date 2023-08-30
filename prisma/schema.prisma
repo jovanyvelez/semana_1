@@ -101,10 +101,10 @@ model Product {
   promo           Boolean
   active          Boolean
   categoryId      String
+  rootCategory    String?
   createdAt       DateTime                @default(now())
   updatedAt       DateTime                @updatedAt
   tax             Float                   @default(19.0)
-  rootCategory    String?
   image           Image[]
   ordenesDePedido OrdenDePedidoProducto[]
   price           Price[]
