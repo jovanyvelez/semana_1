@@ -19,6 +19,7 @@ export const GET = async ({ url }: { url: any }): Promise<Response> => {
 			code:true,
 			categoryId: true,
 			rootCategory:true,
+			tax:true,
 			price: {
 				select: { price1: true }
 			},
