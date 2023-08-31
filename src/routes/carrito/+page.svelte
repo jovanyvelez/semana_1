@@ -9,7 +9,7 @@
 
 	let empty: boolean = false;
 	let yes = false;
-	let resum: { total: number; items: number };
+	let resum: { total: number, items: number, iva:number,subtotal:number };
 
 	const outOfCart = (product:string) => {
 		const index = $cart.findIndex((x) => x.id === product);
@@ -26,10 +26,18 @@
 	$: $cart,
 		(resum = {
 			total: $cart.reduce(
+				(a, c) => a + c.qtyBuy * c.price[0].price1 * (1 - data.discount / 100)*(1+c.tax/100),
+				0
+			),
+			items: $cart.reduce((a, c) => a + c.qtyBuy, 0),
+			iva: $cart.reduce(
+				(a, c) => a + c.qtyBuy * c.price[0].price1 *(1 - data.discount / 100)*(c.tax/100),
+				0
+			),
+			subtotal: $cart.reduce(
 				(a, c) => a + c.qtyBuy * c.price[0].price1 * (1 - data.discount / 100),
 				0
 			),
-			items: $cart.reduce((a, c) => a + c.qtyBuy, 0)
 		});
 </script>
 
@@ -75,7 +83,9 @@
 <div class="flex justify-end mx-5 sm:mx-16 lg:mx-36 my-0">
 	<div class="flex flex-col mr-10 text-end">
 		{#key resum}
-			<h1 class="text-slate-500 text-sm lg:text-lg">SUBTOTAL: {(resum.total).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</h1>	
+			<h1 class="text-slate-500 text-sm lg:text-lg">SUBTOTAL: {(resum.subtotal).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</h1>	
+			<h1 class="text-slate-500 text-sm lg:text-lg">IMPUESTO: {(resum.iva).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</h1>
+			<h1 class="text-slate-500 text-sm lg:text-lg">TOTAL: {(resum.total).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</h1>
 		{/key}
 		<h1 class="text-slate-400 text-sm lg:text-lg">
 			Iva incluido. Envío y descuentos agregados en el checkout
