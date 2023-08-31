@@ -76,7 +76,7 @@
 		<div class="flex justify-center items-center">
 			{(product.price[0].price1*(1-discount/100)*(1+product.tax/100)*product.qtyBuy).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
 		</div>
-		<div class="divider  mx-10  sm:col-span-4"></div>
+		<div class="divider  mx-10  sm:col-span-6"></div>
 	{/each}
 </div>
 
