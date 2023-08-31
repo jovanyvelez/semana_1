@@ -59,6 +59,8 @@ export async function load({ params, locals }) {
         ch."id"
     FROM CategoryHierarchy ch
     ORDER BY ch.rootId, ch.level`;
+
+
 	let categorias;
 
 	if (resultado.length === 0) {
@@ -82,6 +84,7 @@ export async function load({ params, locals }) {
 			description:true,
 			code:true,
 			categoryId: true,
+			rootCategory:true,
 			price: {
 				select: { price1: true }
 			},

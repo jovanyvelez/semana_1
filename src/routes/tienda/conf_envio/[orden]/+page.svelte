@@ -4,15 +4,8 @@
 </script>
 
 
-
-
-
 {#await data.envio}
 	<h3 class="text-warning">Un momento por favor</h3>
-	<span class="loading loading-bars loading-xs" />
-	<span class="loading loading-bars loading-sm" />
-	<span class="loading loading-bars loading-md" />
-	<span class="loading loading-bars loading-lg" />
 {:then envio}
 	{#if orden}
 		<div class="flex flex-col mx-auto md:ml-5 p-5 w-11/12 md:w-2/3 md:border m-2">
@@ -51,18 +44,10 @@
 									{producto.cantidad}
 								</td>
 								<td class="p-3 text-sm text-gray-700 whitespace-nowrap"
-									>{producto.precio.toLocaleString('en-US', {
-										style: 'currency',
-										currency: 'USD',
-										precision: 2
-									})}</td
+									>{producto.precio.toLocaleString()}€</td
 								>
 								<td class="p-3 text-sm text-gray-700 whitespace-nowrap"
-									>{(producto.precio * producto.cantidad).toLocaleString('en-US', {
-										style: 'currency',
-										currency: 'USD',
-										precision: 2
-									})}</td
+									>{(producto.precio * producto.cantidad).toLocaleString()}€</td
 								>
 							</tr>
 						{/each}
@@ -71,16 +56,11 @@
 							<td />
 							<td class="p-3 text-sm text-gray-700 whitespace-nowrap font-semibold">Total</td>
 							<td class="p-3 text-sm text-gray-700 whitespace-nowrap font-semibold"
-								>{orden.valor.toLocaleString('en-US', {
-									style: 'currency',
-									currency: 'USD',
-									precision: 2
-								})}</td
+								>{orden.valor.toLocaleString()}€</td
 							>
 						</tr>
 					</tbody>
 				</table>
-				
 			</div>
 
 			<h2 class="text-lg md:hidden">Resumen de Pedido</h2>
@@ -92,32 +72,23 @@
 							Cantidad: {producto.cantidad}
 						</div>
 						<div class="text-sm font-medium text-black">
-							Precio: {producto.precio.toLocaleString('en-US', {
-								style: 'currency',
-								currency: 'USD',
-								precision: 2
-							})}
+							Precio: {producto.precio.toLocaleString()}€
 						</div>
 						<div class="text-sm font-medium text-black">
-							Total: {(producto.precio * producto.cantidad).toLocaleString('en-US', {
-								style: 'currency',
-								currency: 'USD',
-								precision: 2
-							})}
+							Total: {(producto.precio * producto.cantidad).toLocaleString()}€
 						</div>
 					</div>
 				{/each}
 			</div>
 			<div class="flex md:hidden my-5 ">
-				<span class="font-semibold mr-1">El valor total de tu orden es de: </span> {orden.valor.toLocaleString('en-US', {
-					style: 'currency',
-					currency: 'USD',
-					precision: 2
-				})}
+				<span class="font-semibold mr-1">El valor total de tu orden es de: </span> {orden.valor.toLocaleString()}€
 			</div>
 		</div>
 	{:else}
 		<p>Numero de orden no existe</p>
 	{/if}
 {/await}
+<h1 class="text-slate-400 text-sm lg:text-lg text-center">
+	Iva incluido. Envío y descuentos agregados en el checkout
+</h1>
 <div class="flex justify-center btn btn-primary w-1/12 mx-auto"><a href="/" class="mx-auto">Volver al comercio</a></div>

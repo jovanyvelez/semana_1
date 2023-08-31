@@ -77,7 +77,7 @@ export const actions = {
 
 		try {
 			//Verificamos que este código de producto no exista
-			const codigo = await prisma.Product.findFirst({
+			const codigo = await prisma.product.findFirst({
 				where: {
 					code: product.code
 				}

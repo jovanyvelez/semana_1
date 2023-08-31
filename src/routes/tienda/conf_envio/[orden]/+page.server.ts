@@ -15,7 +15,7 @@ export async function load({ params, locals }) {
 	const ordenNumber = parseInt(params.orden, 10);
 	console.log(typeof ordenNumber)
 	//Query order with the route parameter
-	const orden = await prisma.OrdenDePedido.findUnique({
+	const orden = await prisma.ordenDePedido.findUnique({
 		where: { id: ordenNumber },
 		
 		include: {
@@ -42,7 +42,7 @@ export async function load({ params, locals }) {
 
 		}
 	});
-
+	prisma.$disconnect();
 	//If user not auth
 	
 	if(email !== orden.cliente.email) return { error: 'User not found' }

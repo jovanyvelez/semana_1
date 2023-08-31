@@ -4,7 +4,7 @@
 
 	export let data;
 	const {images, user} = data;
-	console.log(images)
+
 
 	let products = [];
 	let datos = [];
@@ -21,7 +21,7 @@
 	}
 
 	const handleClick = async () => {
-		const textos = `'/api/queries?searchTerm='${texto}'`;
+		//const textos = `'/api/queries?searchTerm='${texto}'`;
 		const response = await fetch(`/api/queries?searchTerm=${texto}`);
 		products = await response.json();
 		paginacion = false;

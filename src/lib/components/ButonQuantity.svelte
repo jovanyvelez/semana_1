@@ -25,7 +25,6 @@
 			$cart = [...$cart, item];
 			show = false;
 		} else {
-			console.log($cart[index].qtyBuy)
 			if($cart[index].qtyBuy===$cart[index].quantity) {
 				disabled = true; 
 				return

@@ -18,6 +18,7 @@ export const GET = async ({ url }: { url: any }): Promise<Response> => {
 			description:true,
 			code:true,
 			categoryId: true,
+			rootCategory:true,
 			price: {
 				select: { price1: true }
 			},

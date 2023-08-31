@@ -8,11 +8,7 @@ const detail = (productos) => {
             <span style="font-weight: 600;">Cantidad: </span> ${detalle.cantidad}
           </div>
           <div>
-            <p><span>Total    : </span> ${(detalle.precio * detalle.cantidad).toLocaleString('en-US', {
-              style: 'currency',
-              currency: 'USD',
-              precision: 2
-              })}
+            <p><span>Total    : </span> ${(detalle.precio * detalle.cantidad).toLocaleString()}€
             </p>
           </div>
         </div>
@@ -117,11 +113,7 @@ const detail = (productos) => {
                         </h3>
                           ${detalle}
                         <div>
-                          <span style="font-weight: 600;">Total Compra: ${orden.valor.toLocaleString('en-US', {
-                            style: 'currency',
-                            currency: 'USD',
-                            precision: 2
-                            })} </span>
+                          <span style="font-weight: 600;">Total Compra: ${orden.valor.toLocaleString()}€ </span>
                         </div>
                       </td>
                     </tr>
