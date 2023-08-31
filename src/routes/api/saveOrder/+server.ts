@@ -12,7 +12,7 @@ export const GET = async ({ url }: { url: any }): Promise<Response> => {
     const products = product.map(e => {
       const data = { CodCC: e.ccosto,
                      CodProducto: e.producto.code,
-                     ValorUnitario:e.precio*(1-e.producto.tax/100),
+                     ValorUnitario:e.precio/(1+e.producto.tax/100),
                      Cantidad: e.cantidad,
                      Iva: e.producto.tax}
       return data;  
