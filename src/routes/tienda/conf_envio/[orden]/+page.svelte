@@ -1,6 +1,6 @@
 <script>
 	export let data;
-	const { orden, envio } = data;
+	const { orden, envio, } = data;
 </script>
 
 
@@ -29,8 +29,9 @@
 					<thead class="bg-gray-100 border-b-2 border-gray-200">
 						<tr>
 							<th class="p-3 text-sm font-semibold tracking-wide text-left">Producto</th>
-							<th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Cantidad</th>
 							<th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Precio</th>
+							<th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Iva</th>
+							<th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Cantidad</th>
 							<th class="w-32 p-3 text-sm font-semibold tracking-wide text-left">Total</th>
 						</tr>
 					</thead>
@@ -41,22 +42,26 @@
 									{producto.producto.name}
 								</td>
 								<td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-									{producto.cantidad}
+									{(producto.precio/(1+producto.producto.tax/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+								</td>
+								<td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+									{((producto.precio/(1+producto.producto.tax/100))*(producto.producto.tax/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
 								</td>
 								<td class="p-3 text-sm text-gray-700 whitespace-nowrap"
-									>{producto.precio.toLocaleString()}€</td
+									>{producto.cantidad}</td
 								>
 								<td class="p-3 text-sm text-gray-700 whitespace-nowrap"
-									>{(producto.precio * producto.cantidad).toLocaleString()}€</td
+									>{(producto.precio * producto.cantidad).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</td
 								>
 							</tr>
 						{/each}
 						<tr>
 							<th />
 							<td />
+							<td />
 							<td class="p-3 text-sm text-gray-700 whitespace-nowrap font-semibold">Total</td>
 							<td class="p-3 text-sm text-gray-700 whitespace-nowrap font-semibold"
-								>{orden.valor.toLocaleString()}€</td
+								>{orden.valor.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</td
 							>
 						</tr>
 					</tbody>
@@ -69,19 +74,22 @@
 					<div class="bg-white space-y-3 p-4 rounded-lg shadow-md">
 						<div class="text-sm text-primary text-center">{producto.producto.name}</div>
 						<div class="text-sm font-medium text-black">
+							Precio: {(producto.precio/(1+producto.producto.tax/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+						</div>
+						<div class="text-sm font-medium text-black">
+							Iva: {((producto.precio/(1+producto.producto.tax/100))*(producto.producto.tax/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+						</div>
+						<div class="text-sm font-medium text-black">
 							Cantidad: {producto.cantidad}
 						</div>
 						<div class="text-sm font-medium text-black">
-							Precio: {producto.precio.toLocaleString()}€
-						</div>
-						<div class="text-sm font-medium text-black">
-							Total: {(producto.precio * producto.cantidad).toLocaleString()}€
+							Total: {(producto.precio * producto.cantidad).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
 						</div>
 					</div>
 				{/each}
 			</div>
 			<div class="flex md:hidden my-5 ">
-				<span class="font-semibold mr-1">El valor total de tu orden es de: </span> {orden.valor.toLocaleString()}€
+				<span class="font-semibold mr-1">El valor total de tu orden es de: </span> {orden.valor.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
 			</div>
 		</div>
 	{:else}

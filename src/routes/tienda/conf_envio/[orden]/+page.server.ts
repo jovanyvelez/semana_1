@@ -34,7 +34,8 @@ export async function load({ params, locals }) {
 				include:{
 					producto:{
 						select:{
-							name:true
+							name:true,
+							tax:true
 						}
 					}
 				}

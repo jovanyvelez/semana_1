@@ -14,7 +14,7 @@ export const authtenticateUser = async (event: RequestEvent) => {
     if (!session) {
 		return null;
 	}
-    const authUser = await prisma.AuthUser.findUnique({
+    const authUser = await prisma.authUser.findUnique({
         where: { userAuthToken: session },
 		select: { email: true }
 	});
@@ -24,7 +24,7 @@ export const authtenticateUser = async (event: RequestEvent) => {
         return null
 	}
 
-	const user = await prisma.Usuario.findUnique({
+	const user = await prisma.usuario.findUnique({
 		where: { email: authUser.email },
 		select: {
 			id: true,

@@ -2,13 +2,24 @@ const detail = (productos) => {
     const chain = productos.reduce((acum,detalle) => {
       return acum  + `
       <div style="margin-top: 16px; margin-bottom: 16px; background-color: #f8fafc; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)">
-        <p style="text-align: center; font-size: 18px; font-weight: 600">${detalle.producto.name}</p>
+        <p style="text-align: center; font-size: 18px; font-weight: 600; color: blue">${detalle.producto.name}</p>
         <div style="margin-left: 40px; margin-right: 40px; font-size: 18px;">
+          
+        <div>
+            <p><span style="font-weight: 600;">Valor unit: </span> ${(detalle.precio / (1+detalle.producto.tax/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+            </p>
+        </div>
+
+        <div>
+            <p><span style="font-weight: 600" ;>Iva       : </span> ${((detalle.precio / (1+detalle.producto.tax/100))*(detalle.producto.tax/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+            </p>
+        </div>
+
           <div style="max-width: fit-content; border-radius: 6px">
             <span style="font-weight: 600;">Cantidad: </span> ${detalle.cantidad}
           </div>
           <div>
-            <p><span>Total    : </span> ${(detalle.precio * detalle.cantidad).toLocaleString()}€
+            <p><span style="font-weight: 600;">Total    : </span> ${(detalle.precio * detalle.cantidad).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
             </p>
           </div>
         </div>
@@ -113,7 +124,7 @@ const detail = (productos) => {
                         </h3>
                           ${detalle}
                         <div>
-                          <span style="font-weight: 600;">Total Compra: ${orden.valor.toLocaleString()}€ </span>
+                          <span style="font-weight: 600;">Total Compra: ${orden.valor.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })} </span>
                         </div>
                       </td>
                     </tr>
