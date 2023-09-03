@@ -6,7 +6,7 @@
 		<p>Lunes - Viernes / 7:00 AM - 5:00 PM</p>
 	</div>
 
-	<div class="flex flex-col">
+	<div class="flex flex-col text-xs sm:text-base">
 		<p class="my-5 font-bold">INFORMACION</p>
 		<a href="https://equisol.com.co/nosotros">Nosotros</a>
 		<a href="https://equisol.com.co/contacto-equisol">Contacto</a>
