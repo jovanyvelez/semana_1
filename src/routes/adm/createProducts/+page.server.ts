@@ -183,7 +183,7 @@ export const actions = {
 			console.error(error);
 			return fail(400, { message: 'No se grabó en db', error:'nada Grabado' })
 		}
-		return { success: true };
+		
 		try {
 			const newImage = await prisma.Image.create({
 				data: 
@@ -210,7 +210,4 @@ export const actions = {
 		return { success: true };
 	},
 
-	delete: async ({ cookies, request }) => {
-		const data = await request.formData();
-	}
 };

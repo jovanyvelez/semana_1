@@ -1,4 +1,4 @@
-import { redirect, type Actions, fail } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
 import { env } from '$env/dynamic/private';
 

@@ -10,6 +10,8 @@
 		<p class="my-5 font-bold">INFORMACION</p>
 		<a href="https://equisol.com.co/nosotros">Nosotros</a>
 		<a href="https://equisol.com.co/contacto-equisol">Contacto</a>
+		<a href="/api/disclaimer">Disclaimer</a>
+		<a href="/api/aviso">Aviso de privacidad</a>
 		<a href="https://equisol.com.co/wp-content/uploads/2023/03/Politica-Habeas-Data-EQUISOL-EQUIPOS-Y-SOLUCIONES.pdf">
 			Politica de tratamiento de datos</a>
 		<a href="https://acrobat.adobe.com/link/review?uri=urn:aaid:scds:US:44078405-f1b1-31a3-b76d-224b8d27927a">Términos de garantía</a>
