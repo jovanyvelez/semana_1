@@ -83,7 +83,7 @@ export const actions = {
 			
 			//Se crea la orden de pedido
 			
-			const finalOrder = await prisma.OrdenDePedido.create({
+			const finalOrder = await prisma.ordenDePedido.create({
 				data: {
 					userId,
 					direccionEntrega: address,
@@ -102,7 +102,7 @@ export const actions = {
 			});
 
 			try {
-				const detalle = await prisma.OrdenDePedidoProducto.createMany({
+				const detalle = await prisma.ordenDePedidoProducto.createMany({
 					data: newProducts
 				});
 			} catch (error) {
