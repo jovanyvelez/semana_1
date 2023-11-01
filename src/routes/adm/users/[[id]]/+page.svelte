@@ -39,7 +39,6 @@
 		const response = await fetch(`/api/ciudad?departamento=${$form.Departament}`);
 		const data = await response.json();
 		municipios = data;
-		console.log(municipios);
 	}
 
 	function ejecutar() {

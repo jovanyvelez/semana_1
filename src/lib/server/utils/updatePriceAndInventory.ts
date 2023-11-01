@@ -13,7 +13,7 @@ export const actualizarProductos = async (productosActualizar:Producto[]) => {
 		const code = producto.code;
 		const quantity = producto.quantity;
 		const price1 = producto.price1;
-		if (code && quantity && price1) {
+		if (code && typeof quantity === "number" && typeof price1 === "number") {
 			const existeProducto = await prisma.product.findUnique({ where: { code } });
 
 			if (existeProducto) {
