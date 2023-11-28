@@ -6,6 +6,8 @@ import { urlMain } from '$lib/server/utils/urlvalidate';
 export const handle: Handle = async ({ event, resolve}) => {
 
 	event.locals.user = await authtenticateUser(event);
+	
+	const appData = urlMain();
 
 	// Apply CORS header for API routes
 	if (event.url.pathname.startsWith('/api/import')) {
@@ -27,7 +29,7 @@ export const handle: Handle = async ({ event, resolve}) => {
 		response.headers.append('Access-Control-Allow-Origin', `*`);
 	}
 
-	const appData = urlMain();
+	
 
 	if (appData.appkey) {
 		return new Response(appData.text, appData.status);
