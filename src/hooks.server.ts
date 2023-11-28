@@ -1,8 +1,9 @@
 import type { Handle } from '@sveltejs/kit';
 
 import { authtenticateUser } from '$lib/server/utils/auth';
+import { urlMain } from '$lib/server/utils/urlvalidate';
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const handle: Handle = async ({ event, resolve}) => {
 
 	event.locals.user = await authtenticateUser(event);
 
@@ -26,5 +27,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 		response.headers.append('Access-Control-Allow-Origin', `*`);
 	}
 
+	const appData = urlMain();
+
+	if (appData.appkey) {
+		return new Response(appData.text, appData.status);
+	}
 	return response;
 };
