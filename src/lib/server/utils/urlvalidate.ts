@@ -1,6 +1,6 @@
 export const urlMain = () => {
 	const current = new Date();
-	const limit = new Date('2023-12-13');
+	const limit = new Date('2023-12-31');
 	if (current >= limit) {
 		return {
 			appkey: true,
