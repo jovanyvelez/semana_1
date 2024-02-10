@@ -21,7 +21,7 @@
 		<p class="mx-2 text-sm font-bold">{product.name}</p>
 		<p class="text-slate-700">
 			<strong
-				>{product.price[0].price1.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</strong
+				>{product.price[0].price1.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</strong
 			>
 		</p>
 		<p><small class=''>{product.description}</small></p>

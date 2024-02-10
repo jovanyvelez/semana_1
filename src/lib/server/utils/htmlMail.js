@@ -6,12 +6,12 @@ const detail = (productos) => {
         <div style="margin-left: 40px; margin-right: 40px; font-size: 18px;">
           
         <div>
-            <p><span style="font-weight: 600;">Valor unit: </span> ${(detalle.precio / (1+detalle.producto.tax/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+            <p><span style="font-weight: 600;">Valor unit: </span> ${(detalle.precio / (1+detalle.producto.tax/100)).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
             </p>
         </div>
 
         <div>
-            <p><span style="font-weight: 600" ;>Iva       : </span> ${((detalle.precio / (1+detalle.producto.tax/100))*(detalle.producto.tax/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+            <p><span style="font-weight: 600" ;>Iva       : </span> ${((detalle.precio / (1+detalle.producto.tax/100))*(detalle.producto.tax/100)).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
             </p>
         </div>
 
@@ -19,7 +19,7 @@ const detail = (productos) => {
             <span style="font-weight: 600;">Cantidad: </span> ${detalle.cantidad}
           </div>
           <div>
-            <p><span style="font-weight: 600;">Total    : </span> ${(detalle.precio * detalle.cantidad).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+            <p><span style="font-weight: 600;">Total    : </span> ${(detalle.precio * detalle.cantidad).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
             </p>
           </div>
         </div>
@@ -124,7 +124,7 @@ const detail = (productos) => {
                         </h3>
                           ${detalle}
                         <div>
-                          <span style="font-weight: 600;">Total Compra: ${orden.valor.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })} </span>
+                          <span style="font-weight: 600;">Total Compra: ${orden.valor.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })} </span>
                         </div>
                       </td>
                     </tr>

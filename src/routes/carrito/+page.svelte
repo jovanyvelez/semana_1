@@ -62,19 +62,19 @@
 			</div>
 		</div>
 		<div class="flex justify-center items-center">
-			{(product.price[0].price1).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+			{(product.price[0].price1).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
 		</div>
 		<div class="flex justify-center items-center">
-			{(product.price[0].price1*(discount/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+			{(product.price[0].price1*(discount/100)).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
 		</div>
 		<div class="flex justify-center items-center">
-			{(product.price[0].price1*(1-discount/100)*(product.tax/100)).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+			{(product.price[0].price1*(1-discount/100)*(product.tax/100)).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
 		</div>
 		<div class="flex flex-col justify-center items-center">
 			<ButonQuantity {product} />
 		</div>
 		<div class="flex justify-center items-center">
-			{(product.price[0].price1*(1-discount/100)*(1+product.tax/100)*product.qtyBuy).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}
+			{(product.price[0].price1*(1-discount/100)*(1+product.tax/100)*product.qtyBuy).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
 		</div>
 		<div class="divider  mx-10  sm:col-span-6"></div>
 	{/each}
@@ -83,9 +83,9 @@
 <div class="flex justify-end mx-5 sm:mx-16 lg:mx-36 my-0">
 	<div class="flex flex-col mr-10 text-end">
 		{#key resum}
-			<h1 class="text-slate-500 text-sm lg:text-lg">SUBTOTAL: {(resum.subtotal).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</h1>	
-			<h1 class="text-slate-500 text-sm lg:text-lg">IMPUESTO: {(resum.iva).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</h1>
-			<h1 class="text-slate-500 text-sm lg:text-lg">TOTAL: {(resum.total).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</h1>
+			<h1 class="text-slate-500 text-sm lg:text-lg">SUBTOTAL: {(resum.subtotal).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</h1>	
+			<h1 class="text-slate-500 text-sm lg:text-lg">IMPUESTO: {(resum.iva).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</h1>
+			<h1 class="text-slate-500 text-sm lg:text-lg">TOTAL: {(resum.total).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</h1>
 		{/key}
 		<h1 class="text-slate-400 text-sm lg:text-lg">
 			Iva incluido. Envío y descuentos agregados en el checkout
